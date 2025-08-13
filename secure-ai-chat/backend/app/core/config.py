@@ -2,6 +2,7 @@
 セキュアAIチャット - アプリケーション設定
 """
 
+import os
 from typing import List, Optional
 from pydantic import HttpUrl, field_validator
 from pydantic_settings import BaseSettings
@@ -14,8 +15,9 @@ class Settings(BaseSettings):
     # アプリケーション基本設定
     APP_NAME: str = "Secure AI Chat"
     APP_VERSION: str = "1.0.0"
-    ENVIRONMENT: str = "development"
-    DEBUG: bool = False
+    ENVIRONMENT: str = os.getenv("RAILWAY_ENVIRONMENT", "development")
+    DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"
+    PORT: int = int(os.getenv("PORT", 8000))
     
     # セキュリティ設定
     SECRET_KEY: str = secrets.token_urlsafe(32)
@@ -28,12 +30,12 @@ class Settings(BaseSettings):
     # レート制限設定
     RATE_LIMIT_PER_MINUTE: int = 100
     
-    # データベース設定
-    DATABASE_URL: str = "postgresql://chatuser:securepassword@localhost:5432/secure_ai_chat"
+    # データベース設定 (Railway自動設定)
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql://chatuser:securepassword@localhost:5432/secure_ai_chat")
     DB_ENCRYPT_KEY: str = secrets.token_urlsafe(32)
     
-    # Redis設定
-    REDIS_URL: str = "redis://localhost:6379/0"
+    # Redis設定 (Railway自動設定)
+    REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")
     
     # AI API設定
     AZURE_OPENAI_ENDPOINT: Optional[str] = None
@@ -45,8 +47,13 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: Optional[str] = None
     OPENAI_MODEL: str = "gpt-4"
     
-    # CORS設定
-    ALLOWED_ORIGINS: List[str] = ["https://localhost:3000"]
+    # CORS設定 (Railway + Vercel)
+    ALLOWED_ORIGINS: List[str] = [
+        "https://chat.dataibridge.com",
+        "https://*.vercel.app",
+        "http://localhost:3000",
+        "http://localhost:8080"
+    ]
     CORS_ALLOW_CREDENTIALS: bool = True
     
     @field_validator("ALLOWED_ORIGINS", mode="before")

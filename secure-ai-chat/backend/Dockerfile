@@ -1,6 +1,6 @@
 # ==============================================================================
-# Secure AI Chat - Backend API Dockerfile (Production)
-# Multi-stage build for optimized production deployment
+# Secure AI Chat - Railway Optimized Dockerfile
+# Lightweight build for Railway deployment
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
@@ -61,19 +61,18 @@ RUN mkdir -p logs temp \
 # Switch to non-root user
 USER appuser
 
-# Set environment variables
+# Set environment variables for Railway
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
-    PORT=8000 \
-    ENVIRONMENT=production
+    RAILWAY_ENVIRONMENT=production
 
-# Expose port
-EXPOSE 8000
+# Railway uses dynamic port assignment
+EXPOSE $PORT
 
-# Health check endpoint with improved configuration
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+# Railway-optimized health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=10s --retries=3 \
+    CMD curl -f http://localhost:$PORT/health || exit 1
 
-# Production-optimized startup command
-CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+# Railway startup command with dynamic port
+CMD gunicorn app.main:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --max-requests 1000 --timeout 120
