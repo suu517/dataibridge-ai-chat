@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テンプレート管理 - セキュアAIチャット</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- ヘッダー -->
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="app-info">
+                        <div class="app-icon">🛠️</div>
+                        <div class="app-title">
+                            <h1>テンプレート管理</h1>
+                            <p>AIチャット用プロンプトテンプレート管理システム</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <a href="/chat.html" class="nav-btn">
+                        💬 チャットに戻る
+                    </a>
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>接続確認中</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- メイン管理エリア -->
+        <main class="admin-main">
+            <!-- サイドバー -->
+            <aside class="admin-sidebar">
+                <nav class="sidebar-nav">
+                    <a href="#templates" class="nav-item active" onclick="showSection('templates')">
+                        📝 テンプレート一覧
+                    </a>
+                    <a href="#create" class="nav-item" onclick="showSection('create')">
+                        ➕ 新規作成
+                    </a>
+                    <a href="#categories" class="nav-item" onclick="showSection('categories')">
+                        📂 カテゴリ管理
+                    </a>
+                </nav>
+                
+                <div class="sidebar-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">総テンプレート数</span>
+                        <span class="stat-value" id="totalTemplates">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">アクティブ</span>
+                        <span class="stat-value" id="activeTemplates">0</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- メインコンテンツ -->
+            <div class="admin-content">
+                <!-- テンプレート一覧セクション -->
+                <section id="templates-section" class="content-section active">
+                    <div class="section-header">
+                        <h2>📝 テンプレート一覧</h2>
+                        <button class="btn btn-primary" onclick="showSection('create')">
+                            ➕ 新規作成
+                        </button>
+                    </div>
+                    
+                    <div class="templates-grid" id="templatesGrid">
+                        <!-- テンプレートカードがここに動的に生成される -->
+                    </div>
+                </section>
+
+                <!-- テンプレート作成セクション -->
+                <section id="create-section" class="content-section">
+                    <div class="section-header">
+                        <h2 id="formTitle">➕ 新規テンプレート作成</h2>
+                        <button class="btn btn-secondary" onclick="showSection('templates')">
+                            ← 一覧に戻る
+                        </button>
+                    </div>
+                    
+                    <form id="templateForm" class="template-form">
+                        <input type="hidden" id="templateId" />
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="templateName">テンプレート名 *</label>
+                                <input type="text" id="templateName" required placeholder="例: 📧 ビジネスメール作成">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="templateCategory">カテゴリ *</label>
+                                <select id="templateCategory" required>
+                                    <option value="">選択してください</option>
+                                    <option value="ビジネス">ビジネス</option>
+                                    <option value="開発">開発</option>
+                                    <option value="クリエイティブ">クリエイティブ</option>
+                                    <option value="学習">学習</option>
+                                    <option value="その他">その他</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="templateDescription">説明</label>
+                            <textarea id="templateDescription" rows="2" placeholder="テンプレートの用途や特徴を説明してください"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="systemPrompt">システムプロンプト *</label>
+                            <textarea id="systemPrompt" rows="8" required placeholder="AIの役割や動作を指定するプロンプトを入力してください。{変数名}で変数を参照できます。"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>変数設定</label>
+                            <div class="variables-container" id="variablesContainer">
+                                <!-- 変数設定フィールドが動的に追加される -->
+                            </div>
+                            <button type="button" class="btn btn-outline" onclick="addVariable()">
+                                ➕ 変数を追加
+                            </button>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="exampleInput">入力例</label>
+                                <textarea id="exampleInput" rows="3" placeholder="ユーザーが入力する内容の例"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="exampleOutput">出力例</label>
+                                <textarea id="exampleOutput" rows="3" placeholder="期待される出力の例"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                                リセット
+                            </button>
+                            <button type="button" class="btn btn-outline" onclick="previewTemplate()">
+                                👁️ プレビュー
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                💾 保存
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- カテゴリ管理セクション -->
+                <section id="categories-section" class="content-section">
+                    <div class="section-header">
+                        <h2>📂 カテゴリ管理</h2>
+                    </div>
+                    
+                    <div class="categories-stats" id="categoriesStats">
+                        <!-- カテゴリ統計がここに表示される -->
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <!-- プレビューモーダル -->
+        <div id="previewModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>🔍 テンプレートプレビュー</h3>
+                    <button class="modal-close" onclick="closePreview()">&times;</button>
+                </div>
+                <div class="modal-body" id="previewContent">
+                    <!-- プレビュー内容がここに表示される -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closePreview()">閉じる</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

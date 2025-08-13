@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テナント登録 - Secure AI Chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .registration-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .loading span {
+            color: #667eea;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .registration-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <div class="header">
+            <h1>🔐 テナント登録</h1>
+            <p>Secure AI Chat サービスへの登録</p>
+        </div>
+
+        <div class="alert alert-success" id="successAlert"></div>
+        <div class="alert alert-error" id="errorAlert"></div>
+        <div class="loading" id="loading"><span>🔄 登録処理中...</span></div>
+
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="name">会社名・組織名 *</label>
+                <input type="text" id="name" required placeholder="株式会社サンプル">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="domain">ドメイン *</label>
+                    <input type="text" id="domain" required placeholder="example.com">
+                </div>
+                <div class="form-group">
+                    <label for="subdomain">サブドメイン *</label>
+                    <input type="text" id="subdomain" required placeholder="company">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="adminEmail">管理者メールアドレス *</label>
+                <input type="email" id="adminEmail" required placeholder="admin@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="adminName">管理者名 *</label>
+                <input type="text" id="adminName" required placeholder="山田太郎">
+            </div>
+
+            <div class="form-group">
+                <label for="adminPassword">管理者パスワード *</label>
+                <input type="password" id="adminPassword" required placeholder="8文字以上のパスワード">
+            </div>
+
+            <div class="form-group">
+                <label for="planType">料金プラン</label>
+                <select id="planType">
+                    <option value="starter">スタータープラン (¥29,800/月) - 10ユーザー</option>
+                    <option value="standard">スタンダードプラン (¥49,800/月) - 50ユーザー</option>
+                    <option value="professional">プロフェッショナルプラン (¥98,000/月) - 200ユーザー</option>
+                    <option value="enterprise">エンタープライズプラン (¥198,000/月) - 無制限</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">テナント登録</button>
+        </form>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000/api/v1';
+
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const loading = document.getElementById('loading');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            
+            // 前回のアラートを非表示
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'none';
+            
+            // ローディング表示
+            submitBtn.disabled = true;
+            loading.style.display = 'block';
+            
+            try {
+                const formData = {
+                    name: document.getElementById('name').value,
+                    domain: document.getElementById('domain').value,
+                    subdomain: document.getElementById('subdomain').value,
+                    admin_email: document.getElementById('adminEmail').value,
+                    admin_name: document.getElementById('adminName').value,
+                    admin_password: document.getElementById('adminPassword').value,
+                    plan_type: document.getElementById('planType').value
+                };
+                
+                const response = await fetch(`${API_BASE}/tenants/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    successAlert.textContent = `✅ テナント「${result.data.tenant.name}」が正常に作成されました！トライアル期間は ${new Date(result.data.tenant.trial_end_date).toLocaleDateString()} までです。`;
+                    successAlert.style.display = 'block';
+                    this.reset();
+                } else {
+                    errorAlert.textContent = `❌ 登録エラー: ${result.message || result.detail || '不明なエラーが発生しました'}`;
+                    errorAlert.style.display = 'block';
+                }
+                
+            } catch (error) {
+                errorAlert.textContent = `❌ 通信エラー: ${error.message}`;
+                errorAlert.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+
+        // リアルタイムバリデーション
+        document.getElementById('subdomain').addEventListener('input', function(e) {
+            e.target.value = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '');
+        });
+
+        document.getElementById('domain').addEventListener('input', function(e) {
+            e.target.value = e.target.value.toLowerCase();
+        });
+    </script>
+</body>
+</html>

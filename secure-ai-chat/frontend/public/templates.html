@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロンプトテンプレート管理 - セキュアAIチャット</title>
+    <link rel="stylesheet" href="templates.css">
+</head>
+<body>
+    <div class="template-container">
+        <!-- ヘッダー -->
+        <header class="template-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <a href="/" class="back-link">
+                        <svg class="back-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        ホーム
+                    </a>
+                    <div class="app-info">
+                        <div class="app-icon">
+                            <span>📝</span>
+                        </div>
+                        <div class="app-title">
+                            <h1>プロンプトテンプレート</h1>
+                            <p>GPTライクなテンプレート管理</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <a href="/chat.html" class="chat-btn">
+                        💬 チャット
+                    </a>
+                    <button class="create-btn" onclick="openCreateModal()">
+                        ➕ 新規作成
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main class="template-main">
+            <!-- フィルター -->
+            <div class="filter-section">
+                <div class="filter-tabs" id="categoryTabs">
+                    <button class="filter-tab active" data-category="all">すべて</button>
+                    <button class="filter-tab" data-category="ビジネス">ビジネス</button>
+                    <button class="filter-tab" data-category="開発">開発</button>
+                    <button class="filter-tab" data-category="クリエイティブ">クリエイティブ</button>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="テンプレートを検索..." onkeyup="filterTemplates()">
+                    <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="M21 21l-4.35-4.35"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- テンプレート一覧 -->
+            <div class="template-grid" id="templateGrid">
+                <!-- テンプレートカードがここに動的に表示される -->
+                <div class="loading-message">
+                    <div class="loading-spinner"></div>
+                    <p>テンプレートを読み込み中...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 作成/編集モーダル -->
+    <div class="modal-overlay" id="templateModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 id="modalTitle">新しいテンプレートを作成</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+
+            <form class="template-form" id="templateForm">
+                <div class="form-group">
+                    <label for="templateName">テンプレート名 *</label>
+                    <input type="text" id="templateName" required maxlength="100" placeholder="例: ビジネスメール作成">
+                </div>
+
+                <div class="form-group">
+                    <label for="templateDescription">説明</label>
+                    <textarea id="templateDescription" placeholder="このテンプレートの用途と特徴を説明してください" maxlength="500"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="templateCategory">カテゴリ *</label>
+                    <select id="templateCategory" required>
+                        <option value="">カテゴリを選択</option>
+                        <option value="ビジネス">ビジネス</option>
+                        <option value="開発">開発</option>
+                        <option value="クリエイティブ">クリエイティブ</option>
+                        <option value="学習">学習</option>
+                        <option value="その他">その他</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="systemPrompt">システムプロンプト *</label>
+                    <textarea id="systemPrompt" required placeholder="AIの役割と応答スタイルを定義してください。変数は {variable_name} の形式で使用できます。" rows="6"></textarea>
+                    <div class="prompt-hint">
+                        💡 変数を使用する場合は {変数名} の形式で記述してください
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="variables">変数設定（オプション）</label>
+                    <div class="variables-container" id="variablesContainer">
+                        <button type="button" class="add-variable-btn" onclick="addVariableField()">
+                            ➕ 変数を追加
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInput">入力例</label>
+                    <textarea id="exampleInput" placeholder="ユーザーがこのテンプレートを使う際の入力例" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleOutput">出力例</label>
+                    <textarea id="exampleOutput" placeholder="期待される出力の例" rows="3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">キャンセル</button>
+                    <button type="submit" class="btn-primary" id="submitBtn">作成</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 使用モーダル -->
+    <div class="modal-overlay" id="useModal" onclick="closeUseModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 id="useModalTitle">テンプレートを使用</h2>
+                <button class="modal-close" onclick="closeUseModal()">×</button>
+            </div>
+
+            <form class="use-form" id="useForm">
+                <div class="template-preview" id="templatePreview">
+                    <!-- テンプレート情報の表示 -->
+                </div>
+
+                <div class="form-group" id="variableInputs">
+                    <!-- 変数入力フィールドが動的に生成される -->
+                </div>
+
+                <div class="form-group">
+                    <label for="modelSelect">使用するAIモデル</label>
+                    <select id="modelSelect">
+                        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                        <option value="gpt-4">GPT-4</option>
+                        <option value="gpt-4o">GPT-4o</option>
+                        <option value="gpt-4o-mini">GPT-4o Mini</option>
+                        <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                        <option value="gpt-4.1">GPT-4.1</option>
+                        <option value="gpt-4.1-mini">GPT-4.1 Mini</option>
+                    </select>
+                    <div class="model-info" id="modelInfo">
+                        <span class="model-description">モデルを選択すると詳細情報が表示されます</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="userMessage">あなたのメッセージ *</label>
+                    <textarea id="userMessage" required placeholder="AIに送信するメッセージを入力してください" rows="4"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeUseModal()">キャンセル</button>
+                    <button type="submit" class="btn-primary">実行</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 結果表示モーダル -->
+    <div class="modal-overlay" id="resultModal" onclick="closeResultModal(event)">
+        <div class="modal-content large" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>AI応答結果</h2>
+                <button class="modal-close" onclick="closeResultModal()">×</button>
+            </div>
+
+            <div class="result-content" id="resultContent">
+                <!-- AI応答結果の表示 -->
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" onclick="closeResultModal()">閉じる</button>
+                <button type="button" class="btn-primary" onclick="copyToClipboard()">結果をコピー</button>
+                <a href="/chat.html" class="btn-primary">チャットで継続</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="templates.js"></script>
+</body>
+</html>

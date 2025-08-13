@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザー管理 - Secure AI Chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .management-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .invite-form {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .users-table th,
+        .users-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .users-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .role-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .role-tenant-admin {
+            background: #667eea;
+            color: white;
+        }
+
+        .role-manager {
+            background: #28a745;
+            color: white;
+        }
+
+        .role-user {
+            background: #6c757d;
+            color: white;
+        }
+
+        .role-viewer {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .users-table {
+                font-size: 12px;
+            }
+            
+            .users-table th,
+            .users-table td {
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="management-container">
+        <div class="header">
+            <h1>👥 ユーザー管理</h1>
+            <p>テナント内のユーザー招待・管理</p>
+        </div>
+
+        <div class="content">
+            <div class="alert alert-success" id="successAlert"></div>
+            <div class="alert alert-error" id="errorAlert"></div>
+            <div class="loading" id="loading">🔄 処理中...</div>
+
+            <!-- ユーザー招待セクション -->
+            <div class="section">
+                <h2 class="section-title">新規ユーザー招待</h2>
+                <div class="invite-form">
+                    <form id="inviteForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">メールアドレス *</label>
+                                <input type="email" id="email" required placeholder="user@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="role">権限</label>
+                                <select id="role">
+                                    <option value="user">ユーザー</option>
+                                    <option value="manager">マネージャー</option>
+                                    <option value="viewer">閲覧者</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="department">部署</label>
+                                <input type="text" id="department" placeholder="営業部">
+                            </div>
+                            <div class="form-group">
+                                <label for="position">役職</label>
+                                <input type="text" id="position" placeholder="主任">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">招待送信</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- ユーザー一覧セクション -->
+            <div class="section">
+                <h2 class="section-title">ユーザー一覧</h2>
+                <div id="usersTableContainer">
+                    <table class="users-table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>ユーザー名</th>
+                                <th>メールアドレス</th>
+                                <th>氏名</th>
+                                <th>権限</th>
+                                <th>部署</th>
+                                <th>状態</th>
+                                <th>最終ログイン</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- ユーザーデータがここに表示される -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000/api/v1';
+        const TENANT_ID = 'demo-tenant'; // 実際の実装では動的に取得
+        const REQUESTER_ID = 'demo-user'; // 実際の実装では認証から取得
+
+        // 招待フォーム送信
+        document.getElementById('inviteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const loading = document.getElementById('loading');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            
+            // アラートをリセット
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'none';
+            loading.style.display = 'block';
+            
+            try {
+                const inviteData = {
+                    email: document.getElementById('email').value,
+                    role: document.getElementById('role').value,
+                    department: document.getElementById('department').value || null,
+                    position: document.getElementById('position').value || null
+                };
+                
+                const response = await fetch(`${API_BASE}/users/invite?tenant_id=${TENANT_ID}&inviter_id=${REQUESTER_ID}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(inviteData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    successAlert.textContent = `✅ ${inviteData.email} に招待を送信しました。`;
+                    successAlert.style.display = 'block';
+                    this.reset();
+                    loadUsers(); // ユーザー一覧を更新
+                } else {
+                    errorAlert.textContent = `❌ 招待エラー: ${result.message || result.detail || '不明なエラーが発生しました'}`;
+                    errorAlert.style.display = 'block';
+                }
+                
+            } catch (error) {
+                errorAlert.textContent = `❌ 通信エラー: ${error.message}`;
+                errorAlert.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+
+        // ユーザー一覧を読み込み
+        async function loadUsers() {
+            try {
+                const response = await fetch(`${API_BASE}/users/list/${TENANT_ID}?requester_id=${REQUESTER_ID}`);
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    displayUsers(result.users);
+                } else {
+                    console.error('ユーザー一覧取得エラー:', result);
+                }
+            } catch (error) {
+                console.error('通信エラー:', error);
+            }
+        }
+
+        // ユーザー一覧表示
+        function displayUsers(users) {
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = '';
+            
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                    <td>${user.full_name || '-'}</td>
+                    <td><span class="role-badge role-${user.role.replace('_', '-')}">${getRoleDisplayName(user.role)}</span></td>
+                    <td>${user.department || '-'}</td>
+                    <td><span class="status-badge status-${user.status}">${getStatusDisplayName(user.status)}</span></td>
+                    <td>${user.last_login ? new Date(user.last_login).toLocaleDateString() : '-'}</td>
+                    <td>
+                        <button class="btn btn-secondary" onclick="updateUserRole('${user.id}')">権限変更</button>
+                        ${user.is_active ? 
+                            `<button class="btn btn-danger" onclick="deactivateUser('${user.id}')">無効化</button>` : 
+                            `<button class="btn btn-primary" onclick="activateUser('${user.id}')">有効化</button>`
+                        }
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // 権限表示名取得
+        function getRoleDisplayName(role) {
+            const roleNames = {
+                'tenant_admin': 'テナント管理者',
+                'manager': 'マネージャー',
+                'user': 'ユーザー',
+                'viewer': '閲覧者'
+            };
+            return roleNames[role] || role;
+        }
+
+        // 状態表示名取得
+        function getStatusDisplayName(status) {
+            const statusNames = {
+                'active': 'アクティブ',
+                'pending': '承認待ち',
+                'inactive': '無効',
+                'locked': 'ロック中'
+            };
+            return statusNames[status] || status;
+        }
+
+        // ユーザー権限更新（簡易実装）
+        function updateUserRole(userId) {
+            const newRole = prompt('新しい権限を選択してください:\nuser, manager, viewer');
+            if (newRole && ['user', 'manager', 'viewer'].includes(newRole)) {
+                // API呼び出し（実装省略）
+                alert(`ユーザー ${userId} の権限を ${newRole} に変更しました`);
+            }
+        }
+
+        // ユーザー無効化
+        function deactivateUser(userId) {
+            if (confirm('このユーザーを無効化しますか？')) {
+                // API呼び出し（実装省略）
+                alert(`ユーザー ${userId} を無効化しました`);
+                loadUsers();
+            }
+        }
+
+        // 初期化：ページ読み込み時にユーザー一覧を取得
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUsers();
+        });
+    </script>
+</body>
+</html>

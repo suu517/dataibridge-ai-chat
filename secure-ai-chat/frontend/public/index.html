@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>セキュアAIチャット - ホーム</title>
+    <style>
+        :root {
+            --primary-color: #3B82F6;
+            --primary-dark: #2563EB;
+            --secondary-color: #64748B;
+            --success-color: #10B981;
+            --background-color: #F8FAFC;
+            --surface-color: #FFFFFF;
+            --border-color: #E2E8F0;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-section {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .feature-card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .status-section {
+            margin-top: 3rem;
+            text-align: center;
+            color: white;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* アニメーション */
+        .hero-section {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .feature-card {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-section">
+            <h1>🔐 セキュアAIチャット</h1>
+            <p>OpenAI GPT-4を使った安全で高性能なAIチャットシステム</p>
+        </div>
+
+        <div class="features-grid">
+            <a href="login.html" class="feature-card login-card">
+                <div class="card-icon">🔐</div>
+                <h3>ログイン</h3>
+                <p>セキュアな認証システムでマルチテナント対応のAIチャットにアクセス</p>
+            </a>
+
+            <a href="chat.html" class="feature-card">
+                <div class="card-icon">💬</div>
+                <h3>AIチャット</h3>
+                <p>リアルタイムでGPT-4とチャット。高度なAI応答機能を体験できます</p>
+            </a>
+
+            <a href="admin.html" class="feature-card">
+                <div class="card-icon">📝</div>
+                <h3>プロンプトテンプレート</h3>
+                <p>GPTライクなカスタムテンプレートで作業を効率化。独自のプロンプトを作成・管理</p>
+            </a>
+
+            <a href="api-settings.html" class="feature-card">
+                <div class="card-icon">⚙️</div>
+                <h3>API設定</h3>
+                <p>テナント別API設定。独自のOpenAI/Azure OpenAIキーで運用コストを管理</p>
+            </a>
+        </div>
+
+        <div class="status-section">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>システム稼働中</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🚀 OpenAI API連携 | 🔒 エンドツーエンド暗号化 | ⚡ 高速応答</p>
+            <p style="margin-top: 0.5rem; opacity: 0.6;">Secure AI Chat System v1.0</p>
+        </div>
+    </div>
+
+    <script>
+        // API接続状態をチェック
+        async function checkSystemStatus() {
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                if (response.ok) {
+                    console.log('✅ API Server: Connected');
+                }
+            } catch (error) {
+                console.warn('⚠️ API Server: Disconnected');
+                const statusIndicator = document.querySelector('.status-indicator span');
+                const statusDot = document.querySelector('.status-dot');
+                if (statusIndicator && statusDot) {
+                    statusIndicator.textContent = 'API未接続';
+                    statusDot.style.background = '#EF4444';
+                }
+            }
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            checkSystemStatus();
+            
+            // カードのホバーエフェクト強化
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('.card-icon');
+                    icon.style.transform = 'scale(1.1) rotate(5deg)';
+                    icon.style.transition = 'transform 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const icon = this.querySelector('.card-icon');
+                    icon.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

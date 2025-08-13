@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理ダッシュボード - Secure AI Chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* サイドバー */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header h1 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .sidebar-nav li {
+            margin: 0;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-nav .icon {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        /* メインコンテンツ */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
+        }
+
+        .dashboard-header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .dashboard-header h2 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .dashboard-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* 統計カード */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .stat-card.users::before {
+            background: #4CAF50;
+        }
+
+        .stat-card.tenants::before {
+            background: #2196F3;
+        }
+
+        .stat-card.revenue::before {
+            background: #FF9800;
+        }
+
+        .stat-card.usage::before {
+            background: #9C27B0;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stat-change {
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 12px;
+        }
+
+        .stat-change.positive {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .stat-change.negative {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        /* コンテンツセクション */
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            background: #f8f9fa;
+        }
+
+        .section-header h3 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .section-body {
+            padding: 20px;
+        }
+
+        /* テーブル */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* バッジ */
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .status-trial {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .status-expired {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        /* チャート */
+        .chart-container {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ローディング */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- サイドバー -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>🔐 Admin Dashboard</h1>
+                <p>Secure AI Chat 管理</p>
+            </div>
+            
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="#overview" class="nav-link active"><span class="icon">📊</span>概要</a></li>
+                    <li><a href="#tenants" class="nav-link"><span class="icon">🏢</span>テナント管理</a></li>
+                    <li><a href="#users" class="nav-link"><span class="icon">👥</span>ユーザー管理</a></li>
+                    <li><a href="#subscriptions" class="nav-link"><span class="icon">💳</span>サブスクリプション</a></li>
+                    <li><a href="#usage" class="nav-link"><span class="icon">📈</span>使用状況</a></li>
+                    <li><a href="#security" class="nav-link"><span class="icon">🔒</span>セキュリティ</a></li>
+                    <li><a href="#settings" class="nav-link"><span class="icon">⚙️</span>設定</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            <!-- ヘッダー -->
+            <div class="dashboard-header">
+                <h2 id="page-title">システム概要</h2>
+                <p id="page-description">Secure AI Chat SaaS プラットフォームの総合管理</p>
+            </div>
+
+            <!-- 概要セクション -->
+            <div id="overview-section" class="content-page">
+                <!-- 統計カード -->
+                <div class="stats-grid">
+                    <div class="stat-card users">
+                        <div class="stat-value" id="total-users">-</div>
+                        <div class="stat-label">総ユーザー数</div>
+                        <div class="stat-change positive">+12% 今月</div>
+                    </div>
+                    
+                    <div class="stat-card tenants">
+                        <div class="stat-value" id="total-tenants">-</div>
+                        <div class="stat-label">アクティブテナント</div>
+                        <div class="stat-change positive">+8% 今月</div>
+                    </div>
+                    
+                    <div class="stat-card revenue">
+                        <div class="stat-value" id="total-revenue">¥-</div>
+                        <div class="stat-label">月間売上</div>
+                        <div class="stat-change positive">+15% 前月比</div>
+                    </div>
+                    
+                    <div class="stat-card usage">
+                        <div class="stat-value" id="total-tokens">-</div>
+                        <div class="stat-label">月間トークン使用量</div>
+                        <div class="stat-change positive">+22% 前月比</div>
+                    </div>
+                </div>
+
+                <!-- チャート -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>月別成長推移</h3>
+                    </div>
+                    <div class="section-body">
+                        <div class="chart-container">
+                            <p>📈 グラフ表示エリア<br>（Chart.js 等で実装予定）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- テナント管理セクション -->
+            <div id="tenants-section" class="content-page hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>テナント一覧</h3>
+                    </div>
+                    <div class="section-body">
+                        <div class="loading" id="tenants-loading">🔄 読み込み中...</div>
+                        <table class="data-table" id="tenants-table">
+                            <thead>
+                                <tr>
+                                    <th>テナント名</th>
+                                    <th>ドメイン</th>
+                                    <th>プラン</th>
+                                    <th>ユーザー数</th>
+                                    <th>状態</th>
+                                    <th>作成日</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tenants-table-body">
+                                <!-- データがここに表示される -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ユーザー管理セクション -->
+            <div id="users-section" class="content-page hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>全ユーザー一覧</h3>
+                    </div>
+                    <div class="section-body">
+                        <div class="loading" id="users-loading">🔄 読み込み中...</div>
+                        <table class="data-table" id="users-table">
+                            <thead>
+                                <tr>
+                                    <th>ユーザー名</th>
+                                    <th>メール</th>
+                                    <th>テナント</th>
+                                    <th>権限</th>
+                                    <th>状態</th>
+                                    <th>最終ログイン</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- データがここに表示される -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- その他のセクションも同様に実装... -->
+            <div id="subscriptions-section" class="content-page hidden">
+                <div class="content-section">
+                    <div class="section-header">
+                        <h3>サブスクリプション管理</h3>
+                    </div>
+                    <div class="section-body">
+                        <p>サブスクリプション管理機能（実装予定）</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000/api/v1';
+
+        // ナビゲーション
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // アクティブリンクの更新
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // ページセクションの切り替え
+                const targetSection = this.getAttribute('href').substring(1);
+                switchSection(targetSection);
+            });
+        });
+
+        function switchSection(section) {
+            // 全セクションを非表示
+            document.querySelectorAll('.content-page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // 対象セクションを表示
+            const targetElement = document.getElementById(`${section}-section`);
+            if (targetElement) {
+                targetElement.classList.remove('hidden');
+            }
+            
+            // タイトル更新
+            updatePageTitle(section);
+            
+            // データ読み込み
+            loadSectionData(section);
+        }
+
+        function updatePageTitle(section) {
+            const titles = {
+                'overview': 'システム概要',
+                'tenants': 'テナント管理',
+                'users': 'ユーザー管理',
+                'subscriptions': 'サブスクリプション管理',
+                'usage': '使用状況分析',
+                'security': 'セキュリティ設定',
+                'settings': 'システム設定'
+            };
+            
+            const title = titles[section] || 'ダッシュボード';
+            document.getElementById('page-title').textContent = title;
+        }
+
+        async function loadSectionData(section) {
+            switch(section) {
+                case 'overview':
+                    await loadOverviewData();
+                    break;
+                case 'tenants':
+                    await loadTenantsData();
+                    break;
+                case 'users':
+                    await loadUsersData();
+                    break;
+            }
+        }
+
+        async function loadOverviewData() {
+            try {
+                // 統計データを読み込み（モックデータ）
+                document.getElementById('total-users').textContent = '1,247';
+                document.getElementById('total-tenants').textContent = '87';
+                document.getElementById('total-revenue').textContent = '¥2,847,000';
+                document.getElementById('total-tokens').textContent = '12.5M';
+            } catch (error) {
+                console.error('概要データの読み込みエラー:', error);
+            }
+        }
+
+        async function loadTenantsData() {
+            const loading = document.getElementById('tenants-loading');
+            const tbody = document.getElementById('tenants-table-body');
+            
+            loading.style.display = 'block';
+            
+            try {
+                // テナント一覧を取得（実際の実装では API を呼び出し）
+                const mockTenants = [
+                    {
+                        name: 'サンプル企業A',
+                        domain: 'samplea.example.com',
+                        plan: 'Standard',
+                        users: 25,
+                        status: 'active',
+                        created: '2024-01-15'
+                    },
+                    {
+                        name: 'テスト会社B',
+                        domain: 'testb.example.com',
+                        plan: 'Professional',
+                        users: 87,
+                        status: 'active',
+                        created: '2024-02-03'
+                    }
+                ];
+                
+                tbody.innerHTML = '';
+                mockTenants.forEach(tenant => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${tenant.name}</td>
+                        <td>${tenant.domain}</td>
+                        <td>${tenant.plan}</td>
+                        <td>${tenant.users}</td>
+                        <td><span class="status-badge status-${tenant.status}">${tenant.status}</span></td>
+                        <td>${tenant.created}</td>
+                        <td>
+                            <button onclick="viewTenant('${tenant.domain}')">詳細</button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+                
+            } catch (error) {
+                console.error('テナントデータの読み込みエラー:', error);
+                tbody.innerHTML = '<tr><td colspan="7">データの読み込みに失敗しました</td></tr>';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        async function loadUsersData() {
+            // ユーザーデータ読み込み（実装省略）
+            console.log('ユーザーデータを読み込み中...');
+        }
+
+        function viewTenant(domain) {
+            alert(`テナント ${domain} の詳細表示`);
+        }
+
+        // 初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOverviewData();
+        });
+    </script>
+</body>
+</html>

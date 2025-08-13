@@ -1,0 +1,51 @@
+# FastAPI フレームワーク
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# データベース・ORM
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+alembic==1.12.1
+
+# Redis・キャッシュ
+redis==5.0.1
+celery==5.3.4
+
+# 認証・セキュリティ
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+cryptography==41.0.7
+
+# HTTP・通信
+httpx==0.25.2
+aiofiles==23.2.1
+websockets==12.0
+
+# AI・OpenAI統合
+openai==1.3.6
+azure-identity==1.15.0
+
+# バリデーション・設定
+pydantic==2.5.0
+pydantic-settings==2.0.3
+email-validator==2.1.0
+
+# ログ・監視
+loguru==0.7.2
+structlog==23.2.0
+
+# ユーティリティ
+python-dotenv==1.0.0
+jinja2==3.1.2
+# pandas==2.1.3  # 一時的にコメントアウト
+
+# 開発・テスト
+pytest==7.4.3
+pytest-asyncio==0.21.1
+httpx==0.25.2
+fakeredis==2.20.0
+
+# セキュリティ監査
+bandit==1.7.5
+safety==2.3.4

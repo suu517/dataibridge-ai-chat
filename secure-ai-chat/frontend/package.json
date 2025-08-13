@@ -1,0 +1,53 @@
+{
+  "name": "secure-ai-chat-frontend",
+  "version": "1.0.0",
+  "description": "セキュアAIチャット - フロントエンド",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.2.0",
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "axios": "^1.6.0",
+    "socket.io-client": "^4.7.0",
+    "react-hook-form": "^7.47.0",
+    "@hookform/resolvers": "^3.3.0",
+    "zod": "^3.22.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.292.0",
+    "react-markdown": "^9.0.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "@types/react-syntax-highlighter": "^15.5.0",
+    "js-cookie": "^3.0.5",
+    "@types/js-cookie": "^3.0.6",
+    "react-hot-toast": "^2.4.0",
+    "framer-motion": "^10.16.0",
+    "date-fns": "^2.30.0",
+    "react-query": "^3.39.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

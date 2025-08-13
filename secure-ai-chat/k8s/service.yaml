@@ -1,0 +1,98 @@
+# ==============================================================================
+# Kubernetes Service Configuration
+# Secure AI Chat - Service Definitions
+# ==============================================================================
+
+# Backend Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: secure-ai-chat-prod
+  labels:
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/component: backend
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 8000
+    targetPort: http
+    protocol: TCP
+  - name: metrics
+    port: 9090
+    targetPort: metrics
+    protocol: TCP
+  selector:
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/component: backend
+  sessionAffinity: None
+
+---
+# Frontend Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: secure-ai-chat-prod
+  labels:
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/component: frontend
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+    protocol: TCP
+  selector:
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/component: frontend
+  sessionAffinity: None
+
+---
+# Redis Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: secure-ai-chat-prod
+  labels:
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/component: redis
+spec:
+  type: ClusterIP
+  ports:
+  - name: redis
+    port: 6379
+    targetPort: redis
+    protocol: TCP
+  selector:
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/component: redis
+  sessionAffinity: None
+
+---
+# Headless Service for StatefulSet (future database)
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-headless
+  namespace: secure-ai-chat-prod
+  labels:
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/component: postgres
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - name: postgres
+    port: 5432
+    targetPort: postgres
+    protocol: TCP
+  selector:
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/component: postgres

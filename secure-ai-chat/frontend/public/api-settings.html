@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI API設定 - Secure AI Chat</title>
+    <link rel="stylesheet" href="api-settings.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- ナビゲーションバー -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-shield-alt"></i>
+                <span>Secure AI Chat</span>
+            </div>
+            <div class="nav-items">
+                <a href="chat.html" class="nav-link">
+                    <i class="fas fa-comments"></i>
+                    チャット
+                </a>
+                <a href="templates.html" class="nav-link">
+                    <i class="fas fa-file-text"></i>
+                    テンプレート
+                </a>
+                <a href="api-settings.html" class="nav-link active">
+                    <i class="fas fa-cog"></i>
+                    API設定
+                </a>
+                <div class="user-menu">
+                    <span class="user-name" id="userName">ユーザー</span>
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- メインコンテンツ -->
+        <div class="main-container">
+            <div class="settings-header">
+                <h1><i class="fas fa-robot"></i> AI API設定</h1>
+                <p>組織でのAI APIプロバイダーを設定・管理します</p>
+            </div>
+
+            <!-- 設定カード -->
+            <div class="settings-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-plug"></i> AI プロバイダー設定</h2>
+                    <div class="current-status">
+                        <span class="status-label">現在の設定:</span>
+                        <span class="status-value" id="currentProvider">システムデフォルト</span>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <!-- プロバイダー選択 -->
+                    <div class="provider-selection">
+                        <label class="radio-option">
+                            <input type="radio" name="provider" value="system_default" checked>
+                            <div class="radio-content">
+                                <div class="radio-title">
+                                    <i class="fas fa-server"></i>
+                                    システムデフォルト
+                                </div>
+                                <div class="radio-description">
+                                    管理者が設定したデフォルトのAI APIを使用します（推奨）
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="radio-option">
+                            <input type="radio" name="provider" value="azure_openai">
+                            <div class="radio-content">
+                                <div class="radio-title">
+                                    <i class="fab fa-microsoft"></i>
+                                    Azure OpenAI
+                                </div>
+                                <div class="radio-description">
+                                    独自のAzure OpenAIリソースを使用します
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="radio-option">
+                            <input type="radio" name="provider" value="openai">
+                            <div class="radio-content">
+                                <div class="radio-title">
+                                    <i class="fas fa-brain"></i>
+                                    OpenAI
+                                </div>
+                                <div class="radio-description">
+                                    OpenAI公式のAPIキーを使用します
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Azure OpenAI設定 -->
+                    <div id="azureSettings" class="provider-config hidden">
+                        <h3><i class="fab fa-microsoft"></i> Azure OpenAI 設定</h3>
+                        <div class="form-group">
+                            <label for="azureEndpoint">エンドポイント URL</label>
+                            <input type="url" id="azureEndpoint" placeholder="https://your-resource.openai.azure.com/">
+                            <small>例: https://your-resource.openai.azure.com/</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="azureApiKey">API キー</label>
+                            <div class="password-input">
+                                <input type="password" id="azureApiKey" placeholder="Your Azure OpenAI API Key">
+                                <button type="button" class="toggle-password" onclick="togglePassword('azureApiKey')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="azureApiVersion">API バージョン</label>
+                            <select id="azureApiVersion">
+                                <option value="2024-02-01">2024-02-01（推奨）</option>
+                                <option value="2023-12-01-preview">2023-12-01-preview</option>
+                                <option value="2023-05-15">2023-05-15</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="azureDeployment">デプロイメント名</label>
+                            <input type="text" id="azureDeployment" placeholder="gpt-4" value="gpt-4">
+                            <small>Azureで作成したデプロイメント名を入力</small>
+                        </div>
+                    </div>
+
+                    <!-- OpenAI設定 -->
+                    <div id="openaiSettings" class="provider-config hidden">
+                        <h3><i class="fas fa-brain"></i> OpenAI 設定</h3>
+                        <div class="form-group">
+                            <label for="openaiApiKey">API キー</label>
+                            <div class="password-input">
+                                <input type="password" id="openaiApiKey" placeholder="sk-...">
+                                <button type="button" class="toggle-password" onclick="togglePassword('openaiApiKey')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="openaiModel">モデル</label>
+                            <select id="openaiModel">
+                                <option value="gpt-4">GPT-4（推奨）</option>
+                                <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                                <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 接続テスト -->
+                    <div class="test-section">
+                        <button id="testConnection" class="btn-secondary" disabled>
+                            <i class="fas fa-plug"></i>
+                            接続テスト
+                        </button>
+                        <div id="testResult" class="test-result"></div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button id="saveSettings" class="btn-primary" disabled>
+                        <i class="fas fa-save"></i>
+                        設定を保存
+                    </button>
+                    <button id="cancelSettings" class="btn-cancel">
+                        <i class="fas fa-times"></i>
+                        キャンセル
+                    </button>
+                </div>
+            </div>
+
+            <!-- 使用量統計カード -->
+            <div class="settings-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-chart-bar"></i> AI API使用状況</h2>
+                </div>
+                <div class="card-content">
+                    <div class="usage-stats">
+                        <div class="usage-item">
+                            <div class="usage-label">今月の使用トークン数</div>
+                            <div class="usage-value" id="monthlyTokens">-</div>
+                        </div>
+                        <div class="usage-item">
+                            <div class="usage-label">今日の使用トークン数</div>
+                            <div class="usage-value" id="dailyTokens">-</div>
+                        </div>
+                        <div class="usage-item">
+                            <div class="usage-label">月間制限</div>
+                            <div class="usage-value" id="monthlyLimit">-</div>
+                        </div>
+                        <div class="usage-item">
+                            <div class="usage-label">残り使用可能トークン</div>
+                            <div class="usage-value" id="remainingTokens">-</div>
+                        </div>
+                    </div>
+                    <div class="usage-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="usageProgress"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span id="usagePercent">0%</span> 使用済み
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ローディングオーバーレイ -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>処理中...</p>
+        </div>
+    </div>
+
+    <!-- 通知トースト -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="api-settings.js"></script>
+</body>
+</html>

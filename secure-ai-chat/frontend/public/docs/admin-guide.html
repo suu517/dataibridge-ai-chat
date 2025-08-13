@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure AI Chat - 管理者ガイド</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            background: white;
+            margin: 2rem auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .sidebar {
+            background: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            padding: 2rem;
+            width: 300px;
+            position: fixed;
+            height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        .content {
+            margin-left: 320px;
+            padding: 2rem;
+        }
+
+        .sidebar h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar ul li a {
+            color: #666;
+            text-decoration: none;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .content h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #667eea;
+            font-size: 2rem;
+        }
+
+        .content h3 {
+            color: #555;
+            margin: 2rem 0 1rem 0;
+            font-size: 1.5rem;
+        }
+
+        .content h4 {
+            color: #666;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.2rem;
+        }
+
+        .card {
+            background: #f8f9ff;
+            border: 1px solid #e0e3ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card.warning {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+        }
+
+        .card.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .card.info {
+            background: #cce7ff;
+            border-color: #99d6ff;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 1.5rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #667eea;
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            background: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .screenshot {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            max-width: 100%;
+            margin: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-actions {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .quick-action-btn {
+            display: block;
+            width: 60px;
+            height: 60px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .quick-action-btn:hover {
+            transform: scale(1.1);
+            background: #5a67d8;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .toc ul {
+            list-style: none;
+            columns: 2;
+            column-gap: 2rem;
+        }
+
+        .toc ul li {
+            margin-bottom: 0.5rem;
+            break-inside: avoid;
+        }
+
+        .toc ul li a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .toc ul li a:hover {
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .toc ul {
+                columns: 1;
+            }
+
+            .quick-actions {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1><i class="fas fa-book"></i> Secure AI Chat 管理者ガイド</h1>
+            <p>効果的なシステム運用のための完全ガイド</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>目次</h3>
+                <ul>
+                    <li><a href="#getting-started" class="active">はじめに</a></li>
+                    <li><a href="#initial-setup">初期設定</a></li>
+                    <li><a href="#user-management">ユーザー管理</a></li>
+                    <li><a href="#api-settings">API設定</a></li>
+                    <li><a href="#security">セキュリティ設定</a></li>
+                    <li><a href="#usage-monitoring">使用量監視</a></li>
+                    <li><a href="#templates">テンプレート管理</a></li>
+                    <li><a href="#troubleshooting">トラブルシューティング</a></li>
+                </ul>
+
+                <h3>クイックリンク</h3>
+                <ul>
+                    <li><a href="/dashboard">ダッシュボード</a></li>
+                    <li><a href="/api-settings">API設定</a></li>
+                    <li><a href="/users">ユーザー管理</a></li>
+                    <li><a href="/templates">テンプレート</a></li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <!-- 目次 -->
+                <div class="toc">
+                    <h3><i class="fas fa-list"></i> ページ内目次</h3>
+                    <ul>
+                        <li><a href="#getting-started">はじめに</a></li>
+                        <li><a href="#initial-setup">初期設定</a></li>
+                        <li><a href="#user-management">ユーザー管理</a></li>
+                        <li><a href="#api-settings">API設定</a></li>
+                        <li><a href="#security">セキュリティ設定</a></li>
+                        <li><a href="#usage-monitoring">使用量監視</a></li>
+                        <li><a href="#templates">テンプレート管理</a></li>
+                        <li><a href="#troubleshooting">トラブルシューティング</a></li>
+                    </ul>
+                </div>
+
+                <!-- はじめに -->
+                <section id="getting-started">
+                    <h2><i class="fas fa-play-circle"></i> はじめに</h2>
+                    
+                    <p>Secure AI Chat へようこそ！このガイドでは、管理者として効果的にシステムを運用するための手順を詳しく説明します。</p>
+
+                    <div class="card success">
+                        <h4><i class="fas fa-check-circle"></i> このガイドで学べること</h4>
+                        <ul>
+                            <li>初期設定の完了方法</li>
+                            <li>ユーザーの招待と管理</li>
+                            <li>API設定の最適化</li>
+                            <li>セキュリティベストプラクティス</li>
+                            <li>使用量の監視と最適化</li>
+                        </ul>
+                    </div>
+
+                    <h3>管理者の責任範囲</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-users"></i> ユーザー管理</h4>
+                            <p>チームメンバーの招待、権限設定、アクセス管理を行います。</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-cog"></i> システム設定</h4>
+                            <p>API設定、セキュリティ設定、使用制限の管理を行います。</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-chart-line"></i> 使用量監視</h4>
+                            <p>トークン使用量、コスト、パフォーマンスの監視を行います。</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-shield-alt"></i> セキュリティ</h4>
+                            <p>データ保護、アクセス制御、コンプライアンス遵守を確保します。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 初期設定 -->
+                <section id="initial-setup">
+                    <h2><i class="fas fa-rocket"></i> 初期設定</h2>
+
+                    <div class="card info">
+                        <h4><i class="fas fa-info-circle"></i> 設定完了の目安</h4>
+                        <p>初期設定は通常15-30分程度で完了します。このセクションの手順に従って進めてください。</p>
+                    </div>
+
+                    <h3>必須設定項目</h3>
+                    <ol class="step-list">
+                        <li>
+                            <h4>メールアドレスの確認</h4>
+                            <p>アカウント作成時に送信された確認メール内のリンクをクリックして、メールアドレスを確認してください。</p>
+                        </li>
+                        <li>
+                            <h4>プロフィール情報の更新</h4>
+                            <p>ダッシュボード右上のプロフィールアイコンから、基本情報を更新してください。</p>
+                            <div class="code-block">
+                                ダッシュボード → プロフィール → 基本情報を編集
+                            </div>
+                        </li>
+                        <li>
+                            <h4>会社情報の設定</h4>
+                            <p>テナント設定から会社情報を詳細に設定してください。</p>
+                            <ul>
+                                <li>会社名</li>
+                                <li>業界</li>
+                                <li>従業員数</li>
+                                <li>タイムゾーン</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>初期ユーザーの招待</h4>
+                            <p>チームメンバーを招待して、協力してシステムを評価できるようにします。</p>
+                        </li>
+                    </ol>
+
+                    <h3>推奨設定項目</h3>
+                    <div class="card">
+                        <h4><i class="fas fa-star"></i> 推奨設定</h4>
+                        <ul>
+                            <li><strong>API設定の選択</strong>: 自社のOpenAI/Azure OpenAI APIを設定</li>
+                            <li><strong>セキュリティポリシー</strong>: パスワードポリシーとセッション設定</li>
+                            <li><strong>通知設定</strong>: 使用量アラートと管理者通知</li>
+                            <li><strong>使用制限</strong>: ユーザー別・プロジェクト別の制限設定</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ユーザー管理 -->
+                <section id="user-management">
+                    <h2><i class="fas fa-users"></i> ユーザー管理</h2>
+
+                    <h3>ユーザー招待の手順</h3>
+                    <ol class="step-list">
+                        <li>
+                            <h4>招待リンクの生成</h4>
+                            <p>ダッシュボードの「ユーザー管理」から「新しいユーザーを招待」をクリックします。</p>
+                        </li>
+                        <li>
+                            <h4>招待情報の入力</h4>
+                            <ul>
+                                <li>メールアドレス</li>
+                                <li>氏名</li>
+                                <li>役割（一般ユーザー/管理者）</li>
+                                <li>部署・チーム</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4>招待メール送信</h4>
+                            <p>システムが自動で招待メールを送信します。招待されたユーザーは24時間以内にアカウントを有効化する必要があります。</p>
+                        </li>
+                    </ol>
+
+                    <h3>権限管理</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-user"></i> 一般ユーザー</h4>
+                            <ul>
+                                <li>AIチャット機能の使用</li>
+                                <li>テンプレートの使用</li>
+                                <li>個人設定の変更</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-user-cog"></i> 管理者</h4>
+                            <ul>
+                                <li>ユーザー管理</li>
+                                <li>システム設定</li>
+                                <li>使用量監視</li>
+                                <li>テンプレート管理</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card warning">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 注意事項</h4>
+                        <ul>
+                            <li>管理者権限は慎重に付与してください</li>
+                            <li>退職者のアカウントは即座に無効化してください</li>
+                            <li>定期的にユーザー一覧を確認し、不要なアカウントを削除してください</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- API設定 -->
+                <section id="api-settings">
+                    <h2><i class="fas fa-key"></i> API設定</h2>
+
+                    <h3>API設定の選択肢</h3>
+                    
+                    <div class="card info">
+                        <h4><i class="fas fa-lightbulb"></i> 推奨設定</h4>
+                        <p>中規模以上の組織では、コスト最適化のため独自のAPIキーを使用することを強く推奨します。</p>
+                    </div>
+
+                    <h4>1. システムデフォルト（簡単開始）</h4>
+                    <div class="card">
+                        <p><strong>メリット:</strong> 即座に利用開始、設定不要</p>
+                        <p><strong>デメリット:</strong> 月間トークン制限、コスト予測困難</p>
+                        <p><strong>適用対象:</strong> 小規模チーム、評価目的</p>
+                    </div>
+
+                    <h4>2. OpenAI API（推奨）</h4>
+                    <ol class="step-list">
+                        <li>
+                            <h4>OpenAI APIキーの取得</h4>
+                            <p><code>https://platform.openai.com</code> でアカウントを作成し、APIキーを生成します。</p>
+                        </li>
+                        <li>
+                            <h4>API設定への入力</h4>
+                            <div class="code-block">
+                                ダッシュボード → API設定 → OpenAI → APIキーを入力 → テスト接続
+                            </div>
+                        </li>
+                        <li>
+                            <h4>使用量制限の設定</h4>
+                            <p>OpenAI側で月間使用量制限を設定することを推奨します。</p>
+                        </li>
+                    </ol>
+
+                    <h4>3. Azure OpenAI（エンタープライズ）</h4>
+                    <ol class="step-list">
+                        <li>
+                            <h4>Azureリソースの作成</h4>
+                            <p>Azure PortalでOpenAI Serviceリソースを作成します。</p>
+                        </li>
+                        <li>
+                            <h4>デプロイメントの設定</h4>
+                            <p>GPT-4またはGPT-3.5-Turboモデルをデプロイします。</p>
+                        </li>
+                        <li>
+                            <h4>接続情報の設定</h4>
+                            <ul>
+                                <li>エンドポイントURL</li>
+                                <li>APIキー</li>
+                                <li>APIバージョン</li>
+                                <li>デプロイメント名</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <div class="card success">
+                        <h4><i class="fas fa-check"></i> API設定テスト</h4>
+                        <p>設定完了後は必ず「接続テスト」を実行して、正常に動作することを確認してください。</p>
+                    </div>
+                </section>
+
+                <!-- セキュリティ設定 -->
+                <section id="security">
+                    <h2><i class="fas fa-shield-alt"></i> セキュリティ設定</h2>
+
+                    <h3>セキュリティベストプラクティス</h3>
+                    
+                    <div class="card warning">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 重要</h4>
+                        <p>企業データを扱う場合、セキュリティ設定は必須です。以下の設定を必ず実施してください。</p>
+                    </div>
+
+                    <h4>パスワードポリシー</h4>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-lock"></i> 推奨設定</h4>
+                            <ul>
+                                <li>最小8文字以上</li>
+                                <li>大文字・小文字・数字・記号を含む</li>
+                                <li>辞書攻撃対策</li>
+                                <li>定期的なパスワード変更</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-clock"></i> セッション管理</h4>
+                            <ul>
+                                <li>自動ログアウト: 30分</li>
+                                <li>同時ログイン制限</li>
+                                <li>IPアドレス制限（オプション）</li>
+                                <li>デバイス登録制限</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>データ保護設定</h4>
+                    <ol class="step-list">
+                        <li>
+                            <h4>データ暗号化</h4>
+                            <p>保存時暗号化と転送時暗号化が自動で有効になっています。</p>
+                        </li>
+                        <li>
+                            <h4>ログ監査</h4>
+                            <p>全てのユーザー操作とAPIアクセスがログに記録されます。</p>
+                        </li>
+                        <li>
+                            <h4>データ保持ポリシー</h4>
+                            <p>チャット履歴の自動削除期間を設定できます（30日〜無制限）。</p>
+                        </li>
+                    </ol>
+
+                    <h4>コンプライアンス</h4>
+                    <div class="card">
+                        <h4><i class="fas fa-certificate"></i> 準拠規格</h4>
+                        <ul>
+                            <li><strong>GDPR</strong>: EU一般データ保護規則</li>
+                            <li><strong>SOC 2</strong>: セキュリティ・可用性・機密性</li>
+                            <li><strong>ISO 27001</strong>: 情報セキュリティマネジメント</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 使用量監視 -->
+                <section id="usage-monitoring">
+                    <h2><i class="fas fa-chart-line"></i> 使用量監視</h2>
+
+                    <h3>監視ダッシュボード</h3>
+                    <p>リアルタイムで以下の情報を監視できます：</p>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-coins"></i> トークン使用量</h4>
+                            <ul>
+                                <li>月間使用量と制限</li>
+                                <li>ユーザー別使用量</li>
+                                <li>時間別トレンド</li>
+                                <li>コスト予測</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-users"></i> ユーザー活動</h4>
+                            <ul>
+                                <li>アクティブユーザー数</li>
+                                <li>ログイン頻度</li>
+                                <li>機能利用状況</li>
+                                <li>エラー発生状況</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>アラート設定</h3>
+                    <ol class="step-list">
+                        <li>
+                            <h4>使用量アラート</h4>
+                            <p>月間制限の80%、90%、95%で自動アラートを設定できます。</p>
+                        </li>
+                        <li>
+                            <h4>コストアラート</h4>
+                            <p>予算超過の危険がある場合に通知を受け取れます。</p>
+                        </li>
+                        <li>
+                            <h4>エラーアラート</h4>
+                            <p>API接続エラーや認証エラーを即座に通知します。</p>
+                        </li>
+                    </ol>
+
+                    <h3>レポート機能</h3>
+                    <div class="card">
+                        <h4><i class="fas fa-file-alt"></i> 定期レポート</h4>
+                        <ul>
+                            <li><strong>週次レポート</strong>: 使用量サマリー</li>
+                            <li><strong>月次レポート</strong>: コスト分析と最適化提案</li>
+                            <li><strong>四半期レポート</strong>: ROI分析とトレンド</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- テンプレート管理 -->
+                <section id="templates">
+                    <h2><i class="fas fa-file-alt"></i> テンプレート管理</h2>
+
+                    <h3>テンプレートの活用メリット</h3>
+                    <div class="card success">
+                        <ul>
+                            <li><strong>品質向上</strong>: 一貫性のある高品質な出力</li>
+                            <li><strong>効率化</strong>: 繰り返し作業の自動化</li>
+                            <li><strong>標準化</strong>: 組織全体での統一されたアプローach</li>
+                            <li><strong>コスト削減</strong>: 最適化されたプロンプトでトークン使用量を削減</li>
+                        </ul>
+                    </div>
+
+                    <h3>テンプレート作成のベストプラクティス</h3>
+                    <ol class="step-list">
+                        <li>
+                            <h4>明確な目的設定</h4>
+                            <p>テンプレートの使用場面と期待する出力を明確に定義します。</p>
+                        </li>
+                        <li>
+                            <h4>変数の適切な設計</h4>
+                            <p>ユーザーが入力すべき変数を{変数名}形式で定義します。</p>
+                            <div class="code-block">
+                                例: 「{商品名}の特徴を{ターゲット顧客}向けに説明してください」
+                            </div>
+                        </li>
+                        <li>
+                            <h4>プロンプト最適化</h4>
+                            <p>明確で具体的な指示を含め、望ましい出力形式を指定します。</p>
+                        </li>
+                        <li>
+                            <h4>テストと改善</h4>
+                            <p>実際に使用してフィードバックを収集し、継続的に改善します。</p>
+                        </li>
+                    </ol>
+
+                    <h3>推奨テンプレートカテゴリ</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4><i class="fas fa-bullhorn"></i> マーケティング</h4>
+                            <ul>
+                                <li>商品説明文</li>
+                                <li>SNS投稿</li>
+                                <li>メルマガ作成</li>
+                                <li>キャッチコピー生成</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-code"></i> 技術文書</h4>
+                            <ul>
+                                <li>API仕様書</li>
+                                <li>コードレビュー</li>
+                                <li>技術説明書</li>
+                                <li>障害報告書</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-handshake"></i> ビジネス</h4>
+                            <ul>
+                                <li>提案書</li>
+                                <li>会議議事録</li>
+                                <li>契約書レビュー</li>
+                                <li>プレゼン資料</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card">
+                            <h4><i class="fas fa-headset"></i> カスタマーサポート</h4>
+                            <ul>
+                                <li>FAQ作成</li>
+                                <li>回答テンプレート</li>
+                                <li>エスカレーション判定</li>
+                                <li>満足度調査</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- トラブルシューティング -->
+                <section id="troubleshooting">
+                    <h2><i class="fas fa-tools"></i> トラブルシューティング</h2>
+
+                    <h3>よくある問題と解決方法</h3>
+
+                    <div class="card warning">
+                        <h4><i class="fas fa-exclamation-triangle"></i> API接続エラー</h4>
+                        <p><strong>症状:</strong> "API接続に失敗しました" エラーが表示される</p>
+                        <p><strong>対処法:</strong></p>
+                        <ol>
+                            <li>API設定画面で接続テストを実行</li>
+                            <li>APIキーが正しいことを確認</li>
+                            <li>使用量制限に達していないか確認</li>
+                            <li>ネットワーク接続を確認</li>
+                        </ol>
+                    </div>
+
+                    <div class="card warning">
+                        <h4><i class="fas fa-user-slash"></i> ユーザーログインできない</h4>
+                        <p><strong>症状:</strong> 正しい認証情報でもログインに失敗する</p>
+                        <p><strong>対処法:</strong></p>
+                        <ol>
+                            <li>メールアドレス認証が完了しているか確認</li>
+                            <li>アカウントが無効化されていないか確認</li>
+                            <li>ブラウザのキャッシュとCookieをクリア</li>
+                            <li>パスワードリセットを試行</li>
+                        </ol>
+                    </div>
+
+                    <div class="card warning">
+                        <h4><i class="fas fa-hourglass-half"></i> 応答が遅い</h4>
+                        <p><strong>症状:</strong> AIの応答に時間がかかる</p>
+                        <p><strong>対処法:</strong></p>
+                        <ol>
+                            <li>システムステータスページを確認</li>
+                            <li>プロンプトの長さを確認（短縮を検討）</li>
+                            <li>API制限に近づいていないか確認</li>
+                            <li>他のユーザーも同様の問題があるか確認</li>
+                        </ol>
+                    </div>
+
+                    <h3>サポートへの連絡</h3>
+                    <div class="card info">
+                        <h4><i class="fas fa-phone"></i> サポート連絡先</h4>
+                        <ul>
+                            <li><strong>メール:</strong> support@secure-ai-chat.com</li>
+                            <li><strong>チャット:</strong> ダッシュボード右下のサポートボタン</li>
+                            <li><strong>電話:</strong> 03-XXXX-XXXX（平日 9:00-18:00）</li>
+                            <li><strong>緊急時:</strong> emergency@secure-ai-chat.com</li>
+                        </ul>
+
+                        <p><strong>連絡時に用意いただく情報:</strong></p>
+                        <ul>
+                            <li>テナントID</li>
+                            <li>発生日時</li>
+                            <li>エラーメッセージ（スクリーンショット推奨）</li>
+                            <li>再現手順</li>
+                        </ul>
+                    </div>
+
+                    <h3>システムステータス</h3>
+                    <p>リアルタイムのシステム状況は <a href="https://status.secure-ai-chat.com" target="_blank">ステータスページ</a> でご確認いただけます。</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <a href="#getting-started" class="quick-action-btn" title="トップに戻る">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+        <a href="/dashboard" class="quick-action-btn" title="ダッシュボード">
+            <i class="fas fa-tachometer-alt"></i>
+        </a>
+        <a href="/support" class="quick-action-btn" title="サポート">
+            <i class="fas fa-question-circle"></i>
+        </a>
+    </div>
+
+    <script>
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // アクティブリンクの更新
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.sidebar a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

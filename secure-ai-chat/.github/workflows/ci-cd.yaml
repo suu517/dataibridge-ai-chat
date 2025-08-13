@@ -1,0 +1,443 @@
+# ==============================================================================
+# GitHub Actions CI/CD Pipeline
+# Secure AI Chat - Automated Build, Test, and Deployment
+# ==============================================================================
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME_BACKEND: ${{ github.repository }}/backend
+  IMAGE_NAME_FRONTEND: ${{ github.repository }}/frontend
+
+jobs:
+  # ==============================================================================
+  # Code Quality and Security Checks
+  # ==============================================================================
+  code-quality:
+    name: Code Quality & Security
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Full history for better analysis
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+        pip install black flake8 mypy safety bandit pytest
+
+    # Code Formatting Check
+    - name: Check code formatting with Black
+      run: |
+        cd backend
+        black --check --diff .
+
+    # Linting
+    - name: Lint with flake8
+      run: |
+        cd backend
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --max-complexity=10 --max-line-length=88 --statistics
+
+    # Type Checking
+    - name: Type check with mypy
+      run: |
+        cd backend
+        mypy app/ --ignore-missing-imports
+
+    # Security Vulnerability Check
+    - name: Check for security vulnerabilities with Safety
+      run: |
+        cd backend
+        safety check --json || true
+
+    # Security Code Analysis
+    - name: Security analysis with Bandit
+      run: |
+        cd backend
+        bandit -r app/ -f json || true
+
+    # SAST with CodeQL
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: python, javascript
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+
+  # ==============================================================================
+  # Unit and Integration Tests
+  # ==============================================================================
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: code-quality
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_USER: test_user
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+          
+      redis:
+        image: redis:7.2-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-asyncio httpx
+
+    - name: Set up test environment
+      env:
+        DATABASE_URL: postgresql://test_user:test_password@localhost:5432/test_db
+        REDIS_URL: redis://localhost:6379/0
+        SECRET_KEY: test-secret-key-for-testing-only
+        JWT_SECRET_KEY: test-jwt-secret-key
+        ENVIRONMENT: testing
+      run: |
+        cd backend
+        # Database migrations for test
+        alembic upgrade head
+
+    - name: Run unit tests
+      env:
+        DATABASE_URL: postgresql://test_user:test_password@localhost:5432/test_db
+        REDIS_URL: redis://localhost:6379/0
+        SECRET_KEY: test-secret-key-for-testing-only
+        JWT_SECRET_KEY: test-jwt-secret-key
+        ENVIRONMENT: testing
+      run: |
+        cd backend
+        pytest tests/ -v --cov=app --cov-report=xml --cov-report=html
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./backend/coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
+  # ==============================================================================
+  # Build Docker Images
+  # ==============================================================================
+  build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: [code-quality, test]
+    if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+    
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    # Extract metadata for tags and labels
+    - name: Extract metadata (Backend)
+      id: meta-backend
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+
+    - name: Extract metadata (Frontend)
+      id: meta-frontend
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+
+    # Build and push Backend image
+    - name: Build and push Backend image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./backend
+        file: ./backend/Dockerfile
+        push: true
+        tags: ${{ steps.meta-backend.outputs.tags }}
+        labels: ${{ steps.meta-backend.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        platforms: linux/amd64,linux/arm64
+
+    # Build and push Frontend image
+    - name: Build and push Frontend image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./frontend
+        file: ./frontend/Dockerfile
+        push: true
+        tags: ${{ steps.meta-frontend.outputs.tags }}
+        labels: ${{ steps.meta-frontend.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        platforms: linux/amd64,linux/arm64
+
+    # Container Security Scanning
+    - name: Run Trivy vulnerability scanner (Backend)
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}:${{ github.sha }}
+        format: 'sarif'
+        output: 'trivy-backend-results.sarif'
+
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: 'trivy-backend-results.sarif'
+
+  # ==============================================================================
+  # Deploy to Development Environment
+  # ==============================================================================
+  deploy-dev:
+    name: Deploy to Development
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/develop'
+    environment: development
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-1
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
+    - name: Update kubeconfig
+      run: |
+        aws eks update-kubeconfig --region ap-northeast-1 --name secure-ai-chat-dev
+
+    - name: Deploy to Kubernetes (Dev)
+      run: |
+        # Update image tags in deployment
+        sed -i "s|secure-ai-chat/backend:latest|${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}:${{ github.sha }}|g" k8s/deployment.yaml
+        sed -i "s|secure-ai-chat/frontend:latest|${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:${{ github.sha }}|g" k8s/deployment.yaml
+        
+        # Apply configurations
+        kubectl apply -f k8s/namespace.yaml
+        kubectl apply -f k8s/configmap.yaml -n secure-ai-chat-dev
+        kubectl apply -f k8s/secrets.yaml -n secure-ai-chat-dev
+        kubectl apply -f k8s/deployment.yaml -n secure-ai-chat-dev
+        kubectl apply -f k8s/service.yaml -n secure-ai-chat-dev
+        kubectl apply -f k8s/ingress.yaml -n secure-ai-chat-dev
+        
+        # Wait for rollout
+        kubectl rollout status deployment/backend -n secure-ai-chat-dev --timeout=300s
+        kubectl rollout status deployment/frontend -n secure-ai-chat-dev --timeout=300s
+
+    - name: Run smoke tests
+      run: |
+        # Wait for services to be ready
+        sleep 30
+        
+        # Get ingress URL
+        INGRESS_URL=$(kubectl get ingress secure-ai-chat-ingress -n secure-ai-chat-dev -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+        
+        # Health check
+        curl -f http://$INGRESS_URL/health || exit 1
+        curl -f http://$INGRESS_URL/api/health || exit 1
+        
+        echo "✅ Development deployment successful!"
+
+  # ==============================================================================
+  # Deploy to Production Environment
+  # ==============================================================================
+  deploy-prod:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+        aws-region: ap-northeast-1
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
+    - name: Update kubeconfig
+      run: |
+        aws eks update-kubeconfig --region ap-northeast-1 --name secure-ai-chat-prod
+
+    - name: Database Migration (if needed)
+      run: |
+        # Run database migrations in a Job
+        kubectl create job --from=deployment/backend migration-$(date +%s) -n secure-ai-chat-prod
+        kubectl wait --for=condition=complete job/migration-$(date +%s) -n secure-ai-chat-prod --timeout=300s
+
+    - name: Deploy to Kubernetes (Production)
+      run: |
+        # Update image tags in deployment
+        sed -i "s|secure-ai-chat/backend:latest|${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}:${{ github.sha }}|g" k8s/deployment.yaml
+        sed -i "s|secure-ai-chat/frontend:latest|${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:${{ github.sha }}|g" k8s/deployment.yaml
+        
+        # Apply configurations (production namespace)
+        kubectl apply -f k8s/configmap.yaml -n secure-ai-chat-prod
+        kubectl apply -f k8s/deployment.yaml -n secure-ai-chat-prod
+        
+        # Rolling update with zero downtime
+        kubectl rollout status deployment/backend -n secure-ai-chat-prod --timeout=600s
+        kubectl rollout status deployment/frontend -n secure-ai-chat-prod --timeout=600s
+
+    - name: Run production health checks
+      run: |
+        # Wait for services to be ready
+        sleep 60
+        
+        # Get production URL
+        PROD_URL="https://secure-ai-chat.com"
+        
+        # Comprehensive health checks
+        curl -f $PROD_URL/health || exit 1
+        curl -f $PROD_URL/api/health || exit 1
+        
+        # Check API endpoints
+        curl -f $PROD_URL/api/v1/plans || exit 1
+        
+        echo "✅ Production deployment successful!"
+
+    # Rollback on failure
+    - name: Rollback on failure
+      if: failure()
+      run: |
+        kubectl rollout undo deployment/backend -n secure-ai-chat-prod
+        kubectl rollout undo deployment/frontend -n secure-ai-chat-prod
+        echo "❌ Deployment failed, rolled back to previous version"
+        exit 1
+
+  # ==============================================================================
+  # Notification and Monitoring
+  # ==============================================================================
+  notify:
+    name: Send Notifications
+    runs-on: ubuntu-latest
+    needs: [deploy-dev, deploy-prod]
+    if: always()
+    
+    steps:
+    - name: Notify Slack on Success
+      if: success()
+      uses: 8398a7/action-slack@v3
+      with:
+        status: success
+        channel: '#deployments'
+        text: |
+          ✅ Secure AI Chat deployment successful!
+          
+          Branch: ${{ github.ref_name }}
+          Commit: ${{ github.sha }}
+          Author: ${{ github.actor }}
+          
+          Environment: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Development' }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    - name: Notify Slack on Failure
+      if: failure()
+      uses: 8398a7/action-slack@v3
+      with:
+        status: failure
+        channel: '#deployments'
+        text: |
+          ❌ Secure AI Chat deployment failed!
+          
+          Branch: ${{ github.ref_name }}
+          Commit: ${{ github.sha }}
+          Author: ${{ github.actor }}
+          
+          Please check the logs and fix the issues.
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    - name: Update deployment status
+      run: |
+        echo "Deployment completed. Updating monitoring dashboards..."
+        # Add logic to update Datadog/monitoring dashboards

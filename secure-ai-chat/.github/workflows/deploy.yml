@@ -1,0 +1,172 @@
+name: Deploy to AWS
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+
+env:
+  AWS_REGION: ap-northeast-1
+  EKS_CLUSTER_NAME: dataibridge-ai-chat
+  REGISTRY: ghcr.io
+
+jobs:
+  deploy-infrastructure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    
+    outputs:
+      alb_dns_name: ${{ steps.terraform.outputs.alb_dns_name }}
+      cloudfront_domain_name: ${{ steps.terraform.outputs.cloudfront_domain_name }}
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.5.7"
+        terraform_wrapper: false
+
+    - name: Terraform Init
+      working-directory: terraform
+      run: terraform init
+
+    - name: Terraform Plan
+      working-directory: terraform
+      run: |
+        terraform plan \
+          -var="environment=${{ github.event.inputs.environment || 'production' }}" \
+          -out=tfplan
+
+    - name: Terraform Apply
+      id: terraform
+      working-directory: terraform
+      run: |
+        terraform apply tfplan
+        
+        # Output values for DNS configuration
+        echo "alb_dns_name=$(terraform output -raw alb_dns_name)" >> $GITHUB_OUTPUT
+        echo "cloudfront_domain_name=$(terraform output -raw cloudfront_domain_name)" >> $GITHUB_OUTPUT
+
+    - name: Display DNS Configuration Instructions
+      run: |
+        echo "🔧 Manual DNS Configuration Required in Lolipop:"
+        echo ""
+        echo "Add these CNAME records in Lolipop DNS management:"
+        echo ""
+        echo "| Subdomain | Type  | Value |"
+        echo "|-----------|-------|-------|"
+        echo "| chat      | CNAME | ${{ steps.terraform.outputs.cloudfront_domain_name }} |"
+        echo "| api       | CNAME | ${{ steps.terraform.outputs.alb_dns_name }} |"
+        echo "| admin     | CNAME | ${{ steps.terraform.outputs.cloudfront_domain_name }} |"
+        echo "| static    | CNAME | ${{ steps.terraform.outputs.cloudfront_domain_name }} |"
+        echo ""
+        echo "📋 Also add SSL certificate validation records from AWS ACM console"
+
+  deploy-application:
+    runs-on: ubuntu-latest
+    needs: deploy-infrastructure
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Update kubeconfig
+      run: |
+        aws eks update-kubeconfig --region ${{ env.AWS_REGION }} --name ${{ env.EKS_CLUSTER_NAME }}
+
+    - name: Replace image tags in Kubernetes manifests
+      run: |
+        # Get the latest image SHA
+        IMAGE_TAG="${{ github.sha }}"
+        
+        # Update Kubernetes deployment files
+        sed -i "s|image: ghcr.io/.*/backend:.*|image: ${{ env.REGISTRY }}/${{ github.repository }}/backend:main-${IMAGE_TAG:0:7}|g" k8s/deployment.yaml
+        sed -i "s|image: ghcr.io/.*/frontend:.*|image: ${{ env.REGISTRY }}/${{ github.repository }}/frontend:main-${IMAGE_TAG:0:7}|g" k8s/deployment.yaml
+
+    - name: Create Kubernetes secrets
+      run: |
+        # Create or update application secrets
+        kubectl create secret generic app-secrets \
+          --from-literal=secret-key="${{ secrets.SECRET_KEY }}" \
+          --from-literal=jwt-secret-key="${{ secrets.JWT_SECRET_KEY }}" \
+          --from-literal=encryption-key="${{ secrets.ENCRYPTION_KEY }}" \
+          --from-literal=openai-api-key="${{ secrets.OPENAI_API_KEY }}" \
+          --from-literal=database-url="${{ secrets.DATABASE_URL }}" \
+          --from-literal=redis-url="${{ secrets.REDIS_URL }}" \
+          --dry-run=client -o yaml | kubectl apply -f -
+
+    - name: Deploy to EKS
+      run: |
+        kubectl apply -f k8s/namespace.yaml
+        kubectl apply -f k8s/configmap.yaml
+        kubectl apply -f k8s/secrets.yaml
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml
+        kubectl apply -f k8s/ingress.yaml
+
+    - name: Wait for deployment
+      run: |
+        kubectl rollout status deployment/secure-ai-chat-backend -n secure-ai-chat --timeout=600s
+        kubectl rollout status deployment/secure-ai-chat-frontend -n secure-ai-chat --timeout=600s
+
+    - name: Verify deployment
+      run: |
+        kubectl get pods -n secure-ai-chat
+        kubectl get services -n secure-ai-chat
+        kubectl get ingress -n secure-ai-chat
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: [deploy-infrastructure, deploy-application]
+    if: always()
+    
+    steps:
+    - name: Notify deployment status
+      uses: 8398a7/action-slack@v3
+      if: always()
+      with:
+        status: ${{ job.status }}
+        channel: '#deployments'
+        username: 'GitHub Actions'
+        icon_emoji: ':rocket:'
+        title: 'DataiBridge AI Chat Deployment'
+        text: |
+          Environment: ${{ github.event.inputs.environment || 'production' }}
+          Status: ${{ job.status }}
+          
+          🔧 DNS Configuration Required:
+          - Add CNAME records in Lolipop DNS
+          - Configure SSL certificate validation
+          
+          See deployment logs for details.
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>セキュアAIチャット - ログイン</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <!-- ヘッダー -->
+            <div class="login-header">
+                <div class="app-icon">🤖</div>
+                <h1>セキュアAIチャット</h1>
+                <p>安全で効率的なAIアシスタント</p>
+            </div>
+
+            <!-- エラー表示 -->
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+            <div id="successMessage" class="success-message" style="display: none;"></div>
+
+            <!-- ログインフォーム -->
+            <div id="loginForm" class="auth-form">
+                <h2>ログイン</h2>
+                <form id="loginFormElement">
+                    <div class="form-group">
+                        <label for="loginEmail">メールアドレス</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">パスワード</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginTenantDomain">組織ドメイン (オプション)</label>
+                        <input type="text" id="loginTenantDomain" name="tenant_domain" 
+                               placeholder="例: company.com または company">
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="loginBtn">
+                        <span class="btn-text">ログイン</span>
+                        <span class="btn-loading" style="display: none;">処理中...</span>
+                    </button>
+                </form>
+                
+                <div class="form-footer">
+                    <p>アカウントをお持ちでない場合は 
+                        <a href="#" id="showSignupForm">新規登録</a>
+                    </p>
+                    <p>組織管理者の場合は 
+                        <a href="#" id="showTenantSignupForm">組織登録</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- ユーザー登録フォーム -->
+            <div id="signupForm" class="auth-form" style="display: none;">
+                <h2>新規ユーザー登録</h2>
+                <form id="signupFormElement">
+                    <div class="form-group">
+                        <label for="signupInviteToken">招待トークン</label>
+                        <input type="text" id="signupInviteToken" name="invitation_token" required>
+                        <small>管理者から受け取った招待トークンを入力してください</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupFullName">氏名</label>
+                        <input type="text" id="signupFullName" name="full_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPassword">パスワード</label>
+                        <input type="password" id="signupPassword" name="password" required minlength="8">
+                        <small>8文字以上のパスワードを入力してください</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signupPasswordConfirm">パスワード確認</label>
+                        <input type="password" id="signupPasswordConfirm" name="password_confirm" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="signupBtn">
+                        <span class="btn-text">登録</span>
+                        <span class="btn-loading" style="display: none;">処理中...</span>
+                    </button>
+                </form>
+                
+                <div class="form-footer">
+                    <p>既にアカウントをお持ちの場合は 
+                        <a href="#" id="showLoginForm">ログイン</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- テナント登録フォーム -->
+            <div id="tenantSignupForm" class="auth-form" style="display: none;">
+                <h2>組織新規登録</h2>
+                <form id="tenantSignupFormElement">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tenantName">組織名</label>
+                            <input type="text" id="tenantName" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tenantDomain">ドメイン</label>
+                            <input type="text" id="tenantDomain" name="domain" required
+                                   placeholder="example.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tenantSubdomain">サブドメイン</label>
+                        <input type="text" id="tenantSubdomain" name="subdomain" required
+                               placeholder="company (company.secure-ai-chat.com)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tenantPlan">プラン</label>
+                        <select id="tenantPlan" name="plan" required>
+                            <option value="starter">スターター（14日間無料トライアル）</option>
+                            <option value="business">ビジネス</option>
+                            <option value="enterprise">エンタープライズ</option>
+                        </select>
+                    </div>
+                    
+                    <h3>管理者アカウント</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="adminName">管理者氏名</label>
+                            <input type="text" id="adminName" name="admin_name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adminEmail">管理者メールアドレス</label>
+                            <input type="email" id="adminEmail" name="admin_email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="adminPassword">管理者パスワード</label>
+                        <input type="password" id="adminPassword" name="admin_password" required minlength="8">
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="tenantSignupBtn">
+                        <span class="btn-text">組織を登録</span>
+                        <span class="btn-loading" style="display: none;">処理中...</span>
+                    </button>
+                </form>
+                
+                <div class="form-footer">
+                    <p>既にアカウントをお持ちの場合は 
+                        <a href="#" id="showLoginFormFromTenant">ログイン</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

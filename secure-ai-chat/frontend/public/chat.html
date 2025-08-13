@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIチャット - セキュアAIチャット</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- ヘッダー -->
+        <header class="chat-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <a href="/" class="back-link">
+                        <svg class="back-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        ホーム
+                    </a>
+                    <div class="app-info">
+                        <div class="app-icon">
+                            <span>🤖</span>
+                        </div>
+                        <div class="app-title">
+                            <h1>AI チャット</h1>
+                            <p>Powered by SecureAI</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="header-model-selector template-btn-style">
+                        <span class="model-icon">🤖</span>
+                        <select id="chatModelSelect" class="header-model-select">
+                            <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            <option value="gpt-4">GPT-4</option>
+                            <option value="gpt-4o">GPT-4o</option>
+                        </select>
+                    </div>
+                    
+                    <a href="/templates.html" class="template-btn">
+                        📝 テンプレート管理
+                    </a>
+                    <a href="/api-settings.html" class="api-settings-btn">
+                        ⚙️ API設定
+                    </a>
+                    <button class="clear-btn" onclick="clearChat()">
+                        🗑️ クリア
+                    </button>
+                    
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>接続中</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- メインチャット領域 -->
+        <main class="chat-main">
+            <!-- クイックプロンプト（初期表示） -->
+            <div class="quick-prompts" id="quickPrompts">
+                <div class="welcome-section">
+                    <h2>何でもお聞きください ✨</h2>
+                    <p>以下の例から選ぶか、自由に質問してください</p>
+                </div>
+                <div class="prompt-grid">
+                    <button class="prompt-card" onclick="setMessage('プロジェクト管理のベストプラクティスを教えて')">
+                        <div class="prompt-icon">💡</div>
+                        <span>プロジェクト管理のベストプラクティスを教えて</span>
+                    </button>
+                    <button class="prompt-card" onclick="setMessage('セキュリティ対策について相談したい')">
+                        <div class="prompt-icon">💡</div>
+                        <span>セキュリティ対策について相談したい</span>
+                    </button>
+                    <button class="prompt-card" onclick="setMessage('新技術の導入について検討中')">
+                        <div class="prompt-icon">💡</div>
+                        <span>新技術の導入について検討中</span>
+                    </button>
+                    <button class="prompt-card template-card" onclick="window.location.href='/admin.html'">
+                        <div class="prompt-icon">📝</div>
+                        <span>プロンプトテンプレートを使用</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- メッセージ一覧 -->
+            <div class="messages-container" id="messagesContainer">
+                <!-- 初期メッセージ -->
+                <div class="message ai-message">
+                    <div class="message-content">
+                        <div class="avatar ai-avatar">
+                            <span>🤖</span>
+                        </div>
+                        <div class="message-bubble ai-bubble">
+                            <div class="message-text">🎉 こんにちは！セキュアAIチャットへようこそ！<br><br>✅ <strong>OpenAI GPT-3.5-turbo</strong> が利用可能です<br>✅ <strong>リアルタイムAI応答</strong> 機能が有効<br>✅ <strong>30種類以上のモデル</strong> にアクセス可能<br><br>何でもお気軽にお聞きください！</div>
+                            <div class="message-meta">
+                                <span class="time">今すぐ</span>
+                                <span class="model-tag">GPT-3.5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- タイピングインジケーター -->
+            <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                <div class="message-content">
+                    <div class="avatar ai-avatar">
+                        <span>🤖</span>
+                    </div>
+                    <div class="message-bubble typing-bubble">
+                        <div class="typing-dots">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <span class="typing-text">考え中...</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 入力エリア -->
+        <div class="chat-input-area">
+            <!-- テンプレート選択 -->
+            <div class="template-selector" id="templateSelector" style="display: none;">
+                <div class="template-selector-header">
+                    <span>📝 テンプレートを使用</span>
+                    <button class="close-template-btn" onclick="closeTemplateSelector()">×</button>
+                </div>
+                <div class="template-list" id="templateList">
+                    <!-- テンプレートリストがここに表示される -->
+                </div>
+            </div>
+
+            <!-- 選択中のテンプレート表示 -->
+            <div class="selected-template" id="selectedTemplate" style="display: none;">
+                <div class="selected-template-info">
+                    <span class="template-name" id="selectedTemplateName"></span>
+                    <button class="clear-template-btn" onclick="clearSelectedTemplate()">クリア</button>
+                </div>
+                <div class="template-variables" id="templateVariables">
+                    <!-- 変数入力フィールドがここに表示される -->
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <div class="input-actions">
+                        <button class="template-toggle-btn" onclick="toggleTemplateSelector()" title="テンプレートを使用">
+                            📝
+                        </button>
+                    </div>
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="メッセージを入力... ✨" 
+                        rows="1"
+                        onkeypress="handleKeyPress(event)"
+                        oninput="autoResize(this)"
+                    ></textarea>
+                    <div class="input-hint">Enter: 送信 / Shift+Enter: 改行</div>
+                </div>
+                
+                <button class="send-button" onclick="sendMessage()" id="sendButton">
+                    <span class="send-text">送信</span>
+                    <svg class="send-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="security-notice">
+                🔐 セキュアな暗号化通信で保護されています
+            </div>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+</body>
+</html>

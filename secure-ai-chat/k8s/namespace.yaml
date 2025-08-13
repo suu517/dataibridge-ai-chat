@@ -1,0 +1,47 @@
+# ==============================================================================
+# Kubernetes Namespace Configuration
+# Secure AI Chat - Production Environment
+# ==============================================================================
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: secure-ai-chat-prod
+  labels:
+    name: secure-ai-chat-prod
+    environment: production
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: kubernetes
+  annotations:
+    description: "Production namespace for Secure AI Chat SaaS platform"
+
+---
+# Development Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: secure-ai-chat-dev
+  labels:
+    name: secure-ai-chat-dev
+    environment: development
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: kubernetes
+  annotations:
+    description: "Development namespace for Secure AI Chat SaaS platform"
+
+---
+# Staging Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: secure-ai-chat-staging
+  labels:
+    name: secure-ai-chat-staging
+    environment: staging
+    app.kubernetes.io/name: secure-ai-chat
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: kubernetes
+  annotations:
+    description: "Staging namespace for Secure AI Chat SaaS platform"

@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure AI Chat - よくある質問 (FAQ)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            background: white;
+            margin: -2rem auto 2rem;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-list li a {
+            color: #666;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .category-list li a:hover,
+        .category-list li a.active {
+            background: #f8f9ff;
+            color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .category-list li a .count {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #e1e5e9;
+            color: #666;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .category-list li a.active .count {
+            background: #667eea;
+            color: white;
+        }
+
+        .content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .content-header {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+            padding: 2rem;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .content-header h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .faq-content {
+            padding: 2rem;
+        }
+
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+
+        .faq-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-section h3 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e8ecff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid #e8ecff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+        }
+
+        .faq-question {
+            background: #f8f9ff;
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #e8ecff;
+        }
+
+        .faq-question h4 {
+            color: #333;
+            font-size: 1.1rem;
+            margin: 0;
+            flex: 1;
+        }
+
+        .faq-question .toggle-icon {
+            color: #667eea;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 1000px;
+        }
+
+        .faq-answer p {
+            margin-bottom: 1rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer ul, .faq-answer ol {
+            margin: 1rem 0 1rem 1.5rem;
+            color: #555;
+        }
+
+        .faq-answer li {
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-answer .code {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 0.2rem 0.4rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .faq-answer .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #856404;
+        }
+
+        .faq-answer .info {
+            background: #cce7ff;
+            border: 1px solid #99d6ff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #0c5aa6;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+            display: none;
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .contact-support {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .contact-support h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-support p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .support-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .support-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .support-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .search-container {
+                margin: -1rem auto 1rem;
+                padding: 1rem;
+            }
+
+            .support-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .support-btn {
+                width: 100%;
+                justify-content: center;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1><i class="fas fa-question-circle"></i> よくある質問</h1>
+            <p>Secure AI Chat に関するよくある質問と回答</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="質問を検索...">
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>カテゴリ</h3>
+                <ul class="category-list">
+                    <li><a href="#all" class="category-filter active" data-category="all">
+                        すべて <span class="count" id="count-all">0</span>
+                    </a></li>
+                    <li><a href="#getting-started" class="category-filter" data-category="getting-started">
+                        はじめに <span class="count" id="count-getting-started">0</span>
+                    </a></li>
+                    <li><a href="#account" class="category-filter" data-category="account">
+                        アカウント <span class="count" id="count-account">0</span>
+                    </a></li>
+                    <li><a href="#usage" class="category-filter" data-category="usage">
+                        使用方法 <span class="count" id="count-usage">0</span>
+                    </a></li>
+                    <li><a href="#api" class="category-filter" data-category="api">
+                        API設定 <span class="count" id="count-api">0</span>
+                    </a></li>
+                    <li><a href="#billing" class="category-filter" data-category="billing">
+                        請求・支払い <span class="count" id="count-billing">0</span>
+                    </a></li>
+                    <li><a href="#security" class="category-filter" data-category="security">
+                        セキュリティ <span class="count" id="count-security">0</span>
+                    </a></li>
+                    <li><a href="#troubleshooting" class="category-filter" data-category="troubleshooting">
+                        トラブルシューティング <span class="count" id="count-troubleshooting">0</span>
+                    </a></li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <div class="content-header">
+                    <h2 id="categoryTitle">すべての質問</h2>
+                    <p id="categoryDescription">よくある質問とその回答を確認できます</p>
+                </div>
+
+                <div class="faq-content">
+                    <!-- はじめに -->
+                    <div class="faq-section" data-category="getting-started">
+                        <h3><i class="fas fa-play-circle"></i> はじめに</h3>
+                        
+                        <div class="faq-item" data-category="getting-started">
+                            <div class="faq-question">
+                                <h4>Secure AI Chat とは何ですか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Secure AI Chat は、企業向けに設計されたセキュアなAIチャットサービスです。OpenAI GPTやAzure OpenAIを活用し、企業のデータセキュリティ要件を満たしながら、AI技術を安全に利用できます。</p>
+                                <p>主な特徴：</p>
+                                <ul>
+                                    <li>企業グレードのセキュリティ</li>
+                                    <li>マルチテナント対応</li>
+                                    <li>カスタムAPI設定</li>
+                                    <li>テンプレート機能</li>
+                                    <li>使用量監視とコスト管理</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="getting-started">
+                            <div class="faq-question">
+                                <h4>無料トライアルはありますか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>はい、すべてのプランで14-30日間の無料トライアルをご利用いただけます：</p>
+                                <ul>
+                                    <li><strong>Starter/Standard:</strong> 14日間</li>
+                                    <li><strong>Professional/Enterprise:</strong> 30日間</li>
+                                </ul>
+                                <p>トライアル期間中は制限なしでサービスを評価できます。クレジットカード登録も不要です。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="getting-started">
+                            <div class="faq-question">
+                                <h4>どのプランを選べば良いですか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>組織規模と使用量に応じてプランをお選びください：</p>
+                                <ul>
+                                    <li><strong>Starter（¥29,800/月）:</strong> 10名以下の小規模チーム</li>
+                                    <li><strong>Standard（¥49,800/月）:</strong> 50名以下の中規模企業（推奨）</li>
+                                    <li><strong>Professional（¥98,000/月）:</strong> 200名以下の大企業</li>
+                                    <li><strong>Enterprise（¥198,000/月～）:</strong> 200名以上の大規模組織</li>
+                                </ul>
+                                <p>迷った場合は、Standardプランから始めることをお勧めします。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- アカウント -->
+                    <div class="faq-section" data-category="account">
+                        <h3><i class="fas fa-user"></i> アカウント</h3>
+
+                        <div class="faq-item" data-category="account">
+                            <div class="faq-question">
+                                <h4>アカウント作成後のメール確認が必要ですか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>はい、セキュリティのためメールアドレスの確認が必要です。</p>
+                                <ol>
+                                    <li>アカウント作成後、確認メールが送信されます</li>
+                                    <li>メール内の確認リンクをクリック</li>
+                                    <li>アカウントが有効化されます</li>
+                                </ol>
+                                <div class="warning">
+                                    <strong>注意:</strong> 確認リンクは24時間で無効になります。期限が過ぎた場合は、ログイン画面から再送信してください。
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="account">
+                            <div class="faq-question">
+                                <h4>パスワードを忘れた場合はどうすれば良いですか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>ログイン画面の「パスワードを忘れた方」から簡単にリセットできます：</p>
+                                <ol>
+                                    <li>ログイン画面の「パスワードを忘れた方」をクリック</li>
+                                    <li>メールアドレスを入力</li>
+                                    <li>リセット用メールが送信されます</li>
+                                    <li>メール内のリンクから新しいパスワードを設定</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="account">
+                            <div class="faq-question">
+                                <h4>チームメンバーを招待するにはどうすれば良いですか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>管理者アカウントから簡単にメンバーを招待できます：</p>
+                                <ol>
+                                    <li>ダッシュボードの「ユーザー管理」をクリック</li>
+                                    <li>「新しいユーザーを招待」をクリック</li>
+                                    <li>招待したいメンバーの情報を入力</li>
+                                    <li>招待メールが自動送信されます</li>
+                                </ol>
+                                <p>招待されたメンバーは24時間以内にアカウントを有効化する必要があります。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 使用方法 -->
+                    <div class="faq-section" data-category="usage">
+                        <h3><i class="fas fa-rocket"></i> 使用方法</h3>
+
+                        <div class="faq-item" data-category="usage">
+                            <div class="faq-question">
+                                <h4>AIチャットの基本的な使い方を教えてください</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>シンプルで直感的な操作でAIチャットをご利用いただけます：</p>
+                                <ol>
+                                    <li>ダッシュボードの「新しいチャット」をクリック</li>
+                                    <li>メッセージ入力欄に質問や依頼を入力</li>
+                                    <li>送信ボタンをクリックまたはEnterキーを押す</li>
+                                    <li>AIからの回答を確認</li>
+                                </ol>
+                                <div class="info">
+                                    <strong>ヒント:</strong> より具体的で明確な指示を与えることで、より良い回答が得られます。
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="usage">
+                            <div class="faq-question">
+                                <h4>テンプレート機能はどのように使いますか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>テンプレート機能を活用することで、一貫性のある高品質な出力を効率的に生成できます：</p>
+                                <ol>
+                                    <li>「テンプレート」メニューから適切なテンプレートを選択</li>
+                                    <li>必要な変数（{変数名}）に値を入力</li>
+                                    <li>「生成開始」をクリック</li>
+                                    <li>生成された結果を確認・編集</li>
+                                </ol>
+                                <p>カスタムテンプレートを作成することで、組織独自のワークフローに対応できます。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="usage">
+                            <div class="faq-question">
+                                <h4>チャット履歴は保存されますか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>はい、チャット履歴は安全に保存され、いつでも確認できます：</p>
+                                <ul>
+                                    <li>すべてのチャット履歴は暗号化されて保存</li>
+                                    <li>ダッシュボードの「チャット履歴」から過去の会話を検索・確認</li>
+                                    <li>データ保持期間は設定で変更可能（30日〜無制限）</li>
+                                    <li>必要に応じて個別のチャットを削除可能</li>
+                                </ul>
+                                <div class="warning">
+                                    <strong>セキュリティ:</strong> 機密性の高い情報を扱う場合は、データ保持期間を短く設定することをお勧めします。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- API設定 -->
+                    <div class="faq-section" data-category="api">
+                        <h3><i class="fas fa-key"></i> API設定</h3>
+
+                        <div class="faq-item" data-category="api">
+                            <div class="faq-question">
+                                <h4>システムデフォルトと独自APIの違いは何ですか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>それぞれに異なるメリットがあります：</p>
+                                <p><strong>システムデフォルト:</strong></p>
+                                <ul>
+                                    <li>設定不要ですぐに利用開始</li>
+                                    <li>月額固定料金で予算管理が簡単</li>
+                                    <li>月間トークン制限あり</li>
+                                </ul>
+                                <p><strong>独自API（OpenAI/Azure OpenAI）:</strong></p>
+                                <ul>
+                                    <li>使用量に応じた従量課金</li>
+                                    <li>トークン制限なし</li>
+                                    <li>コスト最適化が可能</li>
+                                    <li>企業のガバナンス要件に対応（Azure OpenAI）</li>
+                                </ul>
+                                <p>中規模以上の組織では独自APIの使用を推奨します。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="api">
+                            <div class="faq-question">
+                                <h4>OpenAI APIキーはどこで取得できますか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>OpenAI Platform から簡単に取得できます：</p>
+                                <ol>
+                                    <li><span class="code">https://platform.openai.com</span> にアクセス</li>
+                                    <li>OpenAIアカウントでログイン（未登録の場合は新規作成）</li>
+                                    <li>「API Keys」メニューから「Create new secret key」をクリック</li>
+                                    <li>生成されたAPIキーをコピー</li>
+                                    <li>Secure AI Chatの設定画面で入力・保存</li>
+                                </ol>
+                                <div class="warning">
+                                    <strong>重要:</strong> APIキーは機密情報です。第三者に漏洩しないよう厳重に管理してください。
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="api">
+                            <div class="faq-question">
+                                <h4>Azure OpenAI を使用するメリットは何ですか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Azure OpenAI は企業のガバナンス要件により適した選択肢です：</p>
+                                <ul>
+                                    <li><strong>データ主権:</strong> データの処理場所を制御可能</li>
+                                    <li><strong>企業契約:</strong> Microsoft の企業向けSLA</li>
+                                    <li><strong>コンプライアンス:</strong> SOC 2、GDPR等への準拠</li>
+                                    <li><strong>プライベートネットワーク:</strong> VNet統合による高いセキュリティ</li>
+                                    <li><strong>統合管理:</strong> Azure環境との一元管理</li>
+                                </ul>
+                                <p>大企業や規制の厳しい業界では Azure OpenAI の使用を推奨します。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 請求・支払い -->
+                    <div class="faq-section" data-category="billing">
+                        <h3><i class="fas fa-credit-card"></i> 請求・支払い</h3>
+
+                        <div class="faq-item" data-category="billing">
+                            <div class="faq-question">
+                                <h4>料金の請求はいつ発生しますか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>請求タイミングはプランと支払い方法によって異なります：</p>
+                                <p><strong>無料トライアル期間中:</strong></p>
+                                <ul>
+                                    <li>請求は発生しません</li>
+                                    <li>クレジットカード登録不要</li>
+                                </ul>
+                                <p><strong>有料プラン:</strong></p>
+                                <ul>
+                                    <li>月次請求: 毎月同じ日付</li>
+                                    <li>年次請求: 契約開始月の同じ日付</li>
+                                    <li>使用量ベース（独自API）: 翌月5日</li>
+                                </ul>
+                                <p>請求書は支払期限の10日前にメールで送信されます。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="billing">
+                            <div class="faq-question">
+                                <h4>どのような支払い方法が利用できますか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>企業のニーズに応じて複数の支払い方法をご用意しています：</p>
+                                <ul>
+                                    <li><strong>クレジットカード:</strong> Visa、Mastercard、JCB、American Express</li>
+                                    <li><strong>銀行振込:</strong> 月次・年次契約（Standard以上）</li>
+                                    <li><strong>請求書払い:</strong> 企業向け後払い（Professional以上）</li>
+                                    <li><strong>口座振替:</strong> 年次契約のみ（Enterprise）</li>
+                                </ul>
+                                <p>支払い方法の変更は、ダッシュボードの「請求設定」からいつでも可能です。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="billing">
+                            <div class="faq-question">
+                                <h4>プランの変更やキャンセルはできますか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>はい、いつでもプランの変更・キャンセルが可能です：</p>
+                                <p><strong>プランアップグレード:</strong></p>
+                                <ul>
+                                    <li>即座に反映</li>
+                                    <li>差額は日割り計算で次回請求に加算</li>
+                                </ul>
+                                <p><strong>プランダウングレード:</strong></p>
+                                <ul>
+                                    <li>次回更新時に反映</li>
+                                    <li>現在の請求期間は継続</li>
+                                </ul>
+                                <p><strong>サービスキャンセル:</strong></p>
+                                <ul>
+                                    <li>いつでも可能（違約金なし）</li>
+                                    <li>データは90日間保持後削除</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- セキュリティ -->
+                    <div class="faq-section" data-category="security">
+                        <h3><i class="fas fa-shield-alt"></i> セキュリティ</h3>
+
+                        <div class="faq-item" data-category="security">
+                            <div class="faq-question">
+                                <h4>データはどのように保護されていますか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>企業グレードのセキュリティでお客様のデータを保護しています：</p>
+                                <p><strong>暗号化:</strong></p>
+                                <ul>
+                                    <li>転送時暗号化: TLS 1.3</li>
+                                    <li>保存時暗号化: AES-256</li>
+                                    <li>データベース暗号化: 透過的データ暗号化</li>
+                                </ul>
+                                <p><strong>アクセス制御:</strong></p>
+                                <ul>
+                                    <li>マルチファクタ認証（MFA）</li>
+                                    <li>IPアドレス制限</li>
+                                    <li>役割ベースアクセス制御（RBAC）</li>
+                                </ul>
+                                <p><strong>監査:</strong></p>
+                                <ul>
+                                    <li>全操作ログの記録</li>
+                                    <li>不正アクセス検知</li>
+                                    <li>定期的なセキュリティ監査</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="security">
+                            <div class="faq-question">
+                                <h4>チャットデータはAIの学習に使用されますか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>いいえ、お客様のデータは一切学習に使用されません：</p>
+                                <ul>
+                                    <li>OpenAI API: エンタープライズ契約により学習除外</li>
+                                    <li>Azure OpenAI: 設計上、顧客データは学習に使用されない</li>
+                                    <li>当社システム: データは処理のみに使用、学習は行わない</li>
+                                </ul>
+                                <div class="info">
+                                    <strong>透明性:</strong> データの使用方法について詳細はプライバシーポリシーをご確認ください。
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="security">
+                            <div class="faq-question">
+                                <h4>どのコンプライアンス規格に準拠していますか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>主要なコンプライアンス規格に準拠しています：</p>
+                                <ul>
+                                    <li><strong>SOC 2 Type II:</strong> セキュリティ・可用性・機密性</li>
+                                    <li><strong>ISO 27001:</strong> 情報セキュリティマネジメント</li>
+                                    <li><strong>GDPR:</strong> EU一般データ保護規則</li>
+                                    <li><strong>個人情報保護法:</strong> 日本の個人情報保護法</li>
+                                    <li><strong>PCI DSS:</strong> 決済カード業界データセキュリティ基準</li>
+                                </ul>
+                                <p>コンプライアンス証明書は管理画面からダウンロードできます。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- トラブルシューティング -->
+                    <div class="faq-section" data-category="troubleshooting">
+                        <h3><i class="fas fa-tools"></i> トラブルシューティング</h3>
+
+                        <div class="faq-item" data-category="troubleshooting">
+                            <div class="faq-question">
+                                <h4>「API接続エラー」が表示される場合はどうすれば良いですか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>API接続エラーの一般的な原因と対処法：</p>
+                                <ol>
+                                    <li><strong>APIキー確認:</strong> 設定画面で正しいAPIキーが入力されているか確認</li>
+                                    <li><strong>使用量制限:</strong> OpenAI/Azure側の使用量制限に達していないか確認</li>
+                                    <li><strong>接続テスト:</strong> 設定画面の「接続テスト」ボタンで動作確認</li>
+                                    <li><strong>ネットワーク:</strong> 企業ファイアウォールがAPIアクセスをブロックしていないか確認</li>
+                                </ol>
+                                <p>それでも解決しない場合は、サポートまでお問い合わせください。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="troubleshooting">
+                            <div class="faq-question">
+                                <h4>AIの応答が遅い・応答がない場合はどうすれば良いですか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>応答が遅い場合の確認事項と対処法：</p>
+                                <ol>
+                                    <li><strong>システム状況:</strong> ステータスページで障害情報を確認</li>
+                                    <li><strong>プロンプトサイズ:</strong> 長すぎる入力は短く分割して送信</li>
+                                    <li><strong>サーバー負荷:</strong> 時間を空けて再度試行</li>
+                                    <li><strong>ブラウザ:</strong> ページを再読み込み、別のブラウザで試行</li>
+                                </ol>
+                                <p>継続的に問題が発生する場合は、システム設定やネットワーク環境の見直しが必要な場合があります。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="troubleshooting">
+                            <div class="faq-question">
+                                <h4>ユーザーがログインできない場合はどうすれば良いですか？</h4>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>管理者として確認すべき事項：</p>
+                                <ol>
+                                    <li><strong>アカウント状態:</strong> ユーザー管理画面でアカウントが有効か確認</li>
+                                    <li><strong>メール確認:</strong> メールアドレスが確認済みか確認</li>
+                                    <li><strong>権限設定:</strong> 適切な権限が付与されているか確認</li>
+                                    <li><strong>パスワード:</strong> パスワードリセットを実行</li>
+                                </ol>
+                                <p>ユーザー側の対処法：</p>
+                                <ul>
+                                    <li>ブラウザのキャッシュ・Cookieをクリア</li>
+                                    <li>プライベートブラウジングモードで試行</li>
+                                    <li>別のブラウザまたはデバイスで試行</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="no-results" id="noResults">
+                        <i class="fas fa-search"></i>
+                        <h3>検索結果が見つかりません</h3>
+                        <p>検索キーワードを変更するか、サポートにお問い合わせください</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-support">
+            <h3><i class="fas fa-headset"></i> さらにサポートが必要ですか？</h3>
+            <p>解決できない問題がある場合は、お気軽にサポートチームにお問い合わせください</p>
+            <div class="support-buttons">
+                <a href="mailto:support@secure-ai-chat.com" class="support-btn">
+                    <i class="fas fa-envelope"></i> メール
+                </a>
+                <a href="/support/chat" class="support-btn">
+                    <i class="fas fa-comments"></i> チャット
+                </a>
+                <a href="tel:03-xxxx-xxxx" class="support-btn">
+                    <i class="fas fa-phone"></i> 電話
+                </a>
+                <a href="/docs/admin-guide.html" class="support-btn">
+                    <i class="fas fa-book"></i> ガイド
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class FAQManager {
+            constructor() {
+                this.searchInput = document.getElementById('searchInput');
+                this.faqItems = document.querySelectorAll('.faq-item');
+                this.categoryFilters = document.querySelectorAll('.category-filter');
+                this.categoryTitle = document.getElementById('categoryTitle');
+                this.categoryDescription = document.getElementById('categoryDescription');
+                this.noResults = document.getElementById('noResults');
+                
+                this.currentCategory = 'all';
+                this.searchTerm = '';
+                
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.updateCategoryCounts();
+                this.updateDisplay();
+            }
+
+            bindEvents() {
+                // 検索機能
+                this.searchInput.addEventListener('input', (e) => {
+                    this.searchTerm = e.target.value.toLowerCase();
+                    this.updateDisplay();
+                });
+
+                // カテゴリフィルター
+                this.categoryFilters.forEach(filter => {
+                    filter.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.currentCategory = filter.dataset.category;
+                        this.updateCategoryFilter();
+                        this.updateDisplay();
+                    });
+                });
+
+                // FAQ項目の開閉
+                this.faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    question.addEventListener('click', () => {
+                        item.classList.toggle('active');
+                    });
+                });
+            }
+
+            updateCategoryFilter() {
+                this.categoryFilters.forEach(filter => {
+                    filter.classList.toggle('active', filter.dataset.category === this.currentCategory);
+                });
+
+                // カテゴリタイトルの更新
+                const categoryTitles = {
+                    'all': 'すべての質問',
+                    'getting-started': 'はじめに',
+                    'account': 'アカウント',
+                    'usage': '使用方法',
+                    'api': 'API設定',
+                    'billing': '請求・支払い',
+                    'security': 'セキュリティ',
+                    'troubleshooting': 'トラブルシューティング'
+                };
+
+                const categoryDescriptions = {
+                    'all': 'よくある質問とその回答を確認できます',
+                    'getting-started': 'Secure AI Chat の基本的な情報',
+                    'account': 'アカウント作成・管理に関する質問',
+                    'usage': 'サービスの使用方法に関する質問',
+                    'api': 'API設定に関する質問',
+                    'billing': '料金・請求に関する質問',
+                    'security': 'セキュリティ・プライバシーに関する質問',
+                    'troubleshooting': '問題解決に関する質問'
+                };
+
+                this.categoryTitle.textContent = categoryTitles[this.currentCategory];
+                this.categoryDescription.textContent = categoryDescriptions[this.currentCategory];
+            }
+
+            updateDisplay() {
+                let visibleCount = 0;
+
+                this.faqItems.forEach(item => {
+                    const category = item.dataset.category;
+                    const question = item.querySelector('.faq-question h4').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    const matchesCategory = this.currentCategory === 'all' || category === this.currentCategory;
+                    const matchesSearch = this.searchTerm === '' || 
+                                        question.includes(this.searchTerm) || 
+                                        answer.includes(this.searchTerm);
+
+                    const shouldShow = matchesCategory && matchesSearch;
+                    item.style.display = shouldShow ? 'block' : 'none';
+                    
+                    if (shouldShow) visibleCount++;
+                });
+
+                // FAQ セクションの表示制御
+                const sections = document.querySelectorAll('.faq-section');
+                sections.forEach(section => {
+                    const sectionCategory = section.dataset.category;
+                    const hasVisibleItems = Array.from(section.querySelectorAll('.faq-item')).some(item => 
+                        item.style.display !== 'none'
+                    );
+
+                    const shouldShowSection = this.currentCategory === 'all' || 
+                                            this.currentCategory === sectionCategory ||
+                                            (this.searchTerm && hasVisibleItems);
+                    
+                    section.style.display = shouldShowSection && hasVisibleItems ? 'block' : 'none';
+                });
+
+                // 検索結果なしの表示
+                this.noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+
+                // 検索語のハイライト
+                if (this.searchTerm) {
+                    this.highlightSearchTerm();
+                }
+            }
+
+            highlightSearchTerm() {
+                if (!this.searchTerm) return;
+
+                this.faqItems.forEach(item => {
+                    if (item.style.display === 'none') return;
+
+                    const question = item.querySelector('.faq-question h4');
+                    const answer = item.querySelector('.faq-answer');
+
+                    [question, answer].forEach(element => {
+                        const originalText = element.textContent;
+                        const regex = new RegExp(`(${this.searchTerm})`, 'gi');
+                        const highlightedText = originalText.replace(regex, '<mark>$1</mark>');
+                        
+                        if (highlightedText !== originalText) {
+                            element.innerHTML = highlightedText;
+                        }
+                    });
+                });
+            }
+
+            updateCategoryCounts() {
+                const categories = ['all', 'getting-started', 'account', 'usage', 'api', 'billing', 'security', 'troubleshooting'];
+                
+                categories.forEach(category => {
+                    const count = category === 'all' ? 
+                        this.faqItems.length : 
+                        document.querySelectorAll(`.faq-item[data-category="${category}"]`).length;
+                    
+                    const countElement = document.getElementById(`count-${category}`);
+                    if (countElement) {
+                        countElement.textContent = count;
+                    }
+                });
+            }
+        }
+
+        // アプリケーション初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            new FAQManager();
+        });
+    </script>
+</body>
+</html>
