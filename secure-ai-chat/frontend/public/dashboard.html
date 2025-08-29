@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ダッシュボード - DataiBridge AI Chat</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- サイドバー -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="app-logo">
+                    <span>🤖</span>
+                    <h2>DataiBridge</h2>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <a href="#overview" onclick="switchTab('overview')">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">概要</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#usage" onclick="switchTab('usage')">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-text">使用量分析</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#teams" onclick="switchTab('teams')">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">チーム管理</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#history" onclick="switchTab('history')">
+                            <span class="nav-icon">🔍</span>
+                            <span class="nav-text">履歴・検索</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#admin" onclick="switchTab('admin')">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">管理者設定</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="/chat.html" class="back-to-chat">
+                    💬 チャットに戻る
+                </a>
+            </div>
+        </aside>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            <!-- ヘッダー -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 id="pageTitle">📊 ダッシュボード概要</h1>
+                    <p id="pageSubtitle">リアルタイム使用状況とパフォーマンス分析</p>
+                </div>
+                
+                <div class="header-right">
+                    <div class="date-selector">
+                        <select id="dateRange" onchange="updateDashboard()">
+                            <option value="today">今日</option>
+                            <option value="week">過去7日</option>
+                            <option value="month" selected>過去30日</option>
+                            <option value="quarter">過去3ヶ月</option>
+                        </select>
+                    </div>
+                    <button class="refresh-btn" onclick="updateDashboard()">
+                        <span class="refresh-icon">🔄</span>
+                        更新
+                    </button>
+                </div>
+            </header>
+
+            <!-- タブコンテンツ -->
+            <div class="tab-content">
+                <!-- 概要タブ -->
+                <div id="overview-tab" class="tab-panel active">
+                    <!-- KPI サマリー -->
+                    <section class="kpi-section">
+                        <div class="kpi-cards">
+                            <div class="kpi-card">
+                                <div class="kpi-icon">💬</div>
+                                <div class="kpi-content">
+                                    <div class="kpi-value" id="totalMessages">12,847</div>
+                                    <div class="kpi-label">総メッセージ数</div>
+                                    <div class="kpi-change positive">+15.2%</div>
+                                </div>
+                            </div>
+
+                            <div class="kpi-card">
+                                <div class="kpi-icon">👥</div>
+                                <div class="kpi-content">
+                                    <div class="kpi-value" id="activeUsers">156</div>
+                                    <div class="kpi-label">アクティブユーザー</div>
+                                    <div class="kpi-change positive">+8.7%</div>
+                                </div>
+                            </div>
+
+                            <div class="kpi-card">
+                                <div class="kpi-icon">💰</div>
+                                <div class="kpi-content">
+                                    <div class="kpi-value" id="monthlyCost">¥45,230</div>
+                                    <div class="kpi-label">月間コスト</div>
+                                    <div class="kpi-change negative">+2.1%</div>
+                                </div>
+                            </div>
+
+                            <div class="kpi-card">
+                                <div class="kpi-icon">⚡</div>
+                                <div class="kpi-content">
+                                    <div class="kpi-value" id="avgResponse">1.2秒</div>
+                                    <div class="kpi-label">平均応答時間</div>
+                                    <div class="kpi-change positive">-0.3秒</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- チャート セクション -->
+                    <section class="charts-section">
+                        <div class="charts-grid">
+                            <div class="chart-container">
+                                <div class="chart-header">
+                                    <h3>📈 使用量トレンド</h3>
+                                    <div class="chart-controls">
+                                        <button class="chart-btn active" onclick="changeChart('messages')">メッセージ</button>
+                                        <button class="chart-btn" onclick="changeChart('users')">ユーザー</button>
+                                        <button class="chart-btn" onclick="changeChart('cost')">コスト</button>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <canvas id="usageChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="chart-container">
+                                <div class="chart-header">
+                                    <h3>🥧 モデル使用率</h3>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <canvas id="modelChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ROI分析 -->
+                    <section class="roi-section">
+                        <div class="roi-container">
+                            <div class="roi-header">
+                                <h3>💡 ROI分析レポート</h3>
+                                <button class="export-btn" onclick="exportROIReport()">📊 レポート出力</button>
+                            </div>
+                            <div class="roi-metrics">
+                                <div class="roi-metric">
+                                    <div class="metric-label">時間削減効果</div>
+                                    <div class="metric-value">2,840時間/月</div>
+                                    <div class="metric-detail">平均18分/会話 × 9,485会話</div>
+                                </div>
+                                <div class="roi-metric">
+                                    <div class="metric-label">人件費削減</div>
+                                    <div class="metric-value">¥11,360,000</div>
+                                    <div class="metric-detail">時給¥4,000 × 2,840時間</div>
+                                </div>
+                                <div class="roi-metric">
+                                    <div class="metric-label">投資回収率</div>
+                                    <div class="metric-value">2,410%</div>
+                                    <div class="metric-detail">月間削減効果 ÷ 月間コスト</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 使用量分析タブ -->
+                <div id="usage-tab" class="tab-panel">
+                    <section class="usage-analytics">
+                        <div class="analytics-grid">
+                            <!-- 詳細使用量 -->
+                            <div class="analytics-card">
+                                <div class="card-header">
+                                    <h3>📊 詳細使用量分析</h3>
+                                    <div class="card-controls">
+                                        <select onchange="updateUsageAnalytics()">
+                                            <option value="daily">日別</option>
+                                            <option value="weekly">週別</option>
+                                            <option value="monthly">月別</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <canvas id="detailedUsageChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- コスト分析 -->
+                            <div class="analytics-card">
+                                <div class="card-header">
+                                    <h3>💰 コスト分析</h3>
+                                    <div class="cost-alert" id="costAlert">
+                                        <span class="alert-icon">⚠️</span>
+                                        予算の85%に到達しています
+                                    </div>
+                                </div>
+                                <div class="cost-breakdown">
+                                    <div class="cost-item">
+                                        <span class="cost-label">基本料金</span>
+                                        <span class="cost-value">¥30,000</span>
+                                        <span class="cost-percentage">66.4%</span>
+                                    </div>
+                                    <div class="cost-item">
+                                        <span class="cost-label">API使用料</span>
+                                        <span class="cost-value">¥12,450</span>
+                                        <span class="cost-percentage">27.5%</span>
+                                    </div>
+                                    <div class="cost-item">
+                                        <span class="cost-label">追加機能</span>
+                                        <span class="cost-value">¥2,780</span>
+                                        <span class="cost-percentage">6.1%</span>
+                                    </div>
+                                </div>
+                                <div class="budget-progress">
+                                    <div class="progress-label">月間予算進捗</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <div class="progress-text">¥45,230 / ¥53,000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- チーム管理タブ -->
+                <div id="teams-tab" class="tab-panel">
+                    <section class="team-management">
+                        <div class="team-header">
+                            <h3>👥 チーム別パフォーマンス</h3>
+                            <button class="add-team-btn" onclick="openTeamModal()">+ チーム追加</button>
+                        </div>
+                        
+                        <div class="team-grid">
+                            <div class="team-card">
+                                <div class="team-info">
+                                    <div class="team-avatar">🏢</div>
+                                    <div class="team-details">
+                                        <h4>営業部</h4>
+                                        <p>25名 • アクティブ</p>
+                                    </div>
+                                </div>
+                                <div class="team-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">月間メッセージ</span>
+                                        <span class="metric-value">4,230</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">効率化時間</span>
+                                        <span class="metric-value">950h</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">コスト</span>
+                                        <span class="metric-value">¥18,450</span>
+                                    </div>
+                                </div>
+                                <div class="team-actions">
+                                    <button class="action-btn" onclick="viewTeamDetails('sales')">詳細</button>
+                                    <button class="action-btn" onclick="editTeam('sales')">編集</button>
+                                </div>
+                            </div>
+
+                            <div class="team-card">
+                                <div class="team-info">
+                                    <div class="team-avatar">💻</div>
+                                    <div class="team-details">
+                                        <h4>開発部</h4>
+                                        <p>18名 • アクティブ</p>
+                                    </div>
+                                </div>
+                                <div class="team-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">月間メッセージ</span>
+                                        <span class="metric-value">6,180</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">効率化時間</span>
+                                        <span class="metric-value">1,380h</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">コスト</span>
+                                        <span class="metric-value">¥19,680</span>
+                                    </div>
+                                </div>
+                                <div class="team-actions">
+                                    <button class="action-btn" onclick="viewTeamDetails('dev')">詳細</button>
+                                    <button class="action-btn" onclick="editTeam('dev')">編集</button>
+                                </div>
+                            </div>
+
+                            <div class="team-card">
+                                <div class="team-info">
+                                    <div class="team-avatar">📊</div>
+                                    <div class="team-details">
+                                        <h4>マーケティング部</h4>
+                                        <p>12名 • アクティブ</p>
+                                    </div>
+                                </div>
+                                <div class="team-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">月間メッセージ</span>
+                                        <span class="metric-value">2,437</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">効率化時間</span>
+                                        <span class="metric-value">510h</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">コスト</span>
+                                        <span class="metric-value">¥7,100</span>
+                                    </div>
+                                </div>
+                                <div class="team-actions">
+                                    <button class="action-btn" onclick="viewTeamDetails('marketing')">詳細</button>
+                                    <button class="action-btn" onclick="editTeam('marketing')">編集</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 権限管理 -->
+                        <div class="permissions-section">
+                            <h3>🔐 アクセス権限管理</h3>
+                            <div class="permissions-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>ユーザー</th>
+                                            <th>チーム</th>
+                                            <th>権限レベル</th>
+                                            <th>最終アクセス</th>
+                                            <th>アクション</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="user-info">
+                                                    <div class="user-avatar">👤</div>
+                                                    <span>田中太郎</span>
+                                                </div>
+                                            </td>
+                                            <td>営業部</td>
+                                            <td><span class="role-badge admin">管理者</span></td>
+                                            <td>2分前</td>
+                                            <td>
+                                                <button class="table-action" onclick="editUser('tanaka')">編集</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user-info">
+                                                    <div class="user-avatar">👩</div>
+                                                    <span>佐藤花子</span>
+                                                </div>
+                                            </td>
+                                            <td>開発部</td>
+                                            <td><span class="role-badge user">一般ユーザー</span></td>
+                                            <td>15分前</td>
+                                            <td>
+                                                <button class="table-action" onclick="editUser('sato')">編集</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user-info">
+                                                    <div class="user-avatar">👨</div>
+                                                    <span>山田一郎</span>
+                                                </div>
+                                            </td>
+                                            <td>マーケティング部</td>
+                                            <td><span class="role-badge manager">マネージャー</span></td>
+                                            <td>1時間前</td>
+                                            <td>
+                                                <button class="table-action" onclick="editUser('yamada')">編集</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 履歴・検索タブ -->
+                <div id="history-tab" class="tab-panel">
+                    <section class="chat-history">
+                        <div class="history-header">
+                            <h3>🔍 チャット履歴・検索</h3>
+                            <div class="search-tools">
+                                <div class="search-box">
+                                    <input type="text" id="historySearch" placeholder="キーワードで検索..." oninput="searchChatHistory()">
+                                    <button class="search-btn">🔍</button>
+                                </div>
+                                <select id="searchFilter" onchange="filterChatHistory()">
+                                    <option value="all">全てのチーム</option>
+                                    <option value="sales">営業部</option>
+                                    <option value="dev">開発部</option>
+                                    <option value="marketing">マーケティング部</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="history-content">
+                            <div class="history-sidebar">
+                                <h4>📂 カテゴリ別検索</h4>
+                                <div class="category-list">
+                                    <div class="category-item active" onclick="selectCategory('all')">
+                                        <span class="category-icon">📋</span>
+                                        <span class="category-name">全ての会話</span>
+                                        <span class="category-count">1,247</span>
+                                    </div>
+                                    <div class="category-item" onclick="selectCategory('business')">
+                                        <span class="category-icon">💼</span>
+                                        <span class="category-name">ビジネス相談</span>
+                                        <span class="category-count">456</span>
+                                    </div>
+                                    <div class="category-item" onclick="selectCategory('tech')">
+                                        <span class="category-icon">💻</span>
+                                        <span class="category-name">技術的質問</span>
+                                        <span class="category-count">328</span>
+                                    </div>
+                                    <div class="category-item" onclick="selectCategory('creative')">
+                                        <span class="category-icon">🎨</span>
+                                        <span class="category-name">クリエイティブ</span>
+                                        <span class="category-count">189</span>
+                                    </div>
+                                    <div class="category-item" onclick="selectCategory('analysis')">
+                                        <span class="category-icon">📊</span>
+                                        <span class="category-name">データ分析</span>
+                                        <span class="category-count">274</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="history-main">
+                                <div class="chat-list">
+                                    <div class="chat-item">
+                                        <div class="chat-header">
+                                            <div class="chat-user">
+                                                <span class="user-avatar">👤</span>
+                                                <span class="user-name">田中太郎</span>
+                                                <span class="user-team">営業部</span>
+                                            </div>
+                                            <div class="chat-meta">
+                                                <span class="chat-time">2024-01-15 14:30</span>
+                                                <span class="chat-model">GPT-4o</span>
+                                            </div>
+                                        </div>
+                                        <div class="chat-preview">
+                                            <div class="chat-question">プロジェクト提案書の効果的な書き方を教えてください</div>
+                                            <div class="chat-summary">AI回答: 効果的なプロジェクト提案書には以下の要素が重要です...</div>
+                                        </div>
+                                        <div class="chat-actions">
+                                            <button class="action-btn" onclick="viewFullChat('chat1')">詳細表示</button>
+                                            <button class="action-btn" onclick="exportChat('chat1')">エクスポート</button>
+                                            <button class="action-btn" onclick="addToKnowledge('chat1')">ナレッジ追加</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat-item">
+                                        <div class="chat-header">
+                                            <div class="chat-user">
+                                                <span class="user-avatar">👩</span>
+                                                <span class="user-name">佐藤花子</span>
+                                                <span class="user-team">開発部</span>
+                                            </div>
+                                            <div class="chat-meta">
+                                                <span class="chat-time">2024-01-15 13:45</span>
+                                                <span class="chat-model">GPT-4</span>
+                                            </div>
+                                        </div>
+                                        <div class="chat-preview">
+                                            <div class="chat-question">Pythonでデータベース接続の最適化方法について</div>
+                                            <div class="chat-summary">AI回答: データベース接続の最適化には以下の手法があります...</div>
+                                        </div>
+                                        <div class="chat-actions">
+                                            <button class="action-btn" onclick="viewFullChat('chat2')">詳細表示</button>
+                                            <button class="action-btn" onclick="exportChat('chat2')">エクスポート</button>
+                                            <button class="action-btn" onclick="addToKnowledge('chat2')">ナレッジ追加</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="chat-item">
+                                        <div class="chat-header">
+                                            <div class="chat-user">
+                                                <span class="user-avatar">👨</span>
+                                                <span class="user-name">山田一郎</span>
+                                                <span class="user-team">マーケティング部</span>
+                                            </div>
+                                            <div class="chat-meta">
+                                                <span class="chat-time">2024-01-15 12:20</span>
+                                                <span class="chat-model">GPT-4o Mini</span>
+                                            </div>
+                                        </div>
+                                        <div class="chat-preview">
+                                            <div class="chat-question">SNSマーケティング戦略の立案について相談</div>
+                                            <div class="chat-summary">AI回答: 効果的なSNSマーケティング戦略には...</div>
+                                        </div>
+                                        <div class="chat-actions">
+                                            <button class="action-btn" onclick="viewFullChat('chat3')">詳細表示</button>
+                                            <button class="action-btn" onclick="exportChat('chat3')">エクスポート</button>
+                                            <button class="action-btn" onclick="addToKnowledge('chat3')">ナレッジ追加</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ナレッジベース -->
+                                <div class="knowledge-section">
+                                    <h4>📚 構築されたナレッジベース</h4>
+                                    <div class="knowledge-items">
+                                        <div class="knowledge-item">
+                                            <div class="knowledge-title">プロジェクト管理のベストプラクティス</div>
+                                            <div class="knowledge-summary">15件の会話から生成 • 営業部・開発部で活用</div>
+                                            <div class="knowledge-tags">
+                                                <span class="tag">プロジェクト管理</span>
+                                                <span class="tag">効率化</span>
+                                                <span class="tag">チーム運営</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="knowledge-item">
+                                            <div class="knowledge-title">技術的問題解決パターン</div>
+                                            <div class="knowledge-summary">23件の会話から生成 • 開発部で活用</div>
+                                            <div class="knowledge-tags">
+                                                <span class="tag">技術</span>
+                                                <span class="tag">デバッグ</span>
+                                                <span class="tag">ソリューション</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- 管理者設定タブ -->
+                <div id="admin-tab" class="tab-panel">
+                    <section class="admin-panel">
+                        <div class="admin-header">
+                            <h3>⚙️ 管理者設定</h3>
+                        </div>
+
+                        <div class="admin-grid">
+                            <!-- 監査ログ -->
+                            <div class="admin-card">
+                                <div class="card-header">
+                                    <h4>📋 監査ログ</h4>
+                                    <button class="export-btn" onclick="exportAuditLog()">ログ出力</button>
+                                </div>
+                                <div class="audit-logs">
+                                    <div class="log-item">
+                                        <div class="log-time">2024-01-15 14:35:22</div>
+                                        <div class="log-action">ユーザー権限変更</div>
+                                        <div class="log-detail">田中太郎の権限を管理者に変更</div>
+                                        <div class="log-user">実行者: システム管理者</div>
+                                    </div>
+                                    <div class="log-item">
+                                        <div class="log-time">2024-01-15 13:20:15</div>
+                                        <div class="log-action">新規チーム作成</div>
+                                        <div class="log-detail">マーケティング部チームを作成</div>
+                                        <div class="log-user">実行者: 佐藤花子</div>
+                                    </div>
+                                    <div class="log-item">
+                                        <div class="log-time">2024-01-15 11:45:08</div>
+                                        <div class="log-action">セキュリティ設定変更</div>
+                                        <div class="log-detail">二要素認証を有効化</div>
+                                        <div class="log-user">実行者: システム管理者</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- システム設定 -->
+                            <div class="admin-card">
+                                <div class="card-header">
+                                    <h4>🔧 システム設定</h4>
+                                </div>
+                                <div class="settings-form">
+                                    <div class="setting-item">
+                                        <label>データ保存期間</label>
+                                        <select>
+                                            <option value="30">30日</option>
+                                            <option value="90" selected>90日</option>
+                                            <option value="365">365日</option>
+                                            <option value="unlimited">無制限</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="setting-item">
+                                        <label>デフォルトAIモデル</label>
+                                        <select>
+                                            <option value="gpt-3.5">GPT-3.5 Turbo</option>
+                                            <option value="gpt-4o" selected>GPT-4o</option>
+                                            <option value="gpt-4">GPT-4</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="setting-item">
+                                        <label>月間予算上限</label>
+                                        <input type="number" value="53000" min="0" step="1000">
+                                        <span class="unit">円</span>
+                                    </div>
+                                    
+                                    <div class="setting-item">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" checked>
+                                            予算アラート通知を有効にする
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="setting-item">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" checked>
+                                            監査ログを有効にする
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="settings-actions">
+                                    <button class="save-btn" onclick="saveSettings()">設定を保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

@@ -6,8 +6,39 @@ let currentTemplate = null;
 let editingTemplateId = null;
 let availableModels = [];
 
+// API接続テスト関数（デバッグ用）
+window.testApiConnection = function() {
+    console.log('🔧 API接続テストを開始...');
+    
+    // ステップ1: ヘルスチェック
+    fetch(`${API_BASE_URL}/health`)
+        .then(response => {
+            console.log('💚 ヘルスチェック:', response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('💚 ヘルスチェック結果:', data);
+            
+            // ステップ2: テンプレートAPI
+            return fetch(`${API_BASE_URL}/api/templates`);
+        })
+        .then(response => {
+            console.log('📝 テンプレートAPI:', response.status);
+            return response.json();
+        })
+        .then(templates => {
+            console.log('📝 テンプレート取得結果:', templates);
+            alert(`✅ API接続成功！\n- ヘルスチェック: OK\n- テンプレート: ${templates.length}件`);
+        })
+        .catch(error => {
+            console.error('❌ API接続エラー:', error);
+            alert(`❌ API接続失敗:\n${error.message}`);
+        });
+};
+
 // 初期化
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('📄 templates.js初期化開始');
     loadTemplates();
     loadModels();
     setupEventListeners();
@@ -49,29 +80,59 @@ function setupEventListeners() {
 }
 
 // テンプレート一覧を読み込み
-async function loadTemplates() {
+window.loadTemplates = async function loadTemplates() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/v1/templates`);
+        console.log('🚀 テンプレート読み込み開始:', `${API_BASE_URL}/api/templates`);
+        
+        // ローディング表示を確実に表示
+        const templateGrid = document.getElementById('templateGrid');
+        if (templateGrid) {
+            templateGrid.innerHTML = `
+                <div class="loading-message">
+                    <div class="loading-spinner"></div>
+                    <p>テンプレートを読み込み中...</p>
+                </div>
+            `;
+        }
+        
+        const response = await fetch(`${API_BASE_URL}/api/templates`);
+        console.log('📡 レスポンス受信:', response.status, response.statusText);
+        
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
 
         templates = await response.json();
+        console.log('✅ テンプレート取得成功:', templates.length, '件');
+        console.log('📋 テンプレート詳細:', templates);
+        
         displayTemplates(templates);
         
         // カテゴリタブを更新
         updateCategoryTabs();
 
     } catch (error) {
-        console.error('テンプレート読み込みエラー:', error);
+        console.error('❌ テンプレート読み込みエラー:', error);
         showErrorMessage('テンプレートの読み込みに失敗しました。APIサーバーが起動しているか確認してください。');
+        
+        // ローディングメッセージを隠してエラー表示
+        const templateGrid = document.getElementById('templateGrid');
+        if (templateGrid) {
+            templateGrid.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: #dc2626;">
+                    <h3>⚠️ エラーが発生しました</h3>
+                    <p>${error.message}</p>
+                    <button onclick="window.loadTemplates()" style="margin-top: 20px; padding: 10px 20px; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">再試行</button>
+                </div>
+            `;
+        }
     }
 }
 
 // 利用可能モデル一覧を読み込み
 async function loadModels() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/v1/ai/models`);
+        const response = await fetch(`${API_BASE_URL}/api/models`);
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
@@ -410,13 +471,13 @@ async function handleFormSubmit(e) {
     try {
         let response;
         if (editingTemplateId) {
-            response = await fetch(`${API_BASE_URL}/api/v1/templates/${editingTemplateId}`, {
+            response = await fetch(`${API_BASE_URL}/api/templates/${editingTemplateId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             });
         } else {
-            response = await fetch(`${API_BASE_URL}/api/v1/templates`, {
+            response = await fetch(`${API_BASE_URL}/api/templates`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -493,7 +554,7 @@ async function handleUseTemplate(e) {
         submitBtn.innerHTML = '⏳ 実行中...';
         submitBtn.disabled = true;
         
-        const response = await fetch(`${API_BASE_URL}/api/v1/templates/${currentTemplate.id}/use`, {
+        const response = await fetch(`${API_BASE_URL}/api/chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestData)
@@ -559,7 +620,7 @@ async function deleteTemplate(templateId) {
     }
     
     try {
-        const response = await fetch(`${API_BASE_URL}/api/v1/templates/${templateId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/templates/${templateId}`, {
             method: 'DELETE'
         });
         

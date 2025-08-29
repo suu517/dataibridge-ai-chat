@@ -39,10 +39,10 @@
                         </select>
                     </div>
                     
-                    <a href="/templates.html" class="template-btn">
+                    <a href="templates.html" class="template-btn">
                         📝 テンプレート管理
                     </a>
-                    <a href="/api-settings.html" class="api-settings-btn">
+                    <a href="api-settings.html" class="api-settings-btn">
                         ⚙️ API設定
                     </a>
                     <button class="clear-btn" onclick="clearChat()">
@@ -177,6 +177,11 @@
         </div>
     </div>
 
-    <script src="chat.js"></script>
+    <script>
+        // キャッシュバスター機能付きでJavaScriptを読み込み
+        const script = document.createElement('script');
+        script.src = 'chat.js?v=' + Date.now();
+        document.head.appendChild(script);
+    </script>
 </body>
 </html>

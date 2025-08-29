@@ -12,7 +12,7 @@
         <header class="template-header">
             <div class="header-content">
                 <div class="header-left">
-                    <a href="/" class="back-link">
+                    <a href="chat.html" class="back-link">
                         <svg class="back-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
@@ -30,7 +30,7 @@
                 </div>
                 
                 <div class="header-right">
-                    <a href="/chat.html" class="chat-btn">
+                    <a href="chat.html" class="chat-btn">
                         💬 チャット
                     </a>
                     <button class="create-btn" onclick="openCreateModal()">
@@ -49,6 +49,8 @@
                     <button class="filter-tab" data-category="ビジネス">ビジネス</button>
                     <button class="filter-tab" data-category="開発">開発</button>
                     <button class="filter-tab" data-category="クリエイティブ">クリエイティブ</button>
+                    <button onclick="window.loadTemplates()" style="background: #f59e0b; color: white; margin-left: 10px;">🔄 再読み込み</button>
+                    <button onclick="testApiConnection()" style="background: #10b981; color: white; margin-left: 10px;">🔧 接続テスト</button>
                 </div>
                 
                 <div class="search-box">
@@ -81,52 +83,65 @@
 
             <form class="template-form" id="templateForm">
                 <div class="form-group">
-                    <label for="templateName">テンプレート名 *</label>
-                    <input type="text" id="templateName" required maxlength="100" placeholder="例: ビジネスメール作成">
+                    <label for="templateName">📝 テンプレート名 *</label>
+                    <input type="text" id="templateName" required maxlength="100" placeholder="例: ビジネスメール作成、プロジェクト計画書">
+                    <div class="input-hint">✨ どんな作業で使うテンプレートか分かる名前をつけましょう</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="templateDescription">説明</label>
-                    <textarea id="templateDescription" placeholder="このテンプレートの用途と特徴を説明してください" maxlength="500"></textarea>
+                    <label for="templateDescription">📊 テンプレートの説明</label>
+                    <textarea id="templateDescription" placeholder="例: 丁寧で効果的なビジネスメールを自動生成" maxlength="500"></textarea>
+                    <div class="input-hint">📝 どんな成果を得られるテンプレートか簡潔に説明しましょう</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="templateCategory">カテゴリ *</label>
+                    <label for="templateCategory">📋 カテゴリ分類 *</label>
                     <select id="templateCategory" required>
-                        <option value="">カテゴリを選択</option>
-                        <option value="ビジネス">ビジネス</option>
-                        <option value="開発">開発</option>
-                        <option value="クリエイティブ">クリエイティブ</option>
-                        <option value="学習">学習</option>
-                        <option value="その他">その他</option>
+                        <option value="">▼ どの業務分野で使いますか？</option>
+                        <option value="ビジネス">💼 ビジネス - メール、提案書、交渉など</option>
+                        <option value="開発">💻 開発 - コードレビュー、設計書など</option>
+                        <option value="クリエイティブ">🎨 クリエイティブ - 創作、デザインなど</option>
+                        <option value="学習">📚 学習 - 資格取得、スキルアップなど</option>
+                        <option value="その他">🎆 その他 - 上記以外の業務</option>
                     </select>
+                    <div class="input-hint">💿 カテゴリで管理するとテンプレートを簡単に探せます</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="systemPrompt">システムプロンプト *</label>
-                    <textarea id="systemPrompt" required placeholder="AIの役割と応答スタイルを定義してください。変数は {variable_name} の形式で使用できます。" rows="6"></textarea>
+                    <label for="systemPrompt">🤖 AIへの指示内容 *</label>
+                    <textarea id="systemPrompt" required placeholder="例: 丁寧でプロフェッショナルなビジネスメールを作成してください。宛先: {recipient}、件名: {subject}、内容: {content}を使用して、適切な敷語と結語を含めて作成してください。" rows="8"></textarea>
                     <div class="prompt-hint">
-                        💡 変数を使用する場合は {変数名} の形式で記述してください
+                        📝 <strong>書き方のコツ:</strong><br>
+                        • AIにどんな作業をしてほしいか具体的に書く<br>
+                        • 変数は {variable_name} の形式で使用<br>
+                        • 「丁寧に」「分かりやすく」などの指示を含める
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="variables">変数設定（オプション）</label>
+                    <label for="variables">🔄 入力項目設定（オプション）</label>
                     <div class="variables-container" id="variablesContainer">
+                        <div class="variable-explanation">
+                            💡 <strong>入力項目とは？</strong><br>
+                            ユーザーがこのテンプレートを使う時に入力する項目です。<br>
+                            例: 「宛先」「件名」「本文」など
+                        </div>
                         <button type="button" class="add-variable-btn" onclick="addVariableField()">
-                            ➕ 変数を追加
+                            ➕ 入力項目を追加
                         </button>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInput">入力例</label>
-                    <textarea id="exampleInput" placeholder="ユーザーがこのテンプレートを使う際の入力例" rows="3"></textarea>
+                    <label for="exampleInput">📝 使用例（入力）</label>
+                    <textarea id="exampleInput" placeholder="例: 宛先：田中様、件名：会議の件、内容：明日の会議の資料を送付します" rows="3"></textarea>
+                    <div class="input-hint">🔍 ユーザーがどんな内容を入力するかの参考例</div>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleOutput">出力例</label>
-                    <textarea id="exampleOutput" placeholder="期待される出力の例" rows="3"></textarea>
+                    <label for="exampleOutput">✨ 期待される結果（出力）</label>
+                    <textarea id="exampleOutput" placeholder="例: 件名：会議資料の件　田中様、いつもお世話になっております。明日の会議の資料を送付いたしますので、ご確認ください。" rows="4"></textarea>
+                    <div class="input-hint">🎯 AIがどんな回答をするかのイメージ例</div>
                 </div>
 
                 <div class="form-actions">
@@ -198,11 +213,16 @@
             <div class="form-actions">
                 <button type="button" class="btn-secondary" onclick="closeResultModal()">閉じる</button>
                 <button type="button" class="btn-primary" onclick="copyToClipboard()">結果をコピー</button>
-                <a href="/chat.html" class="btn-primary">チャットで継続</a>
+                <a href="chat.html" class="btn-primary">チャットで継続</a>
             </div>
         </div>
     </div>
 
-    <script src="templates.js"></script>
+    <script>
+        // キャッシュバスター機能付きでJavaScriptを読み込み
+        const script = document.createElement('script');
+        script.src = 'templates.js?v=' + Date.now();
+        document.head.appendChild(script);
+    </script>
 </body>
 </html>

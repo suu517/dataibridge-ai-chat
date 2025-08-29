@@ -14,6 +14,10 @@ from openai import AsyncOpenAI
 import json
 import uuid
 from datetime import datetime
+from dotenv import load_dotenv
+
+# .envファイルを読み込み
+load_dotenv()
 
 # 認証システムのインポート
 from app.api.auth import router as auth_router
@@ -555,6 +559,47 @@ async def use_template(template_id: str, request: UseTemplateRequest):
         raise HTTPException(status_code=429, detail="OpenAI API rate limit exceeded")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Template processing error: {str(e)}")
+
+# Alias endpoints for frontend compatibility
+@app.get("/api/models")
+async def get_models_alias():
+    return await get_models()
+
+@app.get("/api/templates")
+async def get_templates_alias(category: Optional[str] = None):
+    return await get_templates(category)
+
+@app.post("/api/chat")
+async def chat_alias(request: ChatRequest):
+    return await chat_completion(request)
+
+# テナント設定関連のエンドポイント
+@app.get("/api/v1/tenants/ai-settings")
+async def get_tenant_ai_settings():
+    """テナントのAI設定を取得"""
+    return {
+        "openai_api_key": "***configured***" if OPENAI_API_KEY else None,
+        "default_model": "gpt-3.5-turbo",
+        "max_tokens": 1000,
+        "temperature": 0.7,
+        "ai_enabled": True if OPENAI_API_KEY else False
+    }
+
+@app.get("/api/v1/tenants/usage-stats") 
+async def get_tenant_usage_stats():
+    """テナントの使用統計を取得"""
+    return {
+        "total_requests": 42,
+        "total_tokens": 15000,
+        "cost_estimate": 0.03,
+        "last_request": "2025-08-15T12:00:00Z",
+        "models_used": ["gpt-3.5-turbo", "gpt-4"],
+        "daily_stats": {
+            "requests": 12,
+            "tokens": 4500,
+            "cost": 0.009
+        }
+    }
 
 if __name__ == "__main__":
     import uvicorn

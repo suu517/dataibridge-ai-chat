@@ -50,21 +50,18 @@ async function callRealAI(userMessage) {
         const chatModelSelect = document.getElementById('chatModelSelect');
         const selectedModel = chatModelSelect ? chatModelSelect.value : 'gpt-3.5-turbo';
         
-        const response = await fetch(`${API_BASE_URL}/api/v1/ai/chat`, {
+        console.log(`🚀 API呼び出し開始: ${API_BASE_URL}/api/chat`);
+        console.log(`📝 メッセージ: "${userMessage}"`);
+        console.log(`🤖 モデル: ${selectedModel}`);
+        
+        const response = await fetch(`${API_BASE_URL}/api/chat`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                messages: [
-                    {
-                        role: 'user',
-                        content: userMessage
-                    }
-                ],
-                model: selectedModel,
-                temperature: 0.7,
-                max_tokens: 500
+                message: userMessage,  // demo_api.pyの形式に合わせて修正
+                model: selectedModel
             })
         });
 
@@ -346,7 +343,7 @@ async function checkApiConnection() {
             
             // 利用可能なモデルをチェック
             try {
-                const modelsResponse = await fetch(`${API_BASE_URL}/api/v1/ai/models`);
+                const modelsResponse = await fetch(`${API_BASE_URL}/api/models`);
                 if (modelsResponse.ok) {
                     const models = await modelsResponse.json();
                     console.log(`🤖 Available AI Models: ${models.length} models`);
@@ -405,8 +402,8 @@ async function initializeApp() {
 
 async function loadChatModels() {
     try {
-        console.log(`📡 モデル読み込み中: ${API_BASE_URL}/api/v1/ai/models`);
-        const response = await fetch(`${API_BASE_URL}/api/v1/ai/models`);
+        console.log(`📡 モデル読み込み中: ${API_BASE_URL}/api/models`);
+        const response = await fetch(`${API_BASE_URL}/api/models`);
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }
@@ -471,19 +468,36 @@ function updateChatModelInfo() {
 
 async function loadTemplates() {
     try {
-        console.log(`📡 テンプレート読み込み中: ${API_BASE_URL}/api/v1/templates`);
-        const response = await fetch(`${API_BASE_URL}/api/v1/templates`);
+        console.log(`📡 テンプレート読み込み中: ${API_BASE_URL}/api/templates`);
+        const response = await fetch(`${API_BASE_URL}/api/templates`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        console.log(`📡 レスポンス状態: ${response.status} ${response.statusText}`);
+        
         if (response.ok) {
-            availableTemplates = await response.json();
+            const responseText = await response.text();
+            console.log(`📡 生レスポンス:`, responseText);
+            
+            const templates = JSON.parse(responseText);
+            availableTemplates = templates;
             console.log(`✅ ${availableTemplates.length}個のテンプレートを読み込み完了`, availableTemplates);
             return true;
         } else {
             console.error(`❌ API エラー: ${response.status} ${response.statusText}`);
+            const errorText = await response.text();
+            console.error(`❌ エラー詳細:`, errorText);
             availableTemplates = [];
             return false;
         }
     } catch (error) {
         console.error('❌ テンプレート読み込みエラー:', error);
+        console.error('❌ エラー詳細:', error.message);
+        console.error('❌ スタックトレース:', error.stack);
         availableTemplates = [];
         return false;
     }
@@ -814,7 +828,7 @@ async function sendTemplateMessage(message) {
     showTypingIndicator();
     
     try {
-        const url = `${API_BASE_URL}/api/v1/templates/${selectedTemplate.id}/use`;
+        const url = `${API_BASE_URL}/api/chat`;
         const payload = {
             variables: variables,
             user_message: message

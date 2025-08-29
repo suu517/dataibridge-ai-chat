@@ -1,0 +1,2470 @@
+<div class="ember-view" id="ember677"><div id="ember678" class="ember-view">  <div id="ember679" class="ember-view"><div class="zsDialog modal fade     " role="dialog" id="commonDialog" data-backdrop="static" style="z-index: 1152;">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+
+      <header class="modal-header">
+<span id="ember680" class="ember-view">        <button class="popupClose " data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-original-title="閉じる" data-placement="bottom" data-ember-action="" data-ember-action-681="681"><span class="iconDialogClose"></span></button>
+
+</span>        <h5 class="modal-title text-center"></h5>
+<!----><!---->      </header>
+
+      <section class="modal-body ">
+        <div class="row hide">
+         <div id="ember682" class="ember-view"><div class="col-sm-12">
+  <div class="dialogImageUploader ">
+      <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" class="tabItem "><a href="#fromGallery" aria-controls="fromGallery" role="tab" data-toggle="tab" data-ember-action="" data-ember-action-683="683"> <span class="icon gallery"></span>画像ギャラリーから</a></li>
+        <li role="presentation" class="tabItem "><a href="#fromWeb" aria-controls="fromWeb" role="tab" data-toggle="tab" data-ember-action="" data-ember-action-684="684"><span class="icon web"></span>URLから</a></li>
+      </ul>
+    <div class="tab-content commondialog-tab-content">
+      <section role="tabpanel" id="fromWeb" class="tab-pane fromWeb fade ">
+        <div class="fieldImagePath">
+          <div class="row">
+            <div class="col-sm-3 text-right">
+              <label class="preLabel">画像のURL</label>
+            </div>
+            <div class="pull-left">
+              <input placeholder="画像のURLを入力してください" id="ember685" class="txtWebAddress ember-text-field ember-view" type="text">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-3">
+              <div class="webURLError mT10 hide">
+                <span class="errorText"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section role="tabpanel" id="fromGallery" class="tab-pane fromLibrary fade ">
+        <div class="galleryArea super-scrollbar-box super-scrollbar ss-no-auto-hide ss-position" id="imagegallery" data-ss-id="fcb23c2a-29c1-263b-400f-867cc421888f">
+          <div class="text-center mB10 hide">
+            <span class="errorText"></span>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 ">
+              <form target="ds_uploadframe" class="droppableArea" enctype="multipart/form-data">
+                <label class="draggableArea">
+                  <input name="image_file" id="upload-image" class="hide" accept="image/*" type="file">
+                </label>
+                <div id="customInFile" class="customInFile text-center">
+                  <div class="iconCustomInFile" data-image="+"></div>
+                  <div class="infoAndLink">こちらに画像をドロップしてください</div>
+                </div>
+              </form>
+            </div>
+<!---->          </div>
+          <div class="row hide">
+            <div class="col-sm-12 ">
+              <section class="emptyContent text-center">
+                <div class="emptyEmoji"></div>
+                <p class="notFoundText mT10">画像をまだアップロードしていません</p>
+              </section>
+            </div>
+          </div>
+        <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></div>
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+        </div>
+<!---->
+          <div id="ember686" class="ember-view"><div class="dialogAddAttribute" id="add_attributes">
+  <div class="subSection">
+    <div class="row">
+      <div class="col-sm-4 text-right"><label class="preLabel">カーソルを合わせたときのテキスト</label></div>
+        <div class="col-sm-8">
+            <input name="image_title" id="ember687" class="txtBox form-control ember-text-field ember-view" type="text">
+        </div>
+    </div>
+  </div>
+  <div class="subSection">
+    <div class="row">
+        <div class="col-sm-4 text-right"><label class="preLabel">クリックしたときの処理</label></div>
+        <div class="col-sm-8">
+            <div class="zsSelector dropdown imageAttrDD" name="imageAttribute">
+                <button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="value" name="chosenSurveyValue">Missing translation: survey.popup.add_attribute.</span>
+                    <span class="linecaret pull-right"></span>
+                </button>
+                <ul role="menu" class="dropdown-menu droplist" name="dateList">
+<!---->                </ul>
+            </div>
+                <input name="image_link" id="ember688" class="txtBox form-control urlInpTxt mT10 ember-text-field ember-view" type="text">
+        </div>
+    </div>
+  </div>
+</div></div>
+        
+      </section>
+
+      <footer class="modal-footer dialogAction">
+        <div class="btn-group col-sm-12">
+          <div class="row">
+          <button class="btn col-sm-6 btn-pop-close " data-dismiss="modal" id="dialogCloser" type="button" data-ember-action="" data-ember-action-689="689">
+            
+            キャンセルする
+          </button>
+           <button class="btn col-sm-6 btn-pop-ok " id="saveDialogButton" type="button" data-ember-action="" data-ember-action-690="690">
+            
+           </button>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+<!----></div>
+<!----></div>
+
+</div><!----><div id="ember691" class="ember-view"><div class="zsDialog modal fade transitPop in" id="full_screen_popup" data-backdrop="static" role="dialog" style="display: block;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content fullScreenViewComponent">
+        <div id="ember1096" class="ember-view"><div id="ember1097" class="ember-view"><!----></div>
+<header class="modal-header fixedModalHeader previewHeader">
+  <h5 class="modal-title">プレビュー</h5>
+  <div class="deviceModeSection  ">
+    <div class="btn-group" role="group" aria-label="Device Modes">
+      <button class="btn btn-device active" data-ember-action="" data-ember-action-1098="1098">
+        <i class="deviceIcon desktop">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M469.333 21.333H42.667C19.135 21.333 0 40.469 0 64v298.667c0 23.531 19.135 42.667 42.667 42.667h149.362c-.46 17.052-3.728 44.306-15.893 57.104-4.469 4.708-9.604 6.896-16.135 6.896-5.896 0-10.667 4.771-10.667 10.667s4.771 10.667 10.667 10.667h192c5.896 0 10.667-4.771 10.667-10.667s-4.771-10.667-10.667-10.667c-6.531 0-11.667-2.188-16.135-6.896-12.165-12.798-15.434-40.052-15.893-57.104h149.362c23.531 0 42.667-19.135 42.667-42.667V64c-.002-23.531-19.137-42.667-42.669-42.667zm-271.604 448c12.881-19.749 15.374-48.188 15.695-64h85.151c.322 15.813 2.814 44.251 15.695 64H197.729zm292.938-106.666c0 11.76-9.573 21.333-21.333 21.333H42.667c-11.76 0-21.333-9.573-21.333-21.333V320h469.333v42.667zm0-64H21.333V64c0-11.76 9.573-21.333 21.333-21.333h426.667c11.76 0 21.333 9.573 21.333 21.333v234.667z"></path><circle cx="256" cy="352" r="21.333"></circle></svg>
+        </i>
+      </button>
+      <button class="btn btn-device" data-ember-action="" data-ember-action-1099="1099">
+        <i class="deviceIcon tabPortrait">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 792"><ellipse cx="395.1" cy="718.2" rx="27.9" ry="27"></ellipse><path d="M609.804 792S684 792 684 720V72c0-72-74.196-72-74.196-72H182.196S108 0 108 72v648c0 72 74.196 72 74.196 72h427.608zM144 73.26C144 36 183.996 36 183.996 36h424.008S648 36 648 73.26V648H144V73.26zm0 645.516V684h504v34.74C648 756 608.004 756 608.004 756H183.996S144 756 144 718.776z"></path></svg>
+        </i>
+      </button>
+      <button class="btn btn-device" data-ember-action="" data-ember-action-1100="1100">
+        <i class="deviceIcon tabLandscape">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 792"><ellipse cx="73.8" cy="395.3" rx="27" ry="27.9"></ellipse><path d="M.1 610s0 74.2 72 74.2l648-.4c72 0 72-74.2 72-74.2l-.2-427.6s0-74.2-72-74.2l-648 .4c-72 0-72 74.2-72 74.2L.1 610zm718.5-466.2c37.3 0 37.3 40 37.3 40l.3 424s0 40-37.2 40l-574.7.4-.3-504 574.6-.4zm-645.5.4h34.8l.3 504H73.5c-37.3 0-37.3-40-37.3-40l-.3-424s-.1-40 37.2-40z"></path></svg>
+        </i>
+      </button>
+      <button class="btn btn-device" data-ember-action="" data-ember-action-1101="1101">
+        <i class="deviceIcon mobilePortrait">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 792"><path d="M522 792s72 0 72-72V72c0-72-72-72-72-72H270s-72 0-72 72v648c0 72 72 72 72 72h252zM234 72c0-17.352 5.4-25.452 16.092-30.816C257.688 37.404 266.076 36 270 36h252c3.924 0 12.312 1.404 19.908 5.184C552.6 46.548 558 54.648 558 72v18H234V72zm0 54h324v486H234V126zm0 594v-72h324v72c0 17.352-5.4 25.452-16.092 30.816C534.312 754.596 525.924 756 522 756H270c-3.924 0-12.312-1.404-19.908-5.184C239.4 745.452 234 737.352 234 720z"></path><path d="M445.212 54h-98.424c-2.664 0-4.788 3.492-4.788 7.956v2.124c0 4.392 2.16 7.956 4.788 7.956h98.424c2.664 0 4.788-3.492 4.788-7.956v-2.124c0-4.392-2.16-7.956-4.788-7.956z"></path><circle cx="396" cy="702" r="36"></circle></svg>
+        </i>
+      </button>
+      <button class="btn btn-device" data-ember-action="" data-ember-action-1102="1102">
+        <i class="deviceIcon mobileLandscape">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 792"><path d="M.6 523.8s.3 72 72.3 71.7l648-3c72-.3 71.7-72.3 71.7-72.3l-1.2-252s-.3-72-72.3-71.7l-648 3c-72 .3-71.7 72.3-71.7 72.3l1.2 252zm718.6-291.3c17.4-.1 25.5 5.3 30.9 15.9 3.8 7.6 5.3 16 5.3 19.9l1.2 252c0 3.9-1.3 12.3-5.1 19.9-5.3 10.7-13.4 16.2-30.7 16.2l-18 .1-1.5-324h17.9zm-54 .2l1.5 324-486 2.3-1.5-324 486-2.3zm-593.9 2.8l72-.3 1.5 324-72 .3c-17.4.1-25.5-5.3-30.9-15.9-3.8-7.6-5.3-16-5.3-19.9l-1.2-252c0-3.9 1.3-12.3 5.1-19.9 5.3-10.8 13.4-16.2 30.8-16.3z"></path><path d="M738.2 443.6l-.5-98.4c0-2.7-3.5-4.8-8-4.8h-2.1c-4.4 0-7.9 2.2-7.9 4.8l.5 98.4c0 2.7 3.5 4.8 8 4.8h2.1c4.4 0 7.9-2.1 7.9-4.8z"></path><circle cx="90" cy="397.4" r="36"></circle></svg>
+         </i>
+      </button>
+    </div>
+  </div>
+<span id="ember1103" class="ember-view">  <button data-dismiss="modal" aria-label="Close" class="popupClose " data-toggle="tooltip" data-original-title="閉じる" data-placement="bottom" data-ember-action="" data-ember-action-1104="1104"><span class="iconDialogClose"></span></button>
+
+</span>
+    <button id="previewShareButton" class="puertoRicoBtn pull-right " data-ember-action="" data-ember-action-1105="1105">レビュー</button>
+<!---->  
+  <div class="previewPageSwitcher pull-right    ">
+    <div class="zsSelector pageSwitcher dropdown text-right">
+      <button class="btnPageSwitcher" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="value">ページ 2 : 満足度・期待度調査</span>
+        <span class="caret" name="dropdown_caret"></span>
+      </button>
+<span id="ember1110" class="ember-view">      <ul class="dropdown-menu dropdown-menu-right super-scrollbar-box super-scrollbar ss-no-auto-hide ss-active-y" id="pagelist" data-ss-id="8368d841-5c44-6335-f4bc-5804494f04a7">
+<!----><!----><!---->          <li class="dropItem  "><a class="itemLink" data-ember-action="" data-ember-action-1111="1111">ページ 1 : 満足度・期待度調査</a></li>
+          <li class="dropItem selected transparentColor"><a class="itemLink" data-ember-action="" data-ember-action-1112="1112">ページ 2 : 満足度・期待度調査</a></li>
+          <li class="dropItem  "><a class="itemLink" data-ember-action="" data-ember-action-1113="1113">ページ 3 : 総合評価</a></li>
+          <li class="dropItem  "><a class="itemLink" data-ember-action="" data-ember-action-1114="1114">ページ 4 : 期待項目の確認</a></li>
+          <li class="dropItem  "><a class="itemLink" data-ember-action="" data-ember-action-1115="1115">ページ 5 : 最も期待値が高い項目について</a></li>
+          <li class="dropItem  "><a class="itemLink" data-ember-action="" data-ember-action-1116="1116">ページ 6 : 満足項目の確認</a></li>
+          <li class="dropItem  "><a class="itemLink" data-ember-action="" data-ember-action-1117="1117">ページ 7 : 最も満足度が高い項目について</a></li>
+          <li class="dropItem  "><a class="itemLink" data-ember-action="" data-ember-action-1118="1118">ページ 8 : 満足度が低い項目について</a></li>
+          <li class="dropItem  "><a class="itemLink" data-ember-action="" data-ember-action-1119="1119">ページ 9 : お礼</a></li>
+      <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail" style="height: 198px; top: 0px; right: 0px;"><div class="ss-scrollbar-y" style="height: 111.059px; top: 0px;"></div></div></ul>
+
+</span>    </div>
+  </div>
+  <div id="reviewPageOptDropper" class="userOptDropper pull-right   ">
+    <div id="reviewPageOptDD" class="zsSelector userOptDD dropdown text-right">
+      <button class="btnUserOpt" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="value">オプション</span>
+        <span class="caret" name="dropdown_caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right multiselect" id="optlist" data-reviewcommentcount="0" data-revieweridofupdatedcomment="0">
+          <li id="reviewOptn_1" class="dropItem disabled">
+            <a class="itemLink clearfix" data-ember-action="" data-ember-action-1106="1106">
+              <span class="pull-left optText ">コメントを有効にする</span>
+              <label class="zsToggleSwitch pull-right" for="toggleComment">
+                <input id="revOpt_1" class="ember-checkbox ember-view" type="checkbox">
+                <div class="switchRail"></div>
+              </label>
+            </a>
+          </li>
+          <li id="reviewOptn_2" class="dropItem ">
+            <a class="itemLink clearfix" data-ember-action="" data-ember-action-1107="1107">
+              <span class="pull-left optText ">検証を無視する</span>
+              <label class="zsToggleSwitch pull-right" for="toggleComment">
+                <input id="revOpt_2" class="ember-checkbox ember-view" type="checkbox">
+                <div class="switchRail"></div>
+              </label>
+            </a>
+          </li>
+          <li id="reviewOptn_3" class="dropItem ">
+            <a class="itemLink clearfix" data-ember-action="" data-ember-action-1108="1108">
+              <span class="pull-left optText ">非表示の質問を表示する</span>
+              <label class="zsToggleSwitch pull-right" for="toggleComment">
+                <input id="revOpt_3" class="ember-checkbox ember-view" type="checkbox">
+                <div class="switchRail"></div>
+              </label>
+            </a>
+          </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<section id="previewAreaSectn" class="modal-body inAppPreview center-block ">
+  <div class="previewArea">
+    <div class="previewDevice desktop">
+      <div class="deviceTop">
+        <span class="sensor"></span>
+        <span class="speaker"></span>
+      </div>
+<!---->            <iframe class="previewFrame" name="previewForm" src="/survey/newpreview.do?surveyid=7902000000002031&amp;portalid=90002077662&amp;zsgid=GNCpxY&amp;frameorigin=https%3A%2F%2Fsurvey.zoho.jp"></iframe>
+<!---->      <div class="deviceBottom"></div>
+    </div>
+  </div>
+</section>
+<div id="ember1109" class="ember-view"><div name="accountConfirmationPopup" style="display: none">
+  <div class="publishInfoPopUp">
+    <div class="publishInfo center-block">
+      <p class="desc">あなたのZohoアカウントがまだ認証されていません。続けるには、<br><a target="_blank" href="https://accounts.zoho.jp/u/h#profile/useremails">こちら</a>をクリックし、以下の手順に従ってください：</p>
+      <ul class="stepsList">
+        <li><span>認証リンクの再送信のメニューをクリックします</span></li>
+        <li><span>受信トレイで認証メールを表示します</span></li>
+        <li><span>登録を確定します</span></li>
+        <li><span>Zohoアカウントからサインアウトします</span></li>
+        <li><span><!----></span></li>
+      </ul>
+    </div>
+  </div>
+</div></div>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+<!----><!----><!----><!---->  <div id="ember692" class="ember-view"><div class="backdropSetupPageResponsePopup hide" id="responsePopupBackdrop"></div>
+<div class="zsDialog modal fade transitPop" role="dialog" data-backdrop="false" id="individualResponseViewInPopup" style="z-index: 1051; background:rgb(258,258,258,0.08)">
+  <div role="document">
+    <div class="modal-content">
+      <div id="responsePopupScroll" class="zsReports individualResponseViewInPopup">
+        <button class="popupClose" data-dismiss="modal" aria-label="Close" data-ember-action="" data-ember-action-693="693"><span class="iconDialogClose"></span></button>
+        <div class="mT30" id="individualResponseComponent">
+          <div id="ember694" class="ember-view"><div id="ember695" class="ember-view"><!----></div>
+<div id="individualResponse" class="individualResp individualRespPopup">
+	<div class="clearfix individualReponseHeader">
+		<div class="pull-left">
+			<div class="indRestitle">個々の回答</div>
+		</div>
+		<div class="pull-right dIF">
+			<div id="navigationDropDown" class="rFilterDD summaryResponseFilterDD pull-left" style="display: block !important;">
+				<div class="clearfix rPageSwitchEle">
+<span id="ember696" class="ember-view">					<div class="dropdown pull-left">
+						<button id="rPageDrop" class="drpdwnrPageSelector text-left pull-left" data-toggle="dropdown" aria-expanded="false" aria-controls="insertVariable">
+							<label class="preLabel mR10 pull-left">表示する</label>
+							<span class="portalName"><!----></span><span class="caret"></span> 
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right drpdwn super-scrollbar-box super-scrollbar ss-no-auto-hide" id="reportspagelist" aria-labelledby="rPageDrop" data-ss-id="2f6518a0-88fc-8414-1d4f-a15a426e5dd7">
+							<div class="pageGroup">
+								<li class="listPageName " name="showAll" navigate-to="1" data-ember-action="" data-ember-action-697="697">すべて</li>
+								<li class="listPageName  hide" name="respondentVariable" navigate-to="6" data-ember-action="" data-ember-action-698="698">回答者変数</li>
+								<li class="listPageName  hide" name="customVariable" navigate-to="2" data-ember-action="" data-ember-action-699="699">カスタム変数</li>
+<!---->								<li class="listPageName  hide" name="responseNotes" navigate-to="9" data-ember-action="" data-ember-action-700="700">メモ</li>
+							</div>
+						<div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+					</div>
+
+</span>				</div>
+			</div>
+
+			<div class="pull-left rFilterDD zs-reportSortBy " id="individual_report_view">
+				<div class="clearfix rReportSwitchEle">
+					<div class="dropdown pull-left">
+					<button id="rReportSwitchDrop" class="drpdwnReportSwitch text-left pull-left" data-toggle="dropdown" aria-expanded="false" aria-controls="insertVariable">
+						<label class="preLabel mR10 pull-left">回答の表示範囲</label>
+						<span class="portalName"><!----></span><span class="caret"></span> 
+					</button>
+					<ul class="dropdown-menu dropdown-menu-left drpdwn" id="reportsSortList" aria-labelledby="rReportSwitchDrop">
+						<div class="reportSwitchGroup">
+						<li class="listReportType " display-type="all" data-ember-action="" data-ember-action-701="701">すべての質問</li>
+						<li class="listReportType " display-type="responder_view" data-ember-action="" data-ember-action-702="702">表示された質問</li>
+						<li class="listReportType " display-type="answered" data-ember-action="" data-ember-action-703="703">回答された質問</li>
+						</div>
+					</ul>
+					</div>
+				</div>
+			</div>
+			<div id="ember704" class="ember-view"><div id="individualResponseBackdrop" class="backdropTimeLine hide"></div>
+<!----><!----><div class="reportsMoreDD">
+	<div class="moreDD" id="dropdown-control" zs-attr-remove="true">
+<div id="ember705" class="pull-right test ember-view dropdown">				<button class="btnUserOpt" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">
+					<span>処理</span>
+					<span name="dropdown_caret" class="caret"></span>
+				</button>
+			<div class="moreDDopen dropdown-menu">
+				<div class="separation ">
+						<a href="javascript:void(0);" data-ember-action="" data-ember-action-706="706"><span class="editDD"></span> 編集する </a>
+						<a href="javascript:void(0);" data-ember-action="" data-ember-action-707="707"><span class="icoClock"></span> 履歴 </a>
+					<a href="javascript:void(0);" data-ember-action="" data-ember-action-708="708"><span class="delDD"></span> 削除する </a>
+				</div>
+<!----><!---->					<a href="javascript:void(0);" data-ember-action="" data-ember-action-709="709"><span class="pdfDD"></span> PDFで出力する </a>
+					<a href="javascript:void(0);" data-ember-action="" data-ember-action-710="710"><span class="printDD"></span> 回答を印刷する </a>
+			</div>
+
+</div>	</div>
+</div>
+
+</div>
+		</div>
+	</div>
+	<div class="individualRespCont indvContMain " name="individualView">
+		<div class="irMeta">
+	        <div class="irUserActions clearfix">
+				<div class="userAnsState pull-left">
+<!---->				</div>
+	        </div>
+			<div class="row">
+				<div class="col-sm-10 col-md-10 col-lg-10">
+					<div class="irUserDetails">
+						<div class="clearfix hide">
+							<label class="preLabel pull-left">回答ID</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;</span>
+						</div>
+						<div class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left ">IPアドレス</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;</span>
+						</div>
+						<div id="userAgent" class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left">ユーザーエージェント</label>
+							<span id="userAgentView" class="metaTxt pull-left"><span class="pull-left">&nbsp;:&nbsp;</span><button onclick="ZSIndividualReportMixin.viewUserAgent(this);" class="plainBtn">表示する</button></span>
+							<div id="userAgentCollapse" class="metaTxt pull-left" style="display: none;"><span class="pull-left">&nbsp;:</span><span class="pL5 pull-left w500 wbba"><!----></span>
+								<span class="metaTxt pull-left pL10 mT5"><button class="plainBtn" onclick="ZSIndividualReportMixin.collapseUserAgent(this);">閉じる</button></span>
+							</div>
+						</div>
+						<div class="irTimeFrame irLinkField clearfix  hide">
+							<label class="preLabel pull-left">回答リンク</label>
+							<span class="metaTxt pull-left"><span class="metaLinkTxt pull-left">&nbsp;:&nbsp;<span id="responseLink"></span></span>
+<span id="ember711" class="pull-left ember-view">					            <button data-placement="bottom" title="" class="copyIcon hasTooltip pull-left" data-original-title="クリックしてコピー" data-ember-action="" data-ember-action-712="712"></button>
+
+</span>    						</span>	 
+						</div>
+						<div class="irTimeFrame irLinkField clearfix hide">
+							<label class="preLabel pull-left">回答リンク</label>
+							<span class="metaTxt pull-left"><span class="metaLinkTxt pull-left">&nbsp;:&nbsp;<span id="customresponseLink"></span></span>
+<span id="ember713" class="pull-left ember-view">					            <button data-placement="bottom" title="" class="copyIcon hasTooltip pull-left" data-original-title="クリックしてコピー" data-ember-action="" data-ember-action-714="714"></button>
+
+</span>    						</span> 
+						</div>
+						<div id="accessedUrl" class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left">回答者がアクセスしたアンケートURL</label>
+							<span id="accessedUrlView" class="metaTxt pull-left"><span class="pull-left">&nbsp;:&nbsp;</span><button onclick="ZSIndividualReportMixin.viewSurveyAcessedUrl(this);" class="plainBtn">表示する</button></span>
+							<div id="accessedUrlCollapse" class="metaTxt pull-left" style="display: none;"><span class="pull-left">&nbsp;:</span><span class="pL5 pull-left w500 wbba"><!----></span>
+								<span class="metaTxt pull-left pL10 mT5"><button class="plainBtn" onclick="ZSIndividualReportMixin.collapseSurveyAcessedUrl(this);">閉じる</button></span>
+							</div>
+						</div>
+
+						<div class="irTimeFrame clearfix  hide">
+							<label class="preLabel pull-left">開始日時</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;</span>
+						</div>
+						<div class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left">完了日時</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;</span>
+						</div>
+						<div class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left">所要時間</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;</span>
+						</div>
+						<div class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left">集計グループ</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;<!----></span>
+						</div>
+						<div class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left">合計評価</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;/</span>
+						</div>
+						<div class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left">NPS（顧客推奨度）スコア</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;/</span>
+						</div>
+						<div class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left">顧客満足度（CSAT）</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;</span>
+						</div>
+						<div class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left">平均評価</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;/</span>
+						</div>
+<!---->						<div class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left">回答上限</label>
+							<span class="metaTxt pull-left">&nbsp;:&nbsp;<!----></span>
+						</div>
+<!---->						
+						<div class="irTimeFrame clearfix  hide  ">
+						        <label class="preLabel pull-left">回答者の位置情報</label>
+						        <span class="pull-left">&nbsp;:</span>
+						        <div class="metaTxt pull-left geoMapsLink">
+									<div></div>
+										<div>
+											<a class="plainBtn" id="viewZohoMap" target="_blank">Zoho Mapsで表示する</a> 
+									        <span class="mapsLinkSeparate">|</span> 
+									        <a class="plainBtn" id="viewGoogleMap" target="_blank">Google マップで表示する</a>
+										</div>
+								</div>
+					    </div>
+						<div class="irTimeFrame clearfix hide">
+							<label class="preLabel pull-left ">配信サービス</label>
+								<span class="metaTxt pull-left">&nbsp;:&nbsp;PurchaseAudience</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-2 col-md-2 col-lg-2">
+					<div class="pR">
+						<div class="irPageNavi text-right clearfix" name="responseNavigation">
+							<span class="prev hasTooltip" name="previousResponse" data-placement="bottom" title="前へ" onclick="ZSIndividualReportMixin.viewPrevious()"></span>
+							<span class="next hasTooltip" name="nextResponse" data-placement="bottom" title="次へ" onclick="ZSIndividualReportMixin.viewNext()"></span>
+						</div>
+					</div>
+<!---->				</div>
+			</div>
+		</div>
+		<div class="irQuesListCont">
+<!----><!----><!---->
+<!----><!---->			<div class="empty-content withBg text-center hide" name="noResponse_individual">
+				<h3 class="emptyHead">この回答者からの回答がありません </h3>
+			</div>
+		</div>
+	</div>
+<!----></div>
+<div class="crtDocoverlay viewDocoverlay hide" id="document_content">
+  <div class="crtDocIn">
+    <div class="header clearFix">
+      <div class="title"></div>
+<span id="ember715" class="ember-view">      <button class="popupClose hasTooltip" data-placement="bottom" data-original-title="閉じる" data-ember-action="" data-ember-action-716="716">
+        <span class="iconDialogClose"></span>
+      </button>
+
+</span>    </div>
+    <div class="crtDocMain">
+      <div class="tempGalList text-center">
+        false
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="ember717" class="ember-view"><!----></div>
+<div class="container-fluid">
+  <div class="row no-gutter">
+      <div id="ember718" class="ember-view"><!----><!----><div class="zs-infoBand " id="info_bandid_div" style="display:none;" onclick="ZS_Util.showOrHideTopBanner();">
+    <input id="banner_content_id" value="" type="hidden">
+    <span id="info_band_content"></span>
+    <span class="bandHideIcon hideBand"></span>
+    <span class="removeBandTxt" onclick="ZS_Util.closeAnnouncementTopBanner();">Do not show again</span>
+</div>
+<header id="zsHeader" class="zsHeader">
+    <div class="upgradeButtonTop">
+        <span id="onezohoLauncherIcon" class="zohoOneLauncherIcon  hide"></span>
+        <div class="zsLogo pull-left "><a href="#/home" id="ember719" class="appLogoLink ember-view"><img src="assets/images/zsLogoNew.svg" class="brandLogoImg"><span class="brandNameText hide"></span></a></div>
+<!---->        <div class="pull-right accountNav">
+            <div class="pull-right">
+                <div class="imageSection" id="userImageSection"><img id="userImage" class="accountImg" data-ember-action="" data-ember-action-720="720" src="https://contacts.zoho.jp/file?fs=thumb&amp;exp=600&amp;ID=90002078383">
+                </div>
+            </div>
+            <div class="zsHeaderLinkBlock pull-right">
+                <div class="zsPortalDropper clearfix">
+                    <div class="pull-right">
+<div id="ember721" class="dropdown ember-view">                        <button id="portalDrop" class="drpdwnPortalSelector text-left" data-toggle="dropdown" aria-expanded="false" aria-controls="insertVariable">
+                            <span class="portalName"> My Department</span>
+                            <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" aria-labelledby="portalDrop">
+                            <div class="portalGroupContainer super-scrollbar-box super-scrollbar ss-no-auto-hide ss-position" id="headerdropdown" data-ss-id="620a716b-274d-1b6f-094f-13fcb3861f1e">
+                                
+                                <div class="portalGroup">
+                                    <div class="dropdown-header">龍太 菅谷</div>
+                                    <li class="listPortalName active" data-ember-action="" data-ember-action-722="722">
+                                        My Department</li>
+                                </div>
+
+                            <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></div>
+                            <a href="#" class="linkSharedSurveys" data-ember-action="" data-ember-action-723="723">自分に共有</a>
+                        </ul>
+
+</div>                    </div>
+                    <div class="pull-right">
+                        <label class="lblZsHeader">部門:</label>
+                    </div>
+                </div>
+            </div>
+<!---->        </div>
+    </div>
+</header>
+</div>
+<!---->	    <div id="ember1081" class="ember-view"><div class="zs-minimalCont clearfix showOneMinIcon" id="fab_min_view">
+
+  <div class="zs-minimalWidget">
+
+    <div class="zs-videoPlayer hide" id="video_icon_popover">
+      <header class="vpHead">
+        <span class="zs-tipWidgetCls" data-ember-action="" data-ember-action-1082="1082"></span>
+        <h5 class="zs-vpHeadTxt">かんたんプレビュー</h5>
+      </header>
+      <iframe id="help_tour_video" class="zs-minVPCont" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+    </div>
+
+    <div id="tinytip_icon_popover" class="zs-tipWidget hide">
+      <input id="announcement_id" value="" type="hidden">
+      <h5 class="zs-tipWidgetHead">
+        <span class="zs-tipWidgetHeadTxt" id="tinytip_header"></span>
+        <span class="zs-tipWidgetCls" data-ember-action="" data-ember-action-1083="1083"></span>
+      </h5>
+      <div class="zs-tipWidgetCont" id="tinytip_description"></div>
+    </div>
+
+    <div class="extendTrailPopUp extendTrailWidget hide" id="rating_popover_div">
+      <header class="extendTrailHead">
+          <span class="zs-tipWidgetCls" data-ember-action="" data-ember-action-1084="1084"></span>
+        <h5 class="extendTrailTitle">レビュー</h5>
+      </header>
+      <div class="extendTrailInfo center-block">
+            <h4 class="extendReviewHead text-center">当社のサービスはいかがでしたか？</h4>
+            <div class="extendReviewIconBox">
+              <button class="extendReviewIcon lowRateIcon " data-ember-action="" data-ember-action-1085="1085"></button>
+              <button class="extendReviewIcon okRateIcon " data-ember-action="" data-ember-action-1086="1086"></button>
+              <button class="extendReviewIcon aveRateIcon " data-ember-action="" data-ember-action-1087="1087"></button>
+              <button class="extendReviewIcon goodRateIcon " data-ember-action="" data-ember-action-1088="1088"></button>
+              <button class="extendReviewIcon bestRateIcon " data-ember-action="" data-ember-action-1089="1089"></button>
+<!---->            </div>
+        <footer class="extendTrailFooter text-center">
+            <button id="saveDialogButton" class="blackBtn" type="button" data-ember-action="" data-ember-action-1090="1090">確定する</button>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+<span id="ember1091" class="ember-view">  <div class="zs-minimalFloatIcons pull-left" id="minimize_icons_div">
+    <button name="video_min_icon" data-toggle="tooltip" data-placement="bottom" title="" class="zs-minimalIcoBox  hide" data-original-title="ヘルプ動画" data-ember-action="" data-ember-action-1092="1092">
+      <span class="zs-minimalIco zs-videoMinIcon"></span>
+    </button>
+
+    <a name="web_min_icon" data-toggle="tooltip" data-placement="bottom" title="" class="zs-minimalIcoBox" href="https://www.zoho.com/survey/help/webinars.html?utm_source=Product&amp;utm_medium=bottom-right-icon&amp;utm_campaign=Product" target="_blank" data-original-title="Webセミナー">
+      <span class="zs-minimalIco zs-webinarMinIcon"></span>
+    </a>
+
+    <button name="tip_min_icon" data-toggle="tooltip" data-placement="bottom" title="" class="zs-minimalIcoBox  hide" data-original-title="ヒント" data-ember-action="" data-ember-action-1093="1093">
+      <span class="zs-minimalIco zs-tipMinIcon"></span>
+    </button>
+
+      <button name="review_min_icon" data-toggle="tooltip" data-placement="bottom" title="" class="zs-minimalIcoBox  hide" data-original-title="レビュー" data-ember-action="" data-ember-action-1094="1094">
+        <span class="zs-minimalIco zs-reviewMinIcon"></span>
+      </button>
+  </div>
+
+</span>
+  <button id="minimal_close_btn" class="zs-minimalIcoBox minimalCloseBox pull-left hide" data-ember-action="" data-ember-action-1095="1095">
+    <span class="zs-minimalIco zs-min"></span>
+    <span class="zs-minimalIco zs-min2"></span>
+    <span class="zs-minimalIco zs-min3"></span>
+    <span class="zs-minimalIco zs-minimalCls"></span>
+  </button>
+</div>
+
+</div>
+<!---->		<aside class="fixed-left-nav">
+  <div class="nav-holder ">
+    <nav class="nav-linkBox clearfix">
+        <a href="#/portal/90002077662/department/GNCpxY/survey/7902000000002031/dashboard" id="ember724" class="lnkSummary linkBox text-uppercase ember-view">概要</a>
+                <a href="#/portal/90002077662/department/GNCpxY/survey/7902000000002031/buildersurvey" id="editor_link" class="lnkBuilder linkBox text-uppercase active ember-view">編集</a>
+<!---->              <a href="#/portal/90002077662/department/GNCpxY/survey/7902000000002031/reports" id="ember725" class="lnkReports linkBox text-uppercase ember-view">レポート</a>
+<!---->            <a href="#/portal/90002077662/department/GNCpxY/survey/7902000000002031/audit" id="ember726" class="lnkAuditSurvey linkBox text-uppercase ember-view">操作履歴</a>
+    </nav>
+  </div>
+</aside>
+
+	<div class="col-sm-12">
+        <section class="document-container">
+				<div class="document-header  ">
+	            <div id="ember727" class="ember-view">  <div id="ember728" class="ember-view"><div class="zsDialog modal fade transitPop" role="dialog" data-backdrop="static" id="surveyNameDialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+<!---->      <section class="modal-body">
+        <div class="dialogSurveyName">
+          <section class="row center-block formSection">
+            <form class="namingForm" data-ember-action="" data-ember-action-729="729">
+              <div class="subSection">
+                <div class="lblHeadRow"><label class="dialogTopLabel">アンケート名</label></div>
+                <input name="survey_name" autocomplete="off" id="ember730" class="txtName ember-text-field ember-view" type="text">
+                <div class="errorText hide"><p></p></div>
+              </div>
+              <div class="subSection ">
+                <div class="lblHeadRow"><label class="dialogTopLabel">カテゴリー名</label></div>
+                <div id="ember731" class="ember-view zsSelector dropdown"><button class="btn dropdown-toggle " aria-haspopup="true" data-toggle="dropdown" aria-expanded="false" zsdropdown="zsDropDown" data-ember-action="" data-ember-action-732="732">
+		<span class="value " name="select_node">
+<!---->			--- カテゴリーを選択してください --- 
+		</span>
+		<span class="linecaret pull-right"></span>
+
+</button> 
+<ul class="dropdown-menu droplist  " role="menu" id="dropdownmenu">
+    <div class="searchDropMenu hide">
+        <input name="searchInputBox" class="inSearchTerm" isstrictwordsearch="false" isstrictsearch="false" listtype="object" placeholder="検索する" autocomplete="off" onfocus="ZSMixin_Util.filterSearchDropdownMenu(this);" onkeyup="ZSMixin_Util.filterSearchDropdownMenu(this);" onkeydown="ZSMixin_Util.selectDropdownOptionsByArrowKey(event, this)" autofocus="" type="text">
+    </div>
+<span id="ember733" class="ember-view">	<div name="menuItems" class="menuItemsContainer super-scrollbar-box super-scrollbar ss-no-auto-hide ss-position" data-ss-id="c406090a-c211-2cda-de4b-012dab6da464">
+		
+<!----><!---->
+    <div name="noResultDiv" class="noResultsMsg text-center hide">該当する結果がありません</div>
+    <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></div>
+
+</span></ul>
+</div>
+<!---->              </div>
+<!---->            </form>
+            <div id="ember734" class="ember-view"><div class="add-tags " id="addTagDiv">
+  <div class="lblAddTag hoverNoDec text-uppercase">
+    <span data-ember-action="" data-ember-action-735="735">タグを追加 +</span>
+  </div>
+  <div class="tagCreate">
+    <div class="tagInput "><input id="tagInput" class="tagit-hidden-field"><ul class="tagit ui-widget ui-widget-content ui-corner-all"><li class="tagit-new"><input type="text" class="ui-widget-content ui-autocomplete-input" autocomplete="off"></li></ul></div>
+      <p class="tagDesc ">タグはスペースで区切ってください。例：デザイン 教育 IT</p>
+  </div>
+</div>
+<!-- {{yield}} -->
+</div>
+          </section>
+        </div>
+      </section>
+      <footer class="modal-footer dialogAction">
+        <div class="btn-group col-sm-12">
+          <div class="row">
+            <button class="btn col-sm-6 btn-pop-close" data-dismiss="modal" id="dialogCloser" type="button" data-ember-action="" data-ember-action-736="736">
+              キャンセルする
+            </button>
+            <button class="btn col-sm-6 btn-pop-ok" type="submit" data-ember-action="" data-ember-action-737="737">保存する</button>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+</div>
+
+  <header class=" editor-header  clearfix " id="surveyHeaderTab">
+      <div class="lnkCreateAndAll pull-left">
+<a data-placement="right" data-toggle="tooltip" title="" href="#/portal/90002077662/department/GNCpxY/createsurvey/blanksurvey" id="ember738" class="lnkCreate linkBoxHeader pull-left ember-view" data-original-title="アンケートを作成する">                <span class="tooltip">アンケートを作成する</span>
+</a><a data-placement="right" data-toggle="tooltip" title="" href="#/portal/90002077662/department/GNCpxY/mysurveys" id="ember739" class="lnkSurvey linkBoxHeader pull-left ember-view" data-original-title="自分のアンケート">                <span class="tooltip">自分のアンケート</span>
+</a>      </div>
+<!---->
+      <section class="editor-sur-title ">
+<span id="ember740" class="ember-view">              	<div class="surNameEditLink hasTooltip" data-placement="bottom" title="" data-original-title="編集する" data-ember-action="" data-ember-action-741="741">
+                	<span class="editor-sur-name">従業員調査</span>
+                	<span class="editIcon"></span>
+             	 </div>
+
+</span>              </section>
+        <nav class="editor-nav">
+          <div class="no-margin text-center clearfix dF">
+            <a href="#/portal/90002077662/department/GNCpxY/survey/7902000000002031/buildersurvey" id="ember742" class="pull-left active ember-view">編集</a>
+            <a href="#/portal/90002077662/department/GNCpxY/survey/7902000000002031/settings" id="ember743" class="pull-left ember-view">設定</a>
+            <a href="#/portal/90002077662/department/GNCpxY/survey/7902000000002031/themes" id="ember744" class="pull-left ember-view">テーマ
+</a>              <a href="#/portal/90002077662/department/GNCpxY/survey/7902000000002031/integration" id="ember745" class="pull-left ember-view">連携</a>
+              <a href="#/portal/90002077662/department/GNCpxY/survey/7902000000002031/launch" id="ember746" class="pull-left ember-view">公開</a>
+          </div>
+        </nav>
+      <section class="pull-right headerActions">
+              <div class="dropdown pull-left">
+                <button id="advOpt1" class="select-adv-opt" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">詳細設定 <span class="caret"></span></button>
+                <section class="dropdown-menu adv-opt-dropdown" aria-labelledby="advOpt1">
+                  <ul class="adv-opts">
+                    <li data-ember-action="" data-ember-action-747="747"><a href="javascript:void(0);" class="opts ">カスタム変数</a></li>
+                    <li data-ember-action="" data-ember-action-748="748"><a href="javascript:void(0);" class="opts upgradeContentTxt">配点</a></li>
+                    <li class=" hide" data-ember-action="" data-ember-action-749="749"><a href="javascript:void(0);" class="opts upgradeContentTxt">メールを送信する</a></li>
+                    <li class=" hide" data-ember-action="" data-ember-action-750="750"><a href="javascript:void(0);" class="opts triggerFunction upgradeContentTxt">関数の実行</a></li>
+                    <li data-ember-action="" data-ember-action-751="751"><a href="javascript:void(0);" class="opts shareSurvey   ">アンケートを共有する</a></li>
+                    <li data-ember-action="" data-ember-action-752="752"><a href="javascript:void(0);" class="opts  ">コピーを送信する</a></li>
+                    <li class=" " data-ember-action="" data-ember-action-753="753"><a href="javascript:void(0);" class="opts  ">アンケートを移行する</a></li>
+                  </ul>
+                  <div class="getOut  ">
+                    <ul class="adv-opts">
+                      <li name="pdf_export" data-ember-action="" data-ember-action-754="754">
+                          <a href="javascript:void(0);" class="opts">
+                            <span class="ico_exportpdf"></span>PDFで出力する
+                          </a>
+                      </li>
+                      <li data-ember-action="" data-ember-action-755="755">
+                        <a href="javascript:void(0);" class="opts ">
+                        <span class="ico_printer"></span>アンケートを印刷する</a>
+<span id="ember756" class="ember-view">                        <ul class="dropdown-menu subMenu hide super-scrollbar-box super-scrollbar ss-no-auto-hide" id="printdropdown" data-ss-id="78124cc9-afb8-f688-2d19-ef3201d4c9e8">
+                          <li class="dropItem">
+                            <a class="itemLink">標準</a>
+                          </li>
+<!---->                        <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</span>                      </li>
+                    </ul>
+                  </div>
+                </section>
+              </div>
+<!---->            <button class="btn-preview text-uppercase " data-ember-action="" data-ember-action-757="757">プレビュー</button>
+<!---->      </section>
+  </header>
+</div>
+<!---->	        </div>
+	    <span id="ember758" class="ember-view"><aside class="builder-toolbar super-scrollbar-box super-scrollbar ss-no-auto-hide" id="builderlist" data-ss-id="77c782c0-92a8-cfb7-87f2-b603cc20ce40">
+  <header class="toolbar-header clearfix">
+    <span class="toolbar-title text-uppercase">質問の種類</span>
+    <span class="btn-group hide" role="group">
+      <button title="List" class="btn listViewSwitch active" type="button" data-ember-action="" data-ember-action-759="759"></button>
+      <button title="Grid" class="btn gridViewSwitch " type="button" data-ember-action="" data-ember-action-760="760"></button>
+    </span>
+  </header>
+<span id="ember761" class="ember-view">  <section class="toolSect super-scrollbar-box super-scrollbar ss-no-auto-hide ss-position ss-active-y" id="questionbuilder" data-ss-id="ff89e412-1ac1-68b4-dab1-16fe475f5223">
+    <!-- question draggable list component here -->
+    <div>
+    <div id="ember762" class="ember-view"><!-- {{yield}} -->
+<ul class="build-items toolsList list-group" id="build-items">
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="single_choice" componenttype="1" draggable="true" data-ember-action="" data-ember-action-763="763">
+	  		<div id="ember764" class="ember-view"><a href="javascript:void(0);" class="qTool multiChoiceOne">多肢選択&nbsp;
+  <span class="responceType">（単一回答）</span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="multiple_choice" componenttype="1" draggable="true" data-ember-action="" data-ember-action-765="765">
+	  		<div id="ember766" class="ember-view"><a href="javascript:void(0);" class="qTool multiChoiceN">多肢選択&nbsp;
+  <span class="responceType">（複数回答）</span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="single_drop_down" componenttype="1" draggable="true" data-ember-action="" data-ember-action-767="767">
+	  		<div id="ember768" class="ember-view"><a href="javascript:void(0);" class="qTool dropdown">ドロップダウン&nbsp;
+  <span class="responceType">（単一回答）</span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="multi_select_dropdown" componenttype="1" draggable="true" data-ember-action="" data-ember-action-769="769">
+	  		<div id="ember770" class="ember-view"><a href="javascript:void(0);" class="qTool multiSelectDropdown">ドロップダウン&nbsp;
+  <span class="responceType">（複数回答）</span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="image_single_choice" componenttype="1" draggable="true" data-ember-action="" data-ember-action-771="771">
+	  		<div id="ember772" class="ember-view"><a href="javascript:void(0);" class="qTool imageType">画像の選択&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="likert_rating" componenttype="1" draggable="true" data-ember-action="" data-ember-action-773="773">
+	  		<div id="ember774" class="ember-view"><a href="javascript:void(0);" class="qTool rateScale">評価尺度&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="star_rating" componenttype="1" draggable="true" data-ember-action="" data-ember-action-775="775">
+	  		<div id="ember776" class="ember-view"><a href="javascript:void(0);" class="qTool rateStar">星による評価&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="nps" componenttype="1" draggable="true" data-ember-action="" data-ember-action-777="777">
+	  		<div id="ember778" class="ember-view"><a href="javascript:void(0);" class="qTool nps">NPS（顧客推奨度）&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="slider" componenttype="1" draggable="true" data-ember-action="" data-ember-action-779="779">
+	  		<div id="ember780" class="ember-view"><a href="javascript:void(0);" class="qTool slider">スライダー&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="continuous_sum" componenttype="11" draggable="true" data-ember-action="" data-ember-action-781="781">
+	  		<div id="ember782" class="ember-view"><a href="javascript:void(0);" class="qTool continuousSum">合計算出&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="ranking" componenttype="1" draggable="true" data-ember-action="" data-ember-action-783="783">
+	  		<div id="ember784" class="ember-view"><a href="javascript:void(0);" class="qTool ranking">順位付け&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="boolean_choice" componenttype="1" draggable="true" data-ember-action="" data-ember-action-785="785">
+	  		<div id="ember786" class="ember-view"><a href="javascript:void(0);" class="qTool booleanChoice">真偽値&nbsp;
+  <span class="responceType">（はい／いいえ）</span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="matrix_radio_box" componenttype="1" draggable="true" data-ember-action="" data-ember-action-787="787">
+	  		<div id="ember788" class="ember-view"><a href="javascript:void(0);" class="qTool matrixChoiceRadio">表&nbsp;
+  <span class="responceType">（単一回答）</span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="matrix_check_box" componenttype="1" draggable="true" data-ember-action="" data-ember-action-789="789">
+	  		<div id="ember790" class="ember-view"><a href="javascript:void(0);" class="qTool matrixChoiceCheck">表&nbsp;
+  <span class="responceType">（複数回答）</span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="matrix_likert_rating" componenttype="1" draggable="true" data-ember-action="" data-ember-action-791="791">
+	  		<div id="ember792" class="ember-view"><a href="javascript:void(0);" class="qTool matrixRateScale">表（尺度による評価）&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="matrix_star_rating" componenttype="1" draggable="true" data-ember-action="" data-ember-action-793="793">
+	  		<div id="ember794" class="ember-view"><a href="javascript:void(0);" class="qTool matrixStar">表（星による評価）&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="matrix_drop_down" componenttype="1" draggable="true" data-ember-action="" data-ember-action-795="795">
+	  		<div id="ember796" class="ember-view"><a href="javascript:void(0);" class="qTool matrixDropdown">表（ドロップダウン）&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="matrix_grid" componenttype="1" draggable="true" data-ember-action="" data-ember-action-797="797">
+	  		<div id="ember798" class="ember-view"><a href="javascript:void(0);" class="qTool matrixGrid">表（複数の回答形式）&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="matrix_text_box" componenttype="1" draggable="true" data-ember-action="" data-ember-action-799="799">
+	  		<div id="ember800" class="ember-view"><a href="javascript:void(0);" class="qTool matrixTextbox">表（テキスト欄）&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="single_textbox" componenttype="1" draggable="true" data-ember-action="" data-ember-action-801="801">
+	  		<div id="ember802" class="ember-view"><a href="javascript:void(0);" class="qTool singleTxt">短文&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="textarea" componenttype="1" draggable="true" data-ember-action="" data-ember-action-803="803">
+	  		<div id="ember804" class="ember-view"><a href="javascript:void(0);" class="qTool essayArea">長文&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="numeric_textbox" componenttype="1" draggable="true" data-ember-action="" data-ember-action-805="805">
+	  		<div id="ember806" class="ember-view"><a href="javascript:void(0);" class="qTool NumericTxt">数字&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="email_textbox" componenttype="1" draggable="true" data-ember-action="" data-ember-action-807="807">
+	  		<div id="ember808" class="ember-view"><a href="javascript:void(0);" class="qTool emailTxt">メールアドレス&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="calendar_box" componenttype="1" draggable="true" data-ember-action="" data-ember-action-809="809">
+	  		<div id="ember810" class="ember-view"><a href="javascript:void(0);" class="qTool calendar">日時&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="multiple_textbox" componenttype="11" draggable="true" data-ember-action="" data-ember-action-811="811">
+	  		<div id="ember812" class="ember-view"><a href="javascript:void(0);" class="qTool multipleTextbox">複数のテキスト欄&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="full_name" componenttype="5" draggable="true" data-ember-action="" data-ember-action-813="813">
+	  		<div id="ember814" class="ember-view"><a href="javascript:void(0);" class="qTool fullName">氏名&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="demographic" componenttype="7" draggable="true" data-ember-action="" data-ember-action-815="815">
+	  		<div id="ember816" class="ember-view"><a href="javascript:void(0);" class="qTool demographic">連絡先情報&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="signature" componenttype="1" draggable="true" data-ember-action="" data-ember-action-817="817">
+	  		<div id="ember818" class="ember-view"><a href="javascript:void(0);" class="qTool sign">署名&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+<!---->	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="combined_file_upload" componenttype="1" draggable="true" data-ember-action="" data-ember-action-819="819">
+	  		<div id="ember820" class="ember-view"><a href="javascript:void(0);" class="qTool file">ファイルのアップロード&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+	  		<li class="qToolItem list-group-item ui-draggable dropQuestion nodragorsort ui-draggable-handle" comptype="heading_descriptive" componenttype="2" draggable="true" data-ember-action="" data-ember-action-821="821">
+	  		<div id="ember822" class="ember-view"><a href="javascript:void(0);" class="qTool headingDesc">テキスト項目&nbsp;
+  <span class="responceType"></span>
+</a>
+</div> </li>
+</ul>
+</div>
+    </div>
+
+    <div class="qBankSect">
+      <h4 class="toolbar-title text-uppercase">質問集</h4>
+      <span class="desc">質問の取得元を選択してください</span>
+    </div>
+    <ul class="toolsList list-group " id="question-bank-items">
+        <li class="qToolItem list-group-item ui-draggable ui-draggable-handle" create_type="from_template"><a href="javascript:void(0);" class="qTool templGal" data-ember-action="" data-ember-action-823="823">テンプレートギャラリー</a></li>
+        <li class="qToolItem list-group-item ui-draggable ui-draggable-handle" create_type="from_exist"><a href="javascript:void(0);" class="qTool templExst" data-ember-action="" data-ember-action-824="824">既存のアンケート</a></li>
+        <li class="qToolItem list-group-item ui-draggable ui-draggable-handle" create_type="import_survey"><a href="javascript:void(0);" class="qTool bulkAddQue" data-ember-action="" data-ember-action-825="825">質問の一括追加</a></li>
+    </ul>
+
+    <div class="trashSect">
+      <h4 class="toolbar-title text-uppercase">ごみ箱内の項目</h4>
+      <span class="desc">質問とカスタム変数を復元できます</span>
+    </div>
+    <ul class="toolsList list-group">
+        <li class="qToolItem trashLink list-group-item"><span class="qTool fromTrash" data-ember-action="" data-ember-action-826="826">ごみ箱</span></li>
+    </ul>
+  <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail" style="height: 758px; top: 0px; right: 0px;"><div class="ss-scrollbar-y" style="height: 346.54px; top: 0px;"></div></div></section>
+
+</span><div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></aside>
+
+</span>
+<section id="page-id" class="builder-right clearfix ">
+<!---->  <div class="pageHolder clearfix" id="pageActiveId">
+    <div id="activePage0" pageid="7902000000002049" class="pageActiveSelector page pull-left active-page" pageindex="0" data-ember-action="" data-ember-action-827="827">
+  <header class="pageHeader text-center">
+<div id="ember828" class="pageOptionSelector text-left ember-view dropdown">      <button class="dropdown-toggle btnPageOptMenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>ページ 1</span><span class="caretIcon "></span></button>
+      <ul class="dropdown-menu dropSect super-scrollbar-box super-scrollbar ss-no-auto-hide" data-ss-id="578283f4-ce51-2239-d712-a16f034c983b">
+        <li data-ember-action="" data-ember-action-829="829"><a class="pageOption">ページ情報を編集する</a></li>
+        <li data-ember-action="" data-ember-action-830="830"><a class="pageOption">ページを複製する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-831="831"><a class="pageOption">ページを移動する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-832="832"><a class="pageOption">ページを削除する</a></li>
+      <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</div>      <div class="page-title text-center" data-ember-action="" data-ember-action-833="833">満足度・期待度調査</div>
+
+
+<div id="ember834" class="logicPageCustVar ember-view dropdown">      <button class="dropdown-toggle btnLogicDropper" data-toggle="dropdown" aria-expanded="true" aria-haspopup="true" id="pageLogicDrop001" data-ember-action="" data-ember-action-835="835">条件処理</button>
+<!---->
+</div>  </header>
+  <section class="page-body">
+      <div class="pageDesc" data-ember-action="" data-ember-action-836="836">このアンケートは、従業員の皆様の満足度と期待度を調査し、<br>より良い職場環境づくりに役立てることを目的としています</div>
+    <ul class="questionsList connectedSortable ui-sortable">
+      <div class="dragdropHint nodragorsort draganddropmsg_7902000000002049 hide ui-sortable-handle" style="">
+        <p class="hintContent text-center">質問をこちらにドラッグ＆ドロップしてください</p>
+        <div class="orRow text-center pR col999">
+          <u></u>
+          <span class="pA bgFFF">または</span>
+        </div>
+        <button class="bulkAddButton " data-ember-action="" data-ember-action-837="837">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.98999 8.81H10.97" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M6.97998 4.82001V12.8" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M11.96 3.04001H2C1.44772 3.04001 1 3.48772 1 4.04001V14C1 14.5523 1.44772 15 2 15H11.96C12.5123 15 12.96 14.5523 12.96 14V4.04001C12.96 3.48772 12.5123 3.04001 11.96 3.04001Z" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M4.03003 1H14C14.55 1 15 1.45 15 2V11.97" stroke="#333333" stroke-miterlimit="10" stroke-linecap="round"></path>
+          </svg>
+          こちらに質問を貼り付けてください
+        </button>
+      </div>
+            	<li class="editorQuestion surveyQuestion nodragorsort ui-sortable-handle" compid="7902000000002057" compindex="0" id="question-id0" questype="heading_descriptive" questionid="7902000000002057" sumvalidation="false" name="comp_li_7902000000002057" role="presentation" data-ember-action="" data-ember-action-838="838">
+<!---->  <div name="error_msg" id="error_content7902000000002057" tabindex="-1" error_position="top" style="display:none" class="error-message clearfix" comment_msg="コメントを入力して送信してください。" req_answer_hidden_msg="アンケートに問題が発生しました。問題を解決するには、管理者にご連絡ください。" invalid_prepopulated_answer_msg="URLに含まれている値を適切に使用できないため、事前入力できません。詳細については、あなたの組織の管理者にお問い合わせください。" has_theme_error="false"><span class="error-text" name="error_content" tabindex="-1">
+<!---->
+  </span>
+    	<a class="next-error-link " href="javascript:void(0);" name="next_error">
+<!----> 	 </a>
+</div>
+
+  <!-- <div class="qNos"></div> -->
+  <div class="sQuestion" data-ember-action="" data-ember-action-839="839">
+    <section class="qSavedElements">
+
+<!---->
+       <div class="row " name="zsAnswerNode">
+  <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11">
+    <section class="sectQuestion">
+        <div name="reviewComment_7902000000002057_" class="reviewLink hide" data-revobj-msg="満足度・期待度調査" data-label="reviewCommentBubble">
+          <span name="commentCount_7902000000002057_" class="commentCount">0</span>
+        </div>
+      <p class="questionText headerDesc" name="headerMsg" role="heading" aria-level="2" tabindex="0">満足度・期待度調査</p>
+    </section>
+  </div>
+</div>
+<div class="row ">
+  <div class="col-xs-12">
+    <section class="sectSavedAns headingDesc ">
+<!---->      <div name="descMsg" role="heading" aria-level="3" tabindex="0"><zsr><p style="margin-bottom:0px; font-style:normal; font-size:13px; line-height:normal; font-family:&quot;Helvetica Neue&quot;; font-size-adjust:none">このアンケートは、従業員の皆様の満足度と期待度を調査し、</p><p style="margin-bottom:0px; font-style:normal; font-size:13px; line-height:normal; font-family:&quot;Helvetica Neue&quot;; font-size-adjust:none">より良い職場環境づくりに役立てることを目的としています。</p><p style="margin-bottom:0px; font-style:normal; font-size:13px; line-height:normal; font-family:&quot;Helvetica Neue&quot;; font-size-adjust:none"><br></p><p style="margin-bottom:0px; font-style:normal; font-size:13px; line-height:normal; font-family:&quot;Helvetica Neue&quot;; font-size-adjust:none">各質問について、<b>現在の満足度</b>と<b>今後の期待度</b>の両方をお答えいただきます。 </p><p style="margin-bottom:0px; font-style:normal; font-size:13px; line-height:normal; font-family:&quot;Helvetica Neue&quot;; font-size-adjust:none">回答は匿名で処理され、個人が特定されることはありません。</p><p style="margin-bottom:0px; font-style:normal; font-size:13px; line-height:normal; font-family:&quot;Helvetica Neue&quot;; font-size-adjust:none"><br></p><p style="margin-bottom:0px; font-style:normal; font-size:13px; line-height:normal; font-family:&quot;Helvetica Neue&quot;; font-size-adjust:none"><span style="font-family:&quot;Hiragino Sans&quot;">アンケートの所要時間は約</span><span style="line-height:normal; font-size-adjust:none">15</span><span style="font-family:&quot;Hiragino Sans&quot;">分です。ご協力をお願いいたします。</span></p></zsr></div>
+    </section>
+  </div>
+</div>
+
+
+
+<!----><!---->    </section>
+  </div>
+  <div class="questionActs">
+<span id="ember840" class="ember-view">    <div class="dropdown" id="7902000000002057"><span id="tquestact_7902000000002057" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="iconMore hasTooltip" data-placement="bottom" title="" data-original-title="処理" data-ember-action="" data-ember-action-841="841"></span>
+<!---->      </div>
+
+</span><span id="ember846" class="ember-view">      <span class="iconTrash hasTooltip " data-placement="bottom" title="" data-original-title="ごみ箱に移動する" data-ember-action="" data-ember-action-847="847"></span>
+
+</span>  </div>
+<!---->    <div class="logAnsLogicRed clearFix">
+<!----><!---->    </div>
+
+</li>
+
+<!---->    </ul>
+  </section>
+
+  <footer class="pageFooter clearfix hide">
+    <div class="pull-right"><label class="lblPageLogic">このページの後の移動先:</label><span class="txtPageLogic"><!----></span></div>
+  </footer>
+</div>
+
+    <div id="activePage1" pageid="7902000000002071" class="pageActiveSelector page pull-left " pageindex="1" data-ember-action="" data-ember-action-848="848">
+  <header class="pageHeader text-center">
+<div id="ember849" class="pageOptionSelector text-left ember-view dropdown">      <button class="dropdown-toggle btnPageOptMenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>ページ 2</span><span class="caretIcon "></span></button>
+      <ul class="dropdown-menu dropSect super-scrollbar-box super-scrollbar ss-no-auto-hide" data-ss-id="2d40ad68-4e2a-5a20-7d36-20b3a4eee0e6">
+        <li data-ember-action="" data-ember-action-850="850"><a class="pageOption">ページ情報を編集する</a></li>
+        <li data-ember-action="" data-ember-action-851="851"><a class="pageOption">ページを複製する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-852="852"><a class="pageOption">ページを移動する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-853="853"><a class="pageOption">ページを削除する</a></li>
+      <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</div>      <div class="page-title text-center" data-ember-action="" data-ember-action-854="854">満足度・期待度調査</div>
+
+
+<div id="ember855" class="logicPageCustVar ember-view dropdown">      <button class="dropdown-toggle btnLogicDropper" data-toggle="dropdown" aria-expanded="true" aria-haspopup="true" id="pageLogicDrop001" data-ember-action="" data-ember-action-856="856">条件処理</button>
+<!---->
+</div>  </header>
+  <section class="page-body">
+<!---->    <ul class="questionsList connectedSortable ui-sortable">
+      <div class="dragdropHint nodragorsort draganddropmsg_7902000000002071 hide ui-sortable-handle" style="">
+        <p class="hintContent text-center">質問をこちらにドラッグ＆ドロップしてください</p>
+        <div class="orRow text-center pR col999">
+          <u></u>
+          <span class="pA bgFFF">または</span>
+        </div>
+        <button class="bulkAddButton " data-ember-action="" data-ember-action-857="857">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.98999 8.81H10.97" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M6.97998 4.82001V12.8" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M11.96 3.04001H2C1.44772 3.04001 1 3.48772 1 4.04001V14C1 14.5523 1.44772 15 2 15H11.96C12.5123 15 12.96 14.5523 12.96 14V4.04001C12.96 3.48772 12.5123 3.04001 11.96 3.04001Z" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M4.03003 1H14C14.55 1 15 1.45 15 2V11.97" stroke="#333333" stroke-miterlimit="10" stroke-linecap="round"></path>
+          </svg>
+          こちらに質問を貼り付けてください
+        </button>
+      </div>
+            	<li class="editorQuestion surveyQuestion nodragorsort ui-sortable-handle" compid="7902000000002079" compindex="0" id="question-id0" mandatory="true" questype="single_choice" questionid="7902000000002079" sumvalidation="false" display_format="vertical_col_1" name="comp_li_7902000000002079" role="presentation" data-ember-action="" data-ember-action-858="858">
+<!---->  <div name="error_msg" id="error_content7902000000002079" tabindex="-1" error_position="top" style="display:none" class="error-message clearfix" comment_msg="コメントを入力して送信してください。" req_msg="この質問は入力必須です" req_answer_hidden_msg="アンケートに問題が発生しました。問題を解決するには、管理者にご連絡ください。" invalid_prepopulated_answer_msg="URLに含まれている値を適切に使用できないため、事前入力できません。詳細については、あなたの組織の管理者にお問い合わせください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+      この質問は入力必須です
+
+  </span>
+    	<a class="next-error-link " href="javascript:void(0);" name="next_error">
+      		<!---->
+ 	 </a>
+</div>
+
+  <!-- <div class="qNos"></div> -->
+  <div class="sQuestion" data-ember-action="" data-ember-action-859="859">
+    <section class="qSavedElements">
+
+        <div class="row">
+  <div class="col-xs-12">
+    <section class="sectQuestion">
+      <div name="reviewComment_7902000000002079_" class="reviewLink hide" data-revobj-msg="&lt;zsr&gt;&lt;p&gt;&lt;b&gt;雇用形態&lt;/b&gt;&lt;/p&gt;&lt;/zsr&gt;" data-label="reviewCommentBubble">
+        <span name="commentCount_7902000000002079_" class="commentCount">0</span>
+      </div>
+      <span class="questionText    " prepopulatereadonly="false" questionhasreadonlymode="false">
+	<span class="mandatory ">*</span><div class="qNos"></div>
+        <!----><span class="zsFormQuestContent   " name="questionMsg" id="question_message_7902000000002079"><zsr><p><b>雇用形態</b></p></zsr></span></span>
+           <div name="error_msg" id="error_content7902000000002079" tabindex="-1" error_position="bottom" style="display:none" class="error-message clearfix error-message-bottom" comment_msg="コメントを入力して送信してください。" higherrank_msg="続けるには、順位付けが上位の項目も選択してください" req_msg="この質問は入力必須です" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+              この質問は入力必須です
+           </span>
+           <a class="next-error-link " href="javascript:void(0);" name="next_error" go_next="次に移動" go_bottom="最後に移動">
+              次に移動
+            </a>
+            </div>
+<!----><!---->    </section>
+  </div>
+</div>
+
+
+       <div class="row" name="zsAnswerNode">
+  <div class="col-xs-12">
+    <section class="sectSavedAns multiChoiceAns verticalOneCol  ">
+<span id="ember860" class="ember-view">      <ul class="noscroll choicelist clearfix " ss-overflow_y="false" name="choice_list" id="simplechoicelist" aria-labelledby="question_message_7902000000002079 hintmessage_7902000000002079" aria-required="true" role="radiogroup" prepopulatereadonly="false" questionhasreadonlymode="false">
+            <li class="choiceItem  " answer_field_id="7902000000002081" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002081" role="presentation">
+              <input name="7902000000002079" id="7902000000002081" autocomplete="off" aria-label="正社員" type="radio" value="7902000000002081">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002081">
+              
+            </span><span class="choiceLabel" for="7902000000002081">正社員</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002083" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002083" role="presentation">
+              <input name="7902000000002079" id="7902000000002083" autocomplete="off" aria-label="契約社員" type="radio" value="7902000000002083">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002083">
+              
+            </span><span class="choiceLabel" for="7902000000002083">契約社員</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002085" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002085" role="presentation">
+              <input name="7902000000002079" id="7902000000002085" autocomplete="off" aria-label="アルバイト・パート" type="radio" value="7902000000002085">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002085">
+              
+            </span><span class="choiceLabel" for="7902000000002085">アルバイト・パート</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002087" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002087" role="presentation">
+              <input name="7902000000002079" id="7902000000002087" autocomplete="off" aria-label="業務委託" type="radio" value="7902000000002087">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002087">
+              
+            </span><span class="choiceLabel" for="7902000000002087">業務委託</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002089" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002089" role="presentation">
+              <input name="7902000000002079" id="7902000000002089" autocomplete="off" aria-label="派遣" type="radio" value="7902000000002089">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002089">
+              
+            </span><span class="choiceLabel" for="7902000000002089">派遣</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002091" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002091" role="presentation">
+              <input name="7902000000002079" id="7902000000002091" autocomplete="off" aria-label="インターン" type="radio" value="7902000000002091">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002091">
+              
+            </span><span class="choiceLabel" for="7902000000002091">インターン</span>
+          </label>
+        </li>
+      </ul>
+
+</span>        <li class="choiceItem other " name="other_choice" answer_field_id="zs_other_7902000000002079" answer_type="choice" role="presentation" prepopulatereadonly="false" questionhasreadonlymode="false">
+          <label class="zsRadio" for="7902000000002079_other" role="presentation">
+            <input name="7902000000002079" value="-1" id="7902000000002079_other" autocomplete="off" otheroption="true" aria-label="その他（具体的にご記入ください）" type="radio">
+            <span class="zsRadioFaux"></span><span class="choiceLabel" name="message" id="7902000000002079_other_text">その他（具体的にご記入ください）</span>
+              <input value="" role="textbox" class="txtOtherChoice" name="7902000000002079" aria-labelledby="7902000000002079_other_text" type="text">
+          </label> 
+        </li>
+<!---->    </section>
+  </div>
+</div>
+
+
+
+<!----><!---->    </section>
+  </div>
+  <div class="questionActs">
+<span id="ember861" class="ember-view">    <div class="dropdown" id="7902000000002079"><span id="tquestact_7902000000002079" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="iconMore hasTooltip" data-placement="bottom" title="" data-original-title="処理" data-ember-action="" data-ember-action-862="862"></span>
+<!---->      </div>
+
+</span><span id="ember867" class="ember-view">      <span class="iconTrash hasTooltip " data-placement="bottom" title="" data-original-title="ごみ箱に移動する" data-ember-action="" data-ember-action-868="868"></span>
+
+</span>  </div>
+<!---->    <div class="logAnsLogicRed clearFix">
+<!----><!---->    </div>
+
+</li>
+
+<!---->            	<li class="editorQuestion surveyQuestion nodragorsort ui-sortable-handle" compid="7902000000002097" compindex="1" id="question-id1" mandatory="true" questype="single_choice" questionid="7902000000002097" sumvalidation="false" display_format="vertical_col_1" name="comp_li_7902000000002097" role="presentation" data-ember-action="" data-ember-action-869="869">
+<!---->  <div name="error_msg" id="error_content7902000000002097" tabindex="-1" error_position="top" style="display:none" class="error-message clearfix" comment_msg="コメントを入力して送信してください。" req_msg="この質問は入力必須です" req_answer_hidden_msg="アンケートに問題が発生しました。問題を解決するには、管理者にご連絡ください。" invalid_prepopulated_answer_msg="URLに含まれている値を適切に使用できないため、事前入力できません。詳細については、あなたの組織の管理者にお問い合わせください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+      この質問は入力必須です
+
+  </span>
+    	<a class="next-error-link " href="javascript:void(0);" name="next_error">
+      		<!---->
+ 	 </a>
+</div>
+
+  <!-- <div class="qNos"></div> -->
+  <div class="sQuestion" data-ember-action="" data-ember-action-870="870">
+    <section class="qSavedElements">
+
+        <div class="row">
+  <div class="col-xs-12">
+    <section class="sectQuestion">
+      <div name="reviewComment_7902000000002097_" class="reviewLink hide" data-revobj-msg="&lt;zsr&gt;&lt;b&gt;入社形態&lt;/b&gt;&lt;/zsr&gt;" data-label="reviewCommentBubble">
+        <span name="commentCount_7902000000002097_" class="commentCount">0</span>
+      </div>
+      <span class="questionText    " prepopulatereadonly="false" questionhasreadonlymode="false">
+	<span class="mandatory ">*</span><div class="qNos"></div>
+        <!----><span class="zsFormQuestContent   " name="questionMsg" id="question_message_7902000000002097"><zsr><b>入社形態</b></zsr></span></span>
+           <div name="error_msg" id="error_content7902000000002097" tabindex="-1" error_position="bottom" style="display:none" class="error-message clearfix error-message-bottom" comment_msg="コメントを入力して送信してください。" higherrank_msg="続けるには、順位付けが上位の項目も選択してください" req_msg="この質問は入力必須です" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+              この質問は入力必須です
+           </span>
+           <a class="next-error-link " href="javascript:void(0);" name="next_error" go_next="次に移動" go_bottom="最後に移動">
+              次に移動
+            </a>
+            </div>
+<!----><!---->    </section>
+  </div>
+</div>
+
+
+       <div class="row" name="zsAnswerNode">
+  <div class="col-xs-12">
+    <section class="sectSavedAns multiChoiceAns verticalOneCol  ">
+<span id="ember871" class="ember-view">      <ul class="noscroll choicelist clearfix " ss-overflow_y="false" name="choice_list" id="simplechoicelist" aria-labelledby="question_message_7902000000002097 hintmessage_7902000000002097" aria-required="true" role="radiogroup" prepopulatereadonly="false" questionhasreadonlymode="false">
+            <li class="choiceItem  " answer_field_id="7902000000002099" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002099" role="presentation">
+              <input name="7902000000002097" id="7902000000002099" autocomplete="off" aria-label="新卒入社" type="radio" value="7902000000002099">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002099">
+              
+            </span><span class="choiceLabel" for="7902000000002099">新卒入社</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002101" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002101" role="presentation">
+              <input name="7902000000002097" id="7902000000002101" autocomplete="off" aria-label="中途入社" type="radio" value="7902000000002101">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002101">
+              
+            </span><span class="choiceLabel" for="7902000000002101">中途入社</span>
+          </label>
+        </li>
+      </ul>
+
+</span>        <li class="choiceItem other " name="other_choice" answer_field_id="zs_other_7902000000002097" answer_type="choice" role="presentation" prepopulatereadonly="false" questionhasreadonlymode="false">
+          <label class="zsRadio" for="7902000000002097_other" role="presentation">
+            <input name="7902000000002097" value="-1" id="7902000000002097_other" autocomplete="off" otheroption="true" aria-label="その他（具体的にご記入ください）" type="radio">
+            <span class="zsRadioFaux"></span><span class="choiceLabel" name="message" id="7902000000002097_other_text">その他（具体的にご記入ください）</span>
+              <input value="" role="textbox" class="txtOtherChoice" name="7902000000002097" aria-labelledby="7902000000002097_other_text" type="text">
+          </label> 
+        </li>
+<!---->    </section>
+  </div>
+</div>
+
+
+
+<!----><!---->    </section>
+  </div>
+  <div class="questionActs">
+<span id="ember872" class="ember-view">    <div class="dropdown" id="7902000000002097"><span id="tquestact_7902000000002097" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="iconMore hasTooltip" data-placement="bottom" title="" data-original-title="処理" data-ember-action="" data-ember-action-873="873"></span>
+<!---->      </div>
+
+</span><span id="ember878" class="ember-view">      <span class="iconTrash hasTooltip " data-placement="bottom" title="" data-original-title="ごみ箱に移動する" data-ember-action="" data-ember-action-879="879"></span>
+
+</span>  </div>
+<!---->    <div class="logAnsLogicRed clearFix">
+<!----><!---->    </div>
+
+</li>
+
+<!---->            	<li class="editorQuestion surveyQuestion nodragorsort ui-sortable-handle" compid="7902000000002107" compindex="2" id="question-id2" mandatory="true" questype="single_choice" questionid="7902000000002107" sumvalidation="false" display_format="vertical_col_1" name="comp_li_7902000000002107" role="presentation" data-ember-action="" data-ember-action-880="880">
+<!---->  <div name="error_msg" id="error_content7902000000002107" tabindex="-1" error_position="top" style="display:none" class="error-message clearfix" comment_msg="コメントを入力して送信してください。" req_msg="この質問は入力必須です" req_answer_hidden_msg="アンケートに問題が発生しました。問題を解決するには、管理者にご連絡ください。" invalid_prepopulated_answer_msg="URLに含まれている値を適切に使用できないため、事前入力できません。詳細については、あなたの組織の管理者にお問い合わせください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+      この質問は入力必須です
+
+  </span>
+    	<a class="next-error-link " href="javascript:void(0);" name="next_error">
+      		<!---->
+ 	 </a>
+</div>
+
+  <!-- <div class="qNos"></div> -->
+  <div class="sQuestion" data-ember-action="" data-ember-action-881="881">
+    <section class="qSavedElements">
+
+        <div class="row">
+  <div class="col-xs-12">
+    <section class="sectQuestion">
+      <div name="reviewComment_7902000000002107_" class="reviewLink hide" data-revobj-msg="&lt;zsr&gt;&lt;b&gt;所属事業部&lt;/b&gt;&lt;/zsr&gt;" data-label="reviewCommentBubble">
+        <span name="commentCount_7902000000002107_" class="commentCount">0</span>
+      </div>
+      <span class="questionText    " prepopulatereadonly="false" questionhasreadonlymode="false">
+	<span class="mandatory ">*</span><div class="qNos"></div>
+        <!----><span class="zsFormQuestContent   " name="questionMsg" id="question_message_7902000000002107"><zsr><b>所属事業部</b></zsr></span></span>
+           <div name="error_msg" id="error_content7902000000002107" tabindex="-1" error_position="bottom" style="display:none" class="error-message clearfix error-message-bottom" comment_msg="コメントを入力して送信してください。" higherrank_msg="続けるには、順位付けが上位の項目も選択してください" req_msg="この質問は入力必須です" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+              この質問は入力必須です
+           </span>
+           <a class="next-error-link " href="javascript:void(0);" name="next_error" go_next="次に移動" go_bottom="最後に移動">
+              次に移動
+            </a>
+            </div>
+<!----><!---->    </section>
+  </div>
+</div>
+
+
+       <div class="row" name="zsAnswerNode">
+  <div class="col-xs-12">
+    <section class="sectSavedAns multiChoiceAns verticalOneCol  ">
+<span id="ember882" class="ember-view">      <ul class="noscroll choicelist clearfix " ss-overflow_y="false" name="choice_list" id="simplechoicelist" aria-labelledby="question_message_7902000000002107 hintmessage_7902000000002107" aria-required="true" role="radiogroup" prepopulatereadonly="false" questionhasreadonlymode="false">
+            <li class="choiceItem  " answer_field_id="7902000000002109" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002109" role="presentation">
+              <input name="7902000000002107" id="7902000000002109" autocomplete="off" aria-label="営業部" type="radio" value="7902000000002109">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002109">
+              
+            </span><span class="choiceLabel" for="7902000000002109">営業部</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002111" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002111" role="presentation">
+              <input name="7902000000002107" id="7902000000002111" autocomplete="off" aria-label="マーケティング部" type="radio" value="7902000000002111">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002111">
+              
+            </span><span class="choiceLabel" for="7902000000002111">マーケティング部</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002113" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002113" role="presentation">
+              <input name="7902000000002107" id="7902000000002113" autocomplete="off" aria-label="人事部" type="radio" value="7902000000002113">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002113">
+              
+            </span><span class="choiceLabel" for="7902000000002113">人事部</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002115" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002115" role="presentation">
+              <input name="7902000000002107" id="7902000000002115" autocomplete="off" aria-label="開発部" type="radio" value="7902000000002115">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002115">
+              
+            </span><span class="choiceLabel" for="7902000000002115">開発部</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002117" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002117" role="presentation">
+              <input name="7902000000002107" id="7902000000002117" autocomplete="off" aria-label="経理部" type="radio" value="7902000000002117">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002117">
+              
+            </span><span class="choiceLabel" for="7902000000002117">経理部</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002119" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002119" role="presentation">
+              <input name="7902000000002107" id="7902000000002119" autocomplete="off" aria-label="総務部" type="radio" value="7902000000002119">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002119">
+              
+            </span><span class="choiceLabel" for="7902000000002119">総務部</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002121" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002121" role="presentation">
+              <input name="7902000000002107" id="7902000000002121" autocomplete="off" aria-label="その他" type="radio" value="7902000000002121">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002121">
+              
+            </span><span class="choiceLabel" for="7902000000002121">その他</span>
+          </label>
+        </li>
+      </ul>
+
+</span>        <li class="choiceItem other " name="other_choice" answer_field_id="zs_other_7902000000002107" answer_type="choice" role="presentation" prepopulatereadonly="false" questionhasreadonlymode="false">
+          <label class="zsRadio" for="7902000000002107_other" role="presentation">
+            <input name="7902000000002107" value="-1" id="7902000000002107_other" autocomplete="off" otheroption="true" aria-label="その他（具体的にご記入ください）" type="radio">
+            <span class="zsRadioFaux"></span><span class="choiceLabel" name="message" id="7902000000002107_other_text">その他（具体的にご記入ください）</span>
+              <input value="" role="textbox" class="txtOtherChoice" name="7902000000002107" aria-labelledby="7902000000002107_other_text" type="text">
+          </label> 
+        </li>
+<!---->    </section>
+  </div>
+</div>
+
+
+
+<!----><!---->    </section>
+  </div>
+  <div class="questionActs">
+<span id="ember883" class="ember-view">    <div class="dropdown" id="7902000000002107"><span id="tquestact_7902000000002107" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="iconMore hasTooltip" data-placement="bottom" title="" data-original-title="処理" data-ember-action="" data-ember-action-884="884"></span>
+<!---->      </div>
+
+</span><span id="ember889" class="ember-view">      <span class="iconTrash hasTooltip " data-placement="bottom" title="" data-original-title="ごみ箱に移動する" data-ember-action="" data-ember-action-890="890"></span>
+
+</span>  </div>
+<!---->    <div class="logAnsLogicRed clearFix">
+<!----><!---->    </div>
+
+</li>
+
+<!---->            	<li class="editorQuestion surveyQuestion nodragorsort ui-sortable-handle" compid="7902000000002127" compindex="3" id="question-id3" mandatory="true" questype="single_choice" questionid="7902000000002127" sumvalidation="false" display_format="vertical_col_1" name="comp_li_7902000000002127" role="presentation" data-ember-action="" data-ember-action-891="891">
+<!---->  <div name="error_msg" id="error_content7902000000002127" tabindex="-1" error_position="top" style="display:none" class="error-message clearfix" comment_msg="コメントを入力して送信してください。" req_msg="この質問は入力必須です" req_answer_hidden_msg="アンケートに問題が発生しました。問題を解決するには、管理者にご連絡ください。" invalid_prepopulated_answer_msg="URLに含まれている値を適切に使用できないため、事前入力できません。詳細については、あなたの組織の管理者にお問い合わせください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+      この質問は入力必須です
+
+  </span>
+    	<a class="next-error-link " href="javascript:void(0);" name="next_error">
+      		<!---->
+ 	 </a>
+</div>
+
+  <!-- <div class="qNos"></div> -->
+  <div class="sQuestion" data-ember-action="" data-ember-action-892="892">
+    <section class="qSavedElements">
+
+        <div class="row">
+  <div class="col-xs-12">
+    <section class="sectQuestion">
+      <div name="reviewComment_7902000000002127_" class="reviewLink hide" data-revobj-msg="&lt;zsr&gt;&lt;p&gt;&lt;b&gt;役職&lt;/b&gt;&lt;/p&gt;&lt;/zsr&gt;" data-label="reviewCommentBubble">
+        <span name="commentCount_7902000000002127_" class="commentCount">0</span>
+      </div>
+      <span class="questionText    " prepopulatereadonly="false" questionhasreadonlymode="false">
+	<span class="mandatory ">*</span><div class="qNos"></div>
+        <!----><span class="zsFormQuestContent   " name="questionMsg" id="question_message_7902000000002127"><zsr><p><b>役職</b></p></zsr></span></span>
+           <div name="error_msg" id="error_content7902000000002127" tabindex="-1" error_position="bottom" style="display:none" class="error-message clearfix error-message-bottom" comment_msg="コメントを入力して送信してください。" higherrank_msg="続けるには、順位付けが上位の項目も選択してください" req_msg="この質問は入力必須です" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+              この質問は入力必須です
+           </span>
+           <a class="next-error-link " href="javascript:void(0);" name="next_error" go_next="次に移動" go_bottom="最後に移動">
+              次に移動
+            </a>
+            </div>
+<!----><!---->    </section>
+  </div>
+</div>
+
+
+       <div class="row" name="zsAnswerNode">
+  <div class="col-xs-12">
+    <section class="sectSavedAns multiChoiceAns verticalOneCol  ">
+<span id="ember893" class="ember-view">      <ul class="noscroll choicelist clearfix " ss-overflow_y="false" name="choice_list" id="simplechoicelist" aria-labelledby="question_message_7902000000002127 hintmessage_7902000000002127" aria-required="true" role="radiogroup" prepopulatereadonly="false" questionhasreadonlymode="false">
+            <li class="choiceItem  " answer_field_id="7902000000002129" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002129" role="presentation">
+              <input name="7902000000002127" id="7902000000002129" autocomplete="off" aria-label="部長" type="radio" value="7902000000002129">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002129">
+              
+            </span><span class="choiceLabel" for="7902000000002129">部長</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002131" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002131" role="presentation">
+              <input name="7902000000002127" id="7902000000002131" autocomplete="off" aria-label="係長" type="radio" value="7902000000002131">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002131">
+              
+            </span><span class="choiceLabel" for="7902000000002131">係長</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002133" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002133" role="presentation">
+              <input name="7902000000002127" id="7902000000002133" autocomplete="off" aria-label="課長" type="radio" value="7902000000002133">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002133">
+              
+            </span><span class="choiceLabel" for="7902000000002133">課長</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002135" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002135" role="presentation">
+              <input name="7902000000002127" id="7902000000002135" autocomplete="off" aria-label="マネージャー" type="radio" value="7902000000002135">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002135">
+              
+            </span><span class="choiceLabel" for="7902000000002135">マネージャー</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002137" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002137" role="presentation">
+              <input name="7902000000002127" id="7902000000002137" autocomplete="off" aria-label="リーダー" type="radio" value="7902000000002137">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002137">
+              
+            </span><span class="choiceLabel" for="7902000000002137">リーダー</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002139" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002139" role="presentation">
+              <input name="7902000000002127" id="7902000000002139" autocomplete="off" aria-label="役職なし" type="radio" value="7902000000002139">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002139">
+              
+            </span><span class="choiceLabel" for="7902000000002139">役職なし</span>
+          </label>
+        </li>
+      </ul>
+
+</span>        <li class="choiceItem other " name="other_choice" answer_field_id="zs_other_7902000000002127" answer_type="choice" role="presentation" prepopulatereadonly="false" questionhasreadonlymode="false">
+          <label class="zsRadio" for="7902000000002127_other" role="presentation">
+            <input name="7902000000002127" value="-1" id="7902000000002127_other" autocomplete="off" otheroption="true" aria-label="その他（具体的にご記入ください）" type="radio">
+            <span class="zsRadioFaux"></span><span class="choiceLabel" name="message" id="7902000000002127_other_text">その他（具体的にご記入ください）</span>
+              <input value="" role="textbox" class="txtOtherChoice" name="7902000000002127" aria-labelledby="7902000000002127_other_text" type="text">
+          </label> 
+        </li>
+<!---->    </section>
+  </div>
+</div>
+
+
+
+<!----><!---->    </section>
+  </div>
+  <div class="questionActs">
+<span id="ember894" class="ember-view">    <div class="dropdown" id="7902000000002127"><span id="tquestact_7902000000002127" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="iconMore hasTooltip" data-placement="bottom" title="" data-original-title="処理" data-ember-action="" data-ember-action-895="895"></span>
+<!---->      </div>
+
+</span><span id="ember900" class="ember-view">      <span class="iconTrash hasTooltip " data-placement="bottom" title="" data-original-title="ごみ箱に移動する" data-ember-action="" data-ember-action-901="901"></span>
+
+</span>  </div>
+<!---->    <div class="logAnsLogicRed clearFix">
+<!----><!---->    </div>
+
+</li>
+
+<!---->            	<li class="editorQuestion surveyQuestion nodragorsort ui-sortable-handle" compid="7902000000002147" compindex="4" id="question-id4" mandatory="true" questype="single_choice" questionid="7902000000002147" sumvalidation="false" display_format="vertical_col_1" name="comp_li_7902000000002147" role="presentation" data-ember-action="" data-ember-action-902="902">
+<!---->  <div name="error_msg" id="error_content7902000000002147" tabindex="-1" error_position="top" style="display:none" class="error-message clearfix" comment_msg="コメントを入力して送信してください。" req_msg="この質問は入力必須です" req_answer_hidden_msg="アンケートに問題が発生しました。問題を解決するには、管理者にご連絡ください。" invalid_prepopulated_answer_msg="URLに含まれている値を適切に使用できないため、事前入力できません。詳細については、あなたの組織の管理者にお問い合わせください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+      この質問は入力必須です
+
+  </span>
+    	<a class="next-error-link " href="javascript:void(0);" name="next_error">
+      		<!---->
+ 	 </a>
+</div>
+
+  <!-- <div class="qNos"></div> -->
+  <div class="sQuestion" data-ember-action="" data-ember-action-903="903">
+    <section class="qSavedElements">
+
+        <div class="row">
+  <div class="col-xs-12">
+    <section class="sectQuestion">
+      <div name="reviewComment_7902000000002147_" class="reviewLink hide" data-revobj-msg="&lt;zsr&gt;&lt;zsr&gt;&lt;p&gt;&lt;b&gt;職種&lt;/b&gt;&lt;/p&gt;&lt;/zsr&gt;&lt;/zsr&gt;" data-label="reviewCommentBubble">
+        <span name="commentCount_7902000000002147_" class="commentCount">0</span>
+      </div>
+      <span class="questionText    " prepopulatereadonly="false" questionhasreadonlymode="false">
+	<span class="mandatory ">*</span><div class="qNos"></div>
+        <!----><span class="zsFormQuestContent   " name="questionMsg" id="question_message_7902000000002147"><zsr><zsr><p><b>職種</b></p></zsr></zsr></span></span>
+           <div name="error_msg" id="error_content7902000000002147" tabindex="-1" error_position="bottom" style="display:none" class="error-message clearfix error-message-bottom" comment_msg="コメントを入力して送信してください。" higherrank_msg="続けるには、順位付けが上位の項目も選択してください" req_msg="この質問は入力必須です" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+              この質問は入力必須です
+           </span>
+           <a class="next-error-link " href="javascript:void(0);" name="next_error" go_next="次に移動" go_bottom="最後に移動">
+              次に移動
+            </a>
+            </div>
+<!----><!---->    </section>
+  </div>
+</div>
+
+
+       <div class="row" name="zsAnswerNode">
+  <div class="col-xs-12">
+    <section class="sectSavedAns multiChoiceAns verticalOneCol  ">
+<span id="ember904" class="ember-view">      <ul class="noscroll choicelist clearfix " ss-overflow_y="false" name="choice_list" id="simplechoicelist" aria-labelledby="question_message_7902000000002147 hintmessage_7902000000002147" aria-required="true" role="radiogroup" prepopulatereadonly="false" questionhasreadonlymode="false">
+            <li class="choiceItem  " answer_field_id="7902000000002149" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002149" role="presentation">
+              <input name="7902000000002147" id="7902000000002149" autocomplete="off" aria-label="営業" type="radio" value="7902000000002149">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002149">
+              
+            </span><span class="choiceLabel" for="7902000000002149">営業</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002151" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002151" role="presentation">
+              <input name="7902000000002147" id="7902000000002151" autocomplete="off" aria-label="事務" type="radio" value="7902000000002151">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002151">
+              
+            </span><span class="choiceLabel" for="7902000000002151">事務</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002153" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002153" role="presentation">
+              <input name="7902000000002147" id="7902000000002153" autocomplete="off" aria-label="企画" type="radio" value="7902000000002153">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002153">
+              
+            </span><span class="choiceLabel" for="7902000000002153">企画</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002155" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002155" role="presentation">
+              <input name="7902000000002147" id="7902000000002155" autocomplete="off" aria-label="人事" type="radio" value="7902000000002155">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002155">
+              
+            </span><span class="choiceLabel" for="7902000000002155">人事</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002157" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002157" role="presentation">
+              <input name="7902000000002147" id="7902000000002157" autocomplete="off" aria-label="労務" type="radio" value="7902000000002157">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002157">
+              
+            </span><span class="choiceLabel" for="7902000000002157">労務</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002159" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002159" role="presentation">
+              <input name="7902000000002147" id="7902000000002159" autocomplete="off" aria-label="総務" type="radio" value="7902000000002159">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002159">
+              
+            </span><span class="choiceLabel" for="7902000000002159">総務</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002161" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002161" role="presentation">
+              <input name="7902000000002147" id="7902000000002161" autocomplete="off" aria-label="研究" type="radio" value="7902000000002161">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002161">
+              
+            </span><span class="choiceLabel" for="7902000000002161">研究</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002163" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002163" role="presentation">
+              <input name="7902000000002147" id="7902000000002163" autocomplete="off" aria-label="経理" type="radio" value="7902000000002163">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002163">
+              
+            </span><span class="choiceLabel" for="7902000000002163">経理</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002165" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002165" role="presentation">
+              <input name="7902000000002147" id="7902000000002165" autocomplete="off" aria-label="エンジニア" type="radio" value="7902000000002165">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002165">
+              
+            </span><span class="choiceLabel" for="7902000000002165">エンジニア</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002167" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002167" role="presentation">
+              <input name="7902000000002147" id="7902000000002167" autocomplete="off" aria-label="デザイナー" type="radio" value="7902000000002167">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002167">
+              
+            </span><span class="choiceLabel" for="7902000000002167">デザイナー</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000002169" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000002169" role="presentation">
+              <input name="7902000000002147" id="7902000000002169" autocomplete="off" aria-label="マーケティング" type="radio" value="7902000000002169">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000002169">
+              
+            </span><span class="choiceLabel" for="7902000000002169">マーケティング</span>
+          </label>
+        </li>
+            <li class="choiceItem  " answer_field_id="7902000000008139" answer_type="choice" role="presentation">
+              <label class="zsRadio" for="7902000000008139" role="presentation">
+              <input name="7902000000002147" id="7902000000008139" autocomplete="off" aria-label="データサイエンティスト" type="radio" value="7902000000008139">
+            
+            <span class="zsRadioFaux" id="choiceEffects_7902000000008139">
+              
+            </span><span class="choiceLabel" for="7902000000008139">データサイエンティスト</span>
+          </label>
+        </li>
+      </ul>
+
+</span>        <li class="choiceItem other " name="other_choice" answer_field_id="zs_other_7902000000002147" answer_type="choice" role="presentation" prepopulatereadonly="false" questionhasreadonlymode="false">
+          <label class="zsRadio" for="7902000000002147_other" role="presentation">
+            <input name="7902000000002147" value="-1" id="7902000000002147_other" autocomplete="off" otheroption="true" aria-label="その他（具体的にご記入ください）" type="radio">
+            <span class="zsRadioFaux"></span><span class="choiceLabel" name="message" id="7902000000002147_other_text">その他（具体的にご記入ください）</span>
+              <input value="" role="textbox" class="txtOtherChoice" name="7902000000002147" aria-labelledby="7902000000002147_other_text" type="text">
+          </label> 
+        </li>
+<!---->    </section>
+  </div>
+</div>
+
+
+
+<!----><!---->    </section>
+  </div>
+  <div class="questionActs">
+<span id="ember905" class="ember-view">    <div class="dropdown" id="7902000000002147"><span id="tquestact_7902000000002147" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="iconMore hasTooltip" data-placement="bottom" title="" data-original-title="処理" data-ember-action="" data-ember-action-906="906"></span>
+<!---->      </div>
+
+</span><span id="ember911" class="ember-view">      <span class="iconTrash hasTooltip " data-placement="bottom" title="" data-original-title="ごみ箱に移動する" data-ember-action="" data-ember-action-912="912"></span>
+
+</span>  </div>
+<!---->    <div class="logAnsLogicRed clearFix">
+<!----><!---->    </div>
+
+</li>
+
+<!---->            	<li class="editorQuestion surveyQuestion nodragorsort ui-sortable-handle" compid="7902000000002177" compindex="5" id="question-id5" mandatory="true" questype="numeric_textbox" questionid="7902000000002177" sumvalidation="false" name="comp_li_7902000000002177" role="presentation" data-ember-action="" data-ember-action-913="913">
+<!---->  <div name="error_msg" id="error_content7902000000002177" tabindex="-1" error_position="top" style="display:none" class="error-message clearfix" comment_msg="コメントを入力して送信してください。" req_msg="この質問は入力必須です。西暦の数値のみでご記入ください。" req_answer_hidden_msg="アンケートに問題が発生しました。問題を解決するには、管理者にご連絡ください。" invalid_prepopulated_answer_msg="URLに含まれている値を適切に使用できないため、事前入力できません。詳細については、あなたの組織の管理者にお問い合わせください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+      この質問は入力必須です。西暦の数値のみでご記入ください。
+
+  </span>
+    	<a class="next-error-link " href="javascript:void(0);" name="next_error">
+      		<!---->
+ 	 </a>
+</div>
+
+  <!-- <div class="qNos"></div> -->
+  <div class="sQuestion" data-ember-action="" data-ember-action-914="914">
+    <section class="qSavedElements">
+
+        <div class="row">
+  <div class="col-xs-12">
+    <section class="sectQuestion">
+      <div name="reviewComment_7902000000002177_" class="reviewLink hide" data-revobj-msg="&lt;zsr&gt;&lt;p&gt;&lt;span style=&quot;font-size:12px&quot;&gt;&lt;/span&gt;&lt;b&gt;&lt;font style=&quot;font-size:20px&quot;&gt;入社年を教えてください。&lt;/font&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;font style=&quot;font-size:20px&quot;&gt;&lt;span style=&quot;font-size:16px&quot;&gt;※2019年入社の場合には、2019とお答えください。&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;&lt;/zsr&gt;" data-label="reviewCommentBubble">
+        <span name="commentCount_7902000000002177_" class="commentCount">0</span>
+      </div>
+      <span class="questionText hintEnabled   " prepopulatereadonly="false" questionhasreadonlymode="false">
+	<span class="mandatory ">*</span><div class="qNos"></div>
+        <!----><span class="zsFormQuestContent   " name="questionMsg" id="question_message_7902000000002177"><zsr><p><span style="font-size:12px"></span><b><font style="font-size:20px">入社年を教えてください。</font></b></p><p><font style="font-size:20px"><span style="font-size:16px">※2019年入社の場合には、2019とお答えください。</span></font></p></zsr></span></span>
+           <div name="error_msg" id="error_content7902000000002177" tabindex="-1" error_position="bottom" style="display:none" class="error-message clearfix error-message-bottom" comment_msg="コメントを入力して送信してください。" higherrank_msg="続けるには、順位付けが上位の項目も選択してください" req_msg="この質問は入力必須です。西暦の数値のみでご記入ください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+              この質問は入力必須です。西暦の数値のみでご記入ください。
+           </span>
+           <a class="next-error-link " href="javascript:void(0);" name="next_error" go_next="次に移動" go_bottom="最後に移動">
+              次に移動
+            </a>
+            </div>
+      <div name="hint_container" class="hintContainer clearfix hide showPublishedForm">
+        <button class="btnHint pull-right" onclick="Response.showHintPopup(this);" aria-label="ヒント" aria-describedby="hintmessage_7902000000002177"><i>i</i></button>
+        <div class="hintPopover hide" name="hint_msg_container">
+          <button class="closePopover" style="z-index:1;" onclick="Response.hideHintPopup(this);" aria-label="閉じる"><svg viewBox="0 0 5 5">
+              <polygon points="0 0.41 0.42 0 5 4.59 4.58 5 0 0.41"></polygon>
+              <polygon points="0 4.59 4.58 0 5 0.41 0.42 5 0 4.59"></polygon></svg></button>
+<span id="ember915" class="ember-view">          <div class="hintBody" id="hintmessage_7902000000002177" name="questionHint" tabindex="0">
+            <zsr><p>西暦の数値のみで、半角でお答えください。<br></p></zsr>
+          </div>
+
+</span>        </div>
+      </div>
+<!---->    </section>
+  </div>
+</div>
+
+
+        <div class="row" name="zsAnswerNode">
+  <div class="col-xs-12">
+    <section class="sectSavedAns singleTextBox">
+      <input aria-labelledby="question_message_7902000000002177 hintmessage_7902000000002177" class="inTextbox " size="40" min_length="1930" max_length="9223372036854775807" decimal_enabled="false" min_value="1930" max_value="9223372036854775807" validation_type="range" prepopulatereadonly="false" questionhasreadonlymode="false" aria-required="true" type="text">
+    </section>
+  </div>
+</div>
+
+
+
+<!----><!---->    </section>
+  </div>
+  <div class="questionActs">
+<span id="ember916" class="ember-view">    <div class="dropdown" id="7902000000002177"><span id="tquestact_7902000000002177" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="iconMore hasTooltip" data-placement="bottom" title="" data-original-title="処理" data-ember-action="" data-ember-action-917="917"></span>
+<!---->      </div>
+
+</span><span id="ember922" class="ember-view">      <span class="iconTrash hasTooltip " data-placement="bottom" title="" data-original-title="ごみ箱に移動する" data-ember-action="" data-ember-action-923="923"></span>
+
+</span>  </div>
+<!---->    <div class="logAnsLogicRed clearFix">
+<!----><!---->    </div>
+
+</li>
+
+<!---->            	<li class="editorQuestion surveyQuestion nodragorsort ui-sortable-handle" compid="7902000000018005" compindex="6" id="question-id6" mandatory="true" questype="numeric_textbox" questionid="7902000000018005" sumvalidation="false" name="comp_li_7902000000018005" role="presentation" data-ember-action="" data-ember-action-924="924">
+<!---->  <div name="error_msg" id="error_content7902000000018005" tabindex="-1" error_position="top" style="display:none" class="error-message clearfix" comment_msg="コメントを入力して送信してください。" req_msg="この質問は入力必須です。西暦の数値のみでご記入ください。" req_answer_hidden_msg="アンケートに問題が発生しました。問題を解決するには、管理者にご連絡ください。" invalid_prepopulated_answer_msg="URLに含まれている値を適切に使用できないため、事前入力できません。詳細については、あなたの組織の管理者にお問い合わせください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+      この質問は入力必須です。西暦の数値のみでご記入ください。
+
+  </span>
+    	<a class="next-error-link " href="javascript:void(0);" name="next_error">
+      		<!---->
+ 	 </a>
+</div>
+
+  <!-- <div class="qNos"></div> -->
+  <div class="sQuestion" data-ember-action="" data-ember-action-925="925">
+    <section class="qSavedElements">
+
+        <div class="row">
+  <div class="col-xs-12">
+    <section class="sectQuestion">
+      <div name="reviewComment_7902000000018005_" class="reviewLink hide" data-revobj-msg="&lt;zsr&gt;&lt;p&gt;&lt;span style=&quot;font-size:12px&quot;&gt;&lt;/span&gt;&lt;b&gt;&lt;font style=&quot;font-size:20px&quot;&gt;入社月を教えてください。&lt;/font&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;font style=&quot;font-size:20px&quot;&gt;&lt;span style=&quot;font-size:16px&quot;&gt;※4月入社の場合には、4とお答えください。&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;&lt;/zsr&gt;" data-label="reviewCommentBubble">
+        <span name="commentCount_7902000000018005_" class="commentCount">0</span>
+      </div>
+      <span class="questionText hintEnabled   " prepopulatereadonly="false" questionhasreadonlymode="false">
+	<span class="mandatory ">*</span><div class="qNos"></div>
+        <!----><span class="zsFormQuestContent   " name="questionMsg" id="question_message_7902000000018005"><zsr><p><span style="font-size:12px"></span><b><font style="font-size:20px">入社月を教えてください。</font></b></p><p><font style="font-size:20px"><span style="font-size:16px">※4月入社の場合には、4とお答えください。</span></font></p></zsr></span></span>
+           <div name="error_msg" id="error_content7902000000018005" tabindex="-1" error_position="bottom" style="display:none" class="error-message clearfix error-message-bottom" comment_msg="コメントを入力して送信してください。" higherrank_msg="続けるには、順位付けが上位の項目も選択してください" req_msg="この質問は入力必須です。西暦の数値のみでご記入ください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+              この質問は入力必須です。西暦の数値のみでご記入ください。
+           </span>
+           <a class="next-error-link " href="javascript:void(0);" name="next_error" go_next="次に移動" go_bottom="最後に移動">
+              次に移動
+            </a>
+            </div>
+      <div name="hint_container" class="hintContainer clearfix hide showPublishedForm">
+        <button class="btnHint pull-right" onclick="Response.showHintPopup(this);" aria-label="ヒント" aria-describedby="hintmessage_7902000000018005"><i>i</i></button>
+        <div class="hintPopover hide" name="hint_msg_container">
+          <button class="closePopover" style="z-index:1;" onclick="Response.hideHintPopup(this);" aria-label="閉じる"><svg viewBox="0 0 5 5">
+              <polygon points="0 0.41 0.42 0 5 4.59 4.58 5 0 0.41"></polygon>
+              <polygon points="0 4.59 4.58 0 5 0.41 0.42 5 0 4.59"></polygon></svg></button>
+<span id="ember926" class="ember-view">          <div class="hintBody" id="hintmessage_7902000000018005" name="questionHint" tabindex="0">
+            <zsr><p>西暦の数値のみで、半角でお答えください。<br></p></zsr>
+          </div>
+
+</span>        </div>
+      </div>
+<!---->    </section>
+  </div>
+</div>
+
+
+        <div class="row" name="zsAnswerNode">
+  <div class="col-xs-12">
+    <section class="sectSavedAns singleTextBox">
+      <input aria-labelledby="question_message_7902000000018005 hintmessage_7902000000018005" class="inTextbox " size="40" min_length="1930" max_length="9223372036854775807" decimal_enabled="false" min_value="1930" max_value="9223372036854775807" validation_type="range" prepopulatereadonly="false" questionhasreadonlymode="false" aria-required="true" type="text">
+    </section>
+  </div>
+</div>
+
+
+
+<!----><!---->    </section>
+  </div>
+  <div class="questionActs">
+<span id="ember927" class="ember-view">    <div class="dropdown" id="7902000000018005"><span id="tquestact_7902000000018005" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="iconMore hasTooltip" data-placement="bottom" title="" data-original-title="処理" data-ember-action="" data-ember-action-928="928"></span>
+<!---->      </div>
+
+</span><span id="ember933" class="ember-view">      <span class="iconTrash hasTooltip " data-placement="bottom" title="" data-original-title="ごみ箱に移動する" data-ember-action="" data-ember-action-934="934"></span>
+
+</span>  </div>
+<!---->    <div class="logAnsLogicRed clearFix">
+<!----><!---->    </div>
+
+</li>
+
+<!---->            	<li class="editorQuestion surveyQuestion nodragorsort ui-sortable-handle" compid="7902000000002183" compindex="7" id="question-id7" mandatory="true" questype="numeric_textbox" questionid="7902000000002183" sumvalidation="false" name="comp_li_7902000000002183" role="presentation" data-ember-action="" data-ember-action-935="935">
+<!---->  <div name="error_msg" id="error_content7902000000002183" tabindex="-1" error_position="top" style="display:none" class="error-message clearfix" comment_msg="コメントを入力して送信してください。" req_msg="この質問は入力必須です。数値のみで、単位は万円でご記入ください。" req_answer_hidden_msg="アンケートに問題が発生しました。問題を解決するには、管理者にご連絡ください。" invalid_prepopulated_answer_msg="URLに含まれている値を適切に使用できないため、事前入力できません。詳細については、あなたの組織の管理者にお問い合わせください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+      この質問は入力必須です。数値のみで、単位は万円でご記入ください。
+
+  </span>
+    	<a class="next-error-link " href="javascript:void(0);" name="next_error">
+      		<!---->
+ 	 </a>
+</div>
+
+  <!-- <div class="qNos"></div> -->
+  <div class="sQuestion" data-ember-action="" data-ember-action-936="936">
+    <section class="qSavedElements">
+
+        <div class="row">
+  <div class="col-xs-12">
+    <section class="sectQuestion">
+      <div name="reviewComment_7902000000002183_" class="reviewLink hide" data-revobj-msg="&lt;zsr&gt;&lt;p&gt;&lt;b&gt;&lt;font style=&quot;font-size:20px&quot;&gt;概算年収を教えてください。&lt;/font&gt;&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;font style=&quot;font-size:20px&quot;&gt;&lt;span style=&quot;font-size:16px&quot;&gt;450万円の場合には、450と半角でお答えください。&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;&lt;/zsr&gt;" data-label="reviewCommentBubble">
+        <span name="commentCount_7902000000002183_" class="commentCount">0</span>
+      </div>
+      <span class="questionText hintEnabled   " prepopulatereadonly="false" questionhasreadonlymode="false">
+	<span class="mandatory ">*</span><div class="qNos"></div>
+        <!----><span class="zsFormQuestContent   " name="questionMsg" id="question_message_7902000000002183"><zsr><p><b><font style="font-size:20px">概算年収を教えてください。</font></b></p><p><font style="font-size:20px"><span style="font-size:16px">450万円の場合には、450と半角でお答えください。</span></font></p></zsr></span></span>
+           <div name="error_msg" id="error_content7902000000002183" tabindex="-1" error_position="bottom" style="display:none" class="error-message clearfix error-message-bottom" comment_msg="コメントを入力して送信してください。" higherrank_msg="続けるには、順位付けが上位の項目も選択してください" req_msg="この質問は入力必須です。数値のみで、単位は万円でご記入ください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+              この質問は入力必須です。数値のみで、単位は万円でご記入ください。
+           </span>
+           <a class="next-error-link " href="javascript:void(0);" name="next_error" go_next="次に移動" go_bottom="最後に移動">
+              次に移動
+            </a>
+            </div>
+      <div name="hint_container" class="hintContainer clearfix hide showPublishedForm">
+        <button class="btnHint pull-right" onclick="Response.showHintPopup(this);" aria-label="ヒント" aria-describedby="hintmessage_7902000000002183"><i>i</i></button>
+        <div class="hintPopover hide" name="hint_msg_container">
+          <button class="closePopover" style="z-index:1;" onclick="Response.hideHintPopup(this);" aria-label="閉じる"><svg viewBox="0 0 5 5">
+              <polygon points="0 0.41 0.42 0 5 4.59 4.58 5 0 0.41"></polygon>
+              <polygon points="0 4.59 4.58 0 5 0.41 0.42 5 0 4.59"></polygon></svg></button>
+<span id="ember937" class="ember-view">          <div class="hintBody" id="hintmessage_7902000000002183" name="questionHint" tabindex="0">
+            <zsr><p>数値のみで、単位は万円でご記入ください。例：500万円の場合、500。400万円の場合、400。とご記載ください。<br></p></zsr>
+          </div>
+
+</span>        </div>
+      </div>
+<!---->    </section>
+  </div>
+</div>
+
+
+        <div class="row" name="zsAnswerNode">
+  <div class="col-xs-12">
+    <section class="sectSavedAns singleTextBox">
+      <input aria-labelledby="question_message_7902000000002183 hintmessage_7902000000002183" class="inTextbox " size="40" min_length="0" max_length="9223372036854775807" decimal_enabled="false" min_value="0" max_value="9223372036854775807" validation_type="range" prepopulatereadonly="false" questionhasreadonlymode="false" aria-required="true" type="text">
+    </section>
+  </div>
+</div>
+
+
+
+<!----><!---->    </section>
+  </div>
+  <div class="questionActs">
+<span id="ember938" class="ember-view">    <div class="dropdown" id="7902000000002183"><span id="tquestact_7902000000002183" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="iconMore hasTooltip" data-placement="bottom" title="" data-original-title="処理" data-ember-action="" data-ember-action-939="939"></span>
+<!---->      </div>
+
+</span><span id="ember944" class="ember-view">      <span class="iconTrash hasTooltip " data-placement="bottom" title="" data-original-title="ごみ箱に移動する" data-ember-action="" data-ember-action-945="945"></span>
+
+</span>  </div>
+<!---->    <div class="logAnsLogicRed clearFix">
+<!----><!---->    </div>
+
+</li>
+
+<!---->            	<li class="editorQuestion surveyQuestion nodragorsort ui-sortable-handle" compid="7902000000002193" compindex="8" id="question-id8" mandatory="true" questype="numeric_textbox" questionid="7902000000002193" sumvalidation="false" name="comp_li_7902000000002193" role="presentation" data-ember-action="" data-ember-action-946="946">
+<!---->  <div name="error_msg" id="error_content7902000000002193" tabindex="-1" error_position="top" style="display:none" class="error-message clearfix" comment_msg="コメントを入力して送信してください。" req_msg="この質問は入力必須です。単位は、時間で半角でお答えください。" req_answer_hidden_msg="アンケートに問題が発生しました。問題を解決するには、管理者にご連絡ください。" invalid_prepopulated_answer_msg="URLに含まれている値を適切に使用できないため、事前入力できません。詳細については、あなたの組織の管理者にお問い合わせください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+      この質問は入力必須です。単位は、時間で半角でお答えください。
+
+  </span>
+    	<a class="next-error-link " href="javascript:void(0);" name="next_error">
+      		<!---->
+ 	 </a>
+</div>
+
+  <!-- <div class="qNos"></div> -->
+  <div class="sQuestion" data-ember-action="" data-ember-action-947="947">
+    <section class="qSavedElements">
+
+        <div class="row">
+  <div class="col-xs-12">
+    <section class="sectQuestion">
+      <div name="reviewComment_7902000000002193_" class="reviewLink hide" data-revobj-msg="&lt;zsr&gt;&lt;p&gt;&lt;b&gt;1ヶ月当たりの平均残業時間を教えてください。&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size:16px&quot;&gt;（残業時間が月100時間ほどある方は100とお答えください）&lt;/span&gt;&lt;/p&gt;&lt;/zsr&gt;" data-label="reviewCommentBubble">
+        <span name="commentCount_7902000000002193_" class="commentCount">0</span>
+      </div>
+      <span class="questionText hintEnabled   " prepopulatereadonly="false" questionhasreadonlymode="false">
+	<span class="mandatory ">*</span><div class="qNos"></div>
+        <!----><span class="zsFormQuestContent   " name="questionMsg" id="question_message_7902000000002193"><zsr><p><b>1ヶ月当たりの平均残業時間を教えてください。</b></p><p><span style="font-size:16px">（残業時間が月100時間ほどある方は100とお答えください）</span></p></zsr></span></span>
+           <div name="error_msg" id="error_content7902000000002193" tabindex="-1" error_position="bottom" style="display:none" class="error-message clearfix error-message-bottom" comment_msg="コメントを入力して送信してください。" higherrank_msg="続けるには、順位付けが上位の項目も選択してください" req_msg="この質問は入力必須です。単位は、時間で半角でお答えください。" has_theme_error="true"><span class="error-text" name="error_content" tabindex="-1">
+              この質問は入力必須です。単位は、時間で半角でお答えください。
+           </span>
+           <a class="next-error-link " href="javascript:void(0);" name="next_error" go_next="次に移動" go_bottom="最後に移動">
+              次に移動
+            </a>
+            </div>
+      <div name="hint_container" class="hintContainer clearfix hide showPublishedForm">
+        <button class="btnHint pull-right" onclick="Response.showHintPopup(this);" aria-label="ヒント" aria-describedby="hintmessage_7902000000002193"><i>i</i></button>
+        <div class="hintPopover hide" name="hint_msg_container">
+          <button class="closePopover" style="z-index:1;" onclick="Response.hideHintPopup(this);" aria-label="閉じる"><svg viewBox="0 0 5 5">
+              <polygon points="0 0.41 0.42 0 5 4.59 4.58 5 0 0.41"></polygon>
+              <polygon points="0 4.59 4.58 0 5 0.41 0.42 5 0 4.59"></polygon></svg></button>
+<span id="ember948" class="ember-view">          <div class="hintBody" id="hintmessage_7902000000002193" name="questionHint" tabindex="0">
+            <zsr><p>単位は、時間で半角でお答えください。例：月当たりの平均残業時間が30時間の場合。30とご記載ください。<br></p></zsr>
+          </div>
+
+</span>        </div>
+      </div>
+<!---->    </section>
+  </div>
+</div>
+
+
+        <div class="row" name="zsAnswerNode">
+  <div class="col-xs-12">
+    <section class="sectSavedAns singleTextBox">
+      <input aria-labelledby="question_message_7902000000002193 hintmessage_7902000000002193" class="inTextbox " size="40" min_length="0" max_length="9223372036854775807" decimal_enabled="true" min_value="0" max_value="9223372036854775807" validation_type="range" prepopulatereadonly="false" questionhasreadonlymode="false" aria-required="true" type="text">
+    </section>
+  </div>
+</div>
+
+
+
+<!----><!---->    </section>
+  </div>
+  <div class="questionActs">
+<span id="ember949" class="ember-view">    <div class="dropdown" id="7902000000002193"><span id="tquestact_7902000000002193" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="iconMore hasTooltip" data-placement="bottom" title="" data-original-title="処理" data-ember-action="" data-ember-action-950="950"></span>
+<!---->      </div>
+
+</span><span id="ember955" class="ember-view">      <span class="iconTrash hasTooltip " data-placement="bottom" title="" data-original-title="ごみ箱に移動する" data-ember-action="" data-ember-action-956="956"></span>
+
+</span>  </div>
+<!---->    <div class="logAnsLogicRed clearFix">
+<!----><!---->    </div>
+
+</li>
+
+<!----><!---->    </ul>
+  </section>
+
+  <footer class="pageFooter clearfix hide">
+    <div class="pull-right"><label class="lblPageLogic">このページの後の移動先:</label><span class="txtPageLogic"><!----></span></div>
+  </footer>
+</div>
+
+    <div id="activePage2" pageid="7902000000002207" class="pageActiveSelector page pull-left " pageindex="2" data-ember-action="" data-ember-action-957="957">
+  <header class="pageHeader text-center">
+<div id="ember958" class="pageOptionSelector text-left ember-view dropdown">      <button class="dropdown-toggle btnPageOptMenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>ページ 3</span><span class="caretIcon "></span></button>
+      <ul class="dropdown-menu dropSect super-scrollbar-box super-scrollbar ss-no-auto-hide" data-ss-id="f8d0d3d2-d071-f688-46c6-deb2783b6272">
+        <li data-ember-action="" data-ember-action-959="959"><a class="pageOption">ページ情報を編集する</a></li>
+        <li data-ember-action="" data-ember-action-960="960"><a class="pageOption">ページを複製する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-961="961"><a class="pageOption">ページを移動する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-962="962"><a class="pageOption">ページを削除する</a></li>
+      <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</div>      <div class="page-title text-center" data-ember-action="" data-ember-action-963="963">総合評価</div>
+
+
+<div id="ember964" class="logicPageCustVar ember-view dropdown">      <button class="dropdown-toggle btnLogicDropper" data-toggle="dropdown" aria-expanded="true" aria-haspopup="true" id="pageLogicDrop001" data-ember-action="" data-ember-action-965="965">条件処理</button>
+<!---->
+</div>  </header>
+  <section class="page-body">
+<!---->    <ul class="questionsList connectedSortable ui-sortable">
+      <div class="dragdropHint nodragorsort draganddropmsg_7902000000002207 hide ui-sortable-handle" style="">
+        <p class="hintContent text-center">質問をこちらにドラッグ＆ドロップしてください</p>
+        <div class="orRow text-center pR col999">
+          <u></u>
+          <span class="pA bgFFF">または</span>
+        </div>
+        <button class="bulkAddButton " data-ember-action="" data-ember-action-966="966">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.98999 8.81H10.97" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M6.97998 4.82001V12.8" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M11.96 3.04001H2C1.44772 3.04001 1 3.48772 1 4.04001V14C1 14.5523 1.44772 15 2 15H11.96C12.5123 15 12.96 14.5523 12.96 14V4.04001C12.96 3.48772 12.5123 3.04001 11.96 3.04001Z" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M4.03003 1H14C14.55 1 15 1.45 15 2V11.97" stroke="#333333" stroke-miterlimit="10" stroke-linecap="round"></path>
+          </svg>
+          こちらに質問を貼り付けてください
+        </button>
+      </div>
+<!----><!----><!----><!----><!----><!----><!---->    </ul>
+  </section>
+
+  <footer class="pageFooter clearfix hide">
+    <div class="pull-right"><label class="lblPageLogic">このページの後の移動先:</label><span class="txtPageLogic"><!----></span></div>
+  </footer>
+</div>
+
+    <div id="activePage3" pageid="7902000000003097" class="pageActiveSelector page pull-left " pageindex="3" data-ember-action="" data-ember-action-967="967">
+  <header class="pageHeader text-center">
+<div id="ember968" class="pageOptionSelector text-left ember-view dropdown">      <button class="dropdown-toggle btnPageOptMenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>ページ 4</span><span class="caretIcon "></span></button>
+      <ul class="dropdown-menu dropSect super-scrollbar-box super-scrollbar ss-no-auto-hide" data-ss-id="9bf82014-d9b2-6270-e3d9-6f8f6bed4b59">
+        <li data-ember-action="" data-ember-action-969="969"><a class="pageOption">ページ情報を編集する</a></li>
+        <li data-ember-action="" data-ember-action-970="970"><a class="pageOption">ページを複製する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-971="971"><a class="pageOption">ページを移動する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-972="972"><a class="pageOption">ページを削除する</a></li>
+      <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</div>      <div class="page-title text-center" data-ember-action="" data-ember-action-973="973">期待項目の確認</div>
+
+
+<div id="ember974" class="logicPageCustVar ember-view dropdown">      <button class="dropdown-toggle btnLogicDropper" data-toggle="dropdown" aria-expanded="true" aria-haspopup="true" id="pageLogicDrop001" data-ember-action="" data-ember-action-975="975">条件処理</button>
+<!---->
+</div>  </header>
+  <section class="page-body">
+      <div class="pageDesc" data-ember-action="" data-ember-action-976="976">あなたが職場や今の会社に対して下記項目をどの程度期待しているのかを教えてください。</div>
+    <ul class="questionsList connectedSortable ui-sortable">
+      <div class="dragdropHint nodragorsort draganddropmsg_7902000000003097 hide ui-sortable-handle" style="">
+        <p class="hintContent text-center">質問をこちらにドラッグ＆ドロップしてください</p>
+        <div class="orRow text-center pR col999">
+          <u></u>
+          <span class="pA bgFFF">または</span>
+        </div>
+        <button class="bulkAddButton " data-ember-action="" data-ember-action-977="977">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.98999 8.81H10.97" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M6.97998 4.82001V12.8" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M11.96 3.04001H2C1.44772 3.04001 1 3.48772 1 4.04001V14C1 14.5523 1.44772 15 2 15H11.96C12.5123 15 12.96 14.5523 12.96 14V4.04001C12.96 3.48772 12.5123 3.04001 11.96 3.04001Z" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M4.03003 1H14C14.55 1 15 1.45 15 2V11.97" stroke="#333333" stroke-miterlimit="10" stroke-linecap="round"></path>
+          </svg>
+          こちらに質問を貼り付けてください
+        </button>
+      </div>
+<!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->    </ul>
+  </section>
+
+  <footer class="pageFooter clearfix hide">
+    <div class="pull-right"><label class="lblPageLogic">このページの後の移動先:</label><span class="txtPageLogic"><!----></span></div>
+  </footer>
+</div>
+
+    <div id="activePage4" pageid="7902000000002337" class="pageActiveSelector page pull-left " pageindex="4" data-ember-action="" data-ember-action-978="978">
+  <header class="pageHeader text-center">
+<div id="ember979" class="pageOptionSelector text-left ember-view dropdown">      <button class="dropdown-toggle btnPageOptMenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>ページ 5</span><span class="caretIcon "></span></button>
+      <ul class="dropdown-menu dropSect super-scrollbar-box super-scrollbar ss-no-auto-hide" data-ss-id="404b662f-de8d-c389-1ae5-9f0abe0116c9">
+        <li data-ember-action="" data-ember-action-980="980"><a class="pageOption">ページ情報を編集する</a></li>
+        <li data-ember-action="" data-ember-action-981="981"><a class="pageOption">ページを複製する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-982="982"><a class="pageOption">ページを移動する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-983="983"><a class="pageOption">ページを削除する</a></li>
+      <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</div>      <div class="page-title text-center" data-ember-action="" data-ember-action-984="984">最も期待値が高い項目について</div>
+
+
+<div id="ember985" class="logicPageCustVar ember-view dropdown">      <button class="dropdown-toggle btnLogicDropper" data-toggle="dropdown" aria-expanded="true" aria-haspopup="true" id="pageLogicDrop001" data-ember-action="" data-ember-action-986="986">条件処理</button>
+<!---->
+</div>  </header>
+  <section class="page-body">
+<!---->    <ul class="questionsList connectedSortable ui-sortable">
+      <div class="dragdropHint nodragorsort draganddropmsg_7902000000002337 hide ui-sortable-handle" style="">
+        <p class="hintContent text-center">質問をこちらにドラッグ＆ドロップしてください</p>
+        <div class="orRow text-center pR col999">
+          <u></u>
+          <span class="pA bgFFF">または</span>
+        </div>
+        <button class="bulkAddButton " data-ember-action="" data-ember-action-987="987">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.98999 8.81H10.97" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M6.97998 4.82001V12.8" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M11.96 3.04001H2C1.44772 3.04001 1 3.48772 1 4.04001V14C1 14.5523 1.44772 15 2 15H11.96C12.5123 15 12.96 14.5523 12.96 14V4.04001C12.96 3.48772 12.5123 3.04001 11.96 3.04001Z" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M4.03003 1H14C14.55 1 15 1.45 15 2V11.97" stroke="#333333" stroke-miterlimit="10" stroke-linecap="round"></path>
+          </svg>
+          こちらに質問を貼り付けてください
+        </button>
+      </div>
+<!---->    </ul>
+  </section>
+
+  <footer class="pageFooter clearfix hide">
+    <div class="pull-right"><label class="lblPageLogic">このページの後の移動先:</label><span class="txtPageLogic"><!----></span></div>
+  </footer>
+</div>
+
+    <div id="activePage5" pageid="7902000000004113" class="pageActiveSelector page pull-left " pageindex="5" data-ember-action="" data-ember-action-988="988">
+  <header class="pageHeader text-center">
+<div id="ember989" class="pageOptionSelector text-left ember-view dropdown">      <button class="dropdown-toggle btnPageOptMenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>ページ 6</span><span class="caretIcon "></span></button>
+      <ul class="dropdown-menu dropSect super-scrollbar-box super-scrollbar ss-no-auto-hide" data-ss-id="aa9d506f-2e27-94f0-9bf2-f652a23cdf2a">
+        <li data-ember-action="" data-ember-action-990="990"><a class="pageOption">ページ情報を編集する</a></li>
+        <li data-ember-action="" data-ember-action-991="991"><a class="pageOption">ページを複製する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-992="992"><a class="pageOption">ページを移動する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-993="993"><a class="pageOption">ページを削除する</a></li>
+      <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</div>      <div class="page-title text-center" data-ember-action="" data-ember-action-994="994">満足項目の確認</div>
+
+
+<div id="ember995" class="logicPageCustVar ember-view dropdown">      <button class="dropdown-toggle btnLogicDropper" data-toggle="dropdown" aria-expanded="true" aria-haspopup="true" id="pageLogicDrop001" data-ember-action="" data-ember-action-996="996">条件処理</button>
+<!---->
+</div>  </header>
+  <section class="page-body">
+      <div class="pageDesc" data-ember-action="" data-ember-action-997="997">あなたが職場や今の会社に対して下記項目をどの程度満足しているのかを教えてください。</div>
+    <ul class="questionsList connectedSortable ui-sortable">
+      <div class="dragdropHint nodragorsort draganddropmsg_7902000000004113 hide ui-sortable-handle" style="">
+        <p class="hintContent text-center">質問をこちらにドラッグ＆ドロップしてください</p>
+        <div class="orRow text-center pR col999">
+          <u></u>
+          <span class="pA bgFFF">または</span>
+        </div>
+        <button class="bulkAddButton " data-ember-action="" data-ember-action-998="998">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.98999 8.81H10.97" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M6.97998 4.82001V12.8" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M11.96 3.04001H2C1.44772 3.04001 1 3.48772 1 4.04001V14C1 14.5523 1.44772 15 2 15H11.96C12.5123 15 12.96 14.5523 12.96 14V4.04001C12.96 3.48772 12.5123 3.04001 11.96 3.04001Z" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M4.03003 1H14C14.55 1 15 1.45 15 2V11.97" stroke="#333333" stroke-miterlimit="10" stroke-linecap="round"></path>
+          </svg>
+          こちらに質問を貼り付けてください
+        </button>
+      </div>
+<!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->    </ul>
+  </section>
+
+  <footer class="pageFooter clearfix hide">
+    <div class="pull-right"><label class="lblPageLogic">このページの後の移動先:</label><span class="txtPageLogic"><!----></span></div>
+  </footer>
+</div>
+
+    <div id="activePage6" pageid="7902000000005733" class="pageActiveSelector page pull-left " pageindex="6" data-ember-action="" data-ember-action-999="999">
+  <header class="pageHeader text-center">
+<div id="ember1000" class="pageOptionSelector text-left ember-view dropdown">      <button class="dropdown-toggle btnPageOptMenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>ページ 7</span><span class="caretIcon "></span></button>
+      <ul class="dropdown-menu dropSect super-scrollbar-box super-scrollbar ss-no-auto-hide" data-ss-id="a9d22089-03c5-4612-d0c5-9b2de2698e3c">
+        <li data-ember-action="" data-ember-action-1001="1001"><a class="pageOption">ページ情報を編集する</a></li>
+        <li data-ember-action="" data-ember-action-1002="1002"><a class="pageOption">ページを複製する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-1003="1003"><a class="pageOption">ページを移動する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-1004="1004"><a class="pageOption">ページを削除する</a></li>
+      <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</div>      <div class="page-title text-center" data-ember-action="" data-ember-action-1005="1005">最も満足度が高い項目について</div>
+
+
+<div id="ember1006" class="logicPageCustVar ember-view dropdown">      <button class="dropdown-toggle btnLogicDropper" data-toggle="dropdown" aria-expanded="true" aria-haspopup="true" id="pageLogicDrop001" data-ember-action="" data-ember-action-1007="1007">条件処理</button>
+<!---->
+</div>  </header>
+  <section class="page-body">
+      <div class="pageDesc" data-ember-action="" data-ember-action-1008="1008">最も満足度が高い項目について教えてください。</div>
+    <ul class="questionsList connectedSortable ui-sortable">
+      <div class="dragdropHint nodragorsort draganddropmsg_7902000000005733 hide ui-sortable-handle" style="">
+        <p class="hintContent text-center">質問をこちらにドラッグ＆ドロップしてください</p>
+        <div class="orRow text-center pR col999">
+          <u></u>
+          <span class="pA bgFFF">または</span>
+        </div>
+        <button class="bulkAddButton " data-ember-action="" data-ember-action-1009="1009">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.98999 8.81H10.97" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M6.97998 4.82001V12.8" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M11.96 3.04001H2C1.44772 3.04001 1 3.48772 1 4.04001V14C1 14.5523 1.44772 15 2 15H11.96C12.5123 15 12.96 14.5523 12.96 14V4.04001C12.96 3.48772 12.5123 3.04001 11.96 3.04001Z" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M4.03003 1H14C14.55 1 15 1.45 15 2V11.97" stroke="#333333" stroke-miterlimit="10" stroke-linecap="round"></path>
+          </svg>
+          こちらに質問を貼り付けてください
+        </button>
+      </div>
+<!---->    </ul>
+  </section>
+
+  <footer class="pageFooter clearfix hide">
+    <div class="pull-right"><label class="lblPageLogic">このページの後の移動先:</label><span class="txtPageLogic"><!----></span></div>
+  </footer>
+</div>
+
+    <div id="activePage7" pageid="7902000000007093" class="pageActiveSelector page pull-left " pageindex="7" data-ember-action="" data-ember-action-1010="1010">
+  <header class="pageHeader text-center">
+<div id="ember1011" class="pageOptionSelector text-left ember-view dropdown">      <button class="dropdown-toggle btnPageOptMenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>ページ 8</span><span class="caretIcon "></span></button>
+      <ul class="dropdown-menu dropSect super-scrollbar-box super-scrollbar ss-no-auto-hide" data-ss-id="b29e1990-125f-fc18-94cc-d22fe623ed3a">
+        <li data-ember-action="" data-ember-action-1012="1012"><a class="pageOption">ページ情報を編集する</a></li>
+        <li data-ember-action="" data-ember-action-1013="1013"><a class="pageOption">ページを複製する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-1014="1014"><a class="pageOption">ページを移動する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-1015="1015"><a class="pageOption">ページを削除する</a></li>
+      <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</div>      <div class="page-title text-center" data-ember-action="" data-ember-action-1016="1016">満足度が低い項目について</div>
+
+
+<div id="ember1017" class="logicPageCustVar ember-view dropdown">      <button class="dropdown-toggle btnLogicDropper" data-toggle="dropdown" aria-expanded="true" aria-haspopup="true" id="pageLogicDrop001" data-ember-action="" data-ember-action-1018="1018">条件処理</button>
+<!---->
+</div>  </header>
+  <section class="page-body">
+      <div class="pageDesc" data-ember-action="" data-ember-action-1019="1019">満足度が低い項目について教えてください。</div>
+    <ul class="questionsList connectedSortable ui-sortable">
+      <div class="dragdropHint nodragorsort draganddropmsg_7902000000007093 hide ui-sortable-handle" style="">
+        <p class="hintContent text-center">質問をこちらにドラッグ＆ドロップしてください</p>
+        <div class="orRow text-center pR col999">
+          <u></u>
+          <span class="pA bgFFF">または</span>
+        </div>
+        <button class="bulkAddButton " data-ember-action="" data-ember-action-1020="1020">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.98999 8.81H10.97" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M6.97998 4.82001V12.8" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M11.96 3.04001H2C1.44772 3.04001 1 3.48772 1 4.04001V14C1 14.5523 1.44772 15 2 15H11.96C12.5123 15 12.96 14.5523 12.96 14V4.04001C12.96 3.48772 12.5123 3.04001 11.96 3.04001Z" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M4.03003 1H14C14.55 1 15 1.45 15 2V11.97" stroke="#333333" stroke-miterlimit="10" stroke-linecap="round"></path>
+          </svg>
+          こちらに質問を貼り付けてください
+        </button>
+      </div>
+<!---->    </ul>
+  </section>
+
+  <footer class="pageFooter clearfix hide">
+    <div class="pull-right"><label class="lblPageLogic">このページの後の移動先:</label><span class="txtPageLogic"><!----></span></div>
+  </footer>
+</div>
+
+    <div id="activePage8" pageid="7902000000007611" class="pageActiveSelector page pull-left " pageindex="8" data-ember-action="" data-ember-action-1021="1021">
+  <header class="pageHeader text-center">
+<div id="ember1022" class="pageOptionSelector text-left ember-view dropdown">      <button class="dropdown-toggle btnPageOptMenu " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>ページ 9</span><span class="caretIcon "></span></button>
+      <ul class="dropdown-menu dropSect super-scrollbar-box super-scrollbar ss-no-auto-hide" data-ss-id="8316b6e4-663b-b433-0059-a501afcbef23">
+        <li data-ember-action="" data-ember-action-1023="1023"><a class="pageOption">ページ情報を編集する</a></li>
+        <li data-ember-action="" data-ember-action-1024="1024"><a class="pageOption">ページを複製する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-1025="1025"><a class="pageOption">ページを移動する</a></li>
+        <li data-toggle="modal" data-target="#commonDialog" data-ember-action="" data-ember-action-1026="1026"><a class="pageOption">ページを削除する</a></li>
+      <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</div>      <div class="page-title text-center" data-ember-action="" data-ember-action-1027="1027">お礼</div>
+
+
+<div id="ember1028" class="logicPageCustVar ember-view dropdown">      <button class="dropdown-toggle btnLogicDropper" data-toggle="dropdown" aria-expanded="true" aria-haspopup="true" id="pageLogicDrop001" data-ember-action="" data-ember-action-1029="1029">条件処理</button>
+<!---->
+</div>  </header>
+  <section class="page-body">
+      <div class="pageDesc" data-ember-action="" data-ember-action-1030="1030">お礼</div>
+    <ul class="questionsList connectedSortable ui-sortable">
+      <div class="dragdropHint nodragorsort draganddropmsg_7902000000007611 hide ui-sortable-handle" style="">
+        <p class="hintContent text-center">質問をこちらにドラッグ＆ドロップしてください</p>
+        <div class="orRow text-center pR col999">
+          <u></u>
+          <span class="pA bgFFF">または</span>
+        </div>
+        <button class="bulkAddButton " data-ember-action="" data-ember-action-1031="1031">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.98999 8.81H10.97" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M6.97998 4.82001V12.8" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M11.96 3.04001H2C1.44772 3.04001 1 3.48772 1 4.04001V14C1 14.5523 1.44772 15 2 15H11.96C12.5123 15 12.96 14.5523 12.96 14V4.04001C12.96 3.48772 12.5123 3.04001 11.96 3.04001Z" stroke="#333333" stroke-miterlimit="10"></path>
+              <path d="M4.03003 1H14C14.55 1 15 1.45 15 2V11.97" stroke="#333333" stroke-miterlimit="10" stroke-linecap="round"></path>
+          </svg>
+          こちらに質問を貼り付けてください
+        </button>
+      </div>
+<!---->    </ul>
+  </section>
+
+  <footer class="pageFooter clearfix hide">
+    <div class="pull-right"><label class="lblPageLogic">このページの後の移動先:</label><span class="txtPageLogic"><!----></span></div>
+  </footer>
+</div>
+
+  </div>
+<!---->  <section class="pageSorter text-uppercase text-center">
+    <p class="pagesLabel">
+      ページ
+      (9)</p>
+    <div id="ember1032" class="ember-view">
+</div>
+    <div class="miniScroll up " data-ember-action="" data-ember-action-1033="1033" data-ember-action-1034="1034" data-ember-action-1035="1035"></div>
+    <div class="miniPageContainer">
+      <ul id="pages-list" class="pagesList text-center pageSortable ui-sortable" data-ember-action="" data-ember-action-1036="1036" data-ember-action-1037="1037">
+        <li id="pageAct0" pageindex="0" pageid="7902000000002049" surveyid="7902000000002031" class="pageActSect pagenos active ui-sortable-handle" data-ember-action="" data-ember-action-1038="1038"><span class="pageLink">P1</span></li>
+        <li id="pageAct1" pageindex="1" pageid="7902000000002071" surveyid="7902000000002031" class="pageActSect pagenos ui-sortable-handle" data-ember-action="" data-ember-action-1039="1039"><span class="pageLink">P2</span></li>
+        <li id="pageAct2" pageindex="2" pageid="7902000000002207" surveyid="7902000000002031" class="pageActSect pagenos ui-sortable-handle" data-ember-action="" data-ember-action-1040="1040"><span class="pageLink">P3</span></li>
+        <li id="pageAct3" pageindex="3" pageid="7902000000003097" surveyid="7902000000002031" class="pageActSect pagenos ui-sortable-handle" data-ember-action="" data-ember-action-1041="1041"><span class="pageLink">P4</span></li>
+        <li id="pageAct4" pageindex="4" pageid="7902000000002337" surveyid="7902000000002031" class="pageActSect pagenos ui-sortable-handle" data-ember-action="" data-ember-action-1042="1042"><span class="pageLink">P5</span></li>
+        <li id="pageAct5" pageindex="5" pageid="7902000000004113" surveyid="7902000000002031" class="pageActSect pagenos ui-sortable-handle" data-ember-action="" data-ember-action-1043="1043"><span class="pageLink">P6</span></li>
+        <li id="pageAct6" pageindex="6" pageid="7902000000005733" surveyid="7902000000002031" class="pageActSect pagenos ui-sortable-handle" data-ember-action="" data-ember-action-1044="1044"><span class="pageLink">P7</span></li>
+        <li id="pageAct7" pageindex="7" pageid="7902000000007093" surveyid="7902000000002031" class="pageActSect pagenos ui-sortable-handle" data-ember-action="" data-ember-action-1045="1045"><span class="pageLink">P8</span></li>
+        <li id="pageAct8" pageindex="8" pageid="7902000000007611" surveyid="7902000000002031" class="pageActSect pagenos ui-sortable-handle" data-ember-action="" data-ember-action-1046="1046"><span class="pageLink">P9</span></li>
+      </ul>
+    </div>
+    <div class="miniScroll down " data-ember-action="" data-ember-action-1047="1047" data-ember-action-1048="1048" data-ember-action-1049="1049"></div>
+<span id="ember1050" class="ember-view">    <div class="addPage text-center hasTooltip " data-toggle="modal" data-placement="left" title="" data-target="#commonDialog" data-original-title="ページを追加する" data-ember-action="" data-ember-action-1051="1051"></div>
+
+</span>  </section>
+</section>
+<div class="zsWidget ">
+  <div id="ember1052" class="ember-view"><!----></div>
+  <div id="ember1053" class="ember-view"><div class="widgetModal modal fade     " role="dialog" id="widgetDialog" data-backdrop="static" style="z-index: 1152;">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+
+      <header class="modal-header">
+<span id="ember1054" class="ember-view">        <button class="popupClose " data-dismiss="modal" aria-label="Close" data-toggle="tooltip" data-original-title="閉じる" data-placement="bottom" data-ember-action="" data-ember-action-1055="1055"><span class="iconDialogClose"></span></button>
+
+</span>        <h5 class="modal-title text-center"></h5>
+<!----><!---->      </header>
+
+      <section class="modal-body ">
+        <div class="row hide">
+         <div id="ember1056" class="ember-view"><div class="col-sm-12">
+  <div class="dialogImageUploader ">
+      <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" class="tabItem "><a href="#fromGallery" aria-controls="fromGallery" role="tab" data-toggle="tab" data-ember-action="" data-ember-action-1057="1057"> <span class="icon gallery"></span>画像ギャラリーから</a></li>
+        <li role="presentation" class="tabItem "><a href="#fromWeb" aria-controls="fromWeb" role="tab" data-toggle="tab" data-ember-action="" data-ember-action-1058="1058"><span class="icon web"></span>URLから</a></li>
+      </ul>
+    <div class="tab-content widget-tab-content">
+      <section role="tabpanel" id="fromWeb" class="tab-pane fromWeb fade ">
+        <div class="fieldImagePath">
+          <div class="row">
+            <div class="col-sm-3 text-right">
+              <label class="preLabel">画像のURL</label>
+            </div>
+            <div class="pull-left">
+              <input placeholder="画像のURLを入力してください" id="ember1059" class="txtWebAddress ember-text-field ember-view" type="text">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-3">
+              <div class="webURLError mT10 hide">
+                <span class="errorText"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section role="tabpanel" id="fromGallery" class="tab-pane fromLibrary fade ">
+        <div class="galleryArea super-scrollbar-box super-scrollbar ss-no-auto-hide ss-position" id="imagegallery" data-ss-id="6d64e07c-2f16-1ff4-248b-93c5191a00c9">
+          <div class="text-center mB10 hide">
+            <span class="errorText"></span>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 ">
+              <form target="ds_uploadframe" class="droppableArea" enctype="multipart/form-data">
+                <label class="draggableArea">
+                  <input name="image_file" id="upload-image" class="hide" accept="image/*" type="file">
+                </label>
+                <div id="customInFile" class="customInFile text-center">
+                  <div class="iconCustomInFile" data-image="+"></div>
+                  <div class="infoAndLink">こちらに画像をドロップしてください</div>
+                </div>
+              </form>
+            </div>
+<!---->          </div>
+          <div class="row hide">
+            <div class="col-sm-12 ">
+              <section class="emptyContent text-center">
+                <div class="emptyEmoji"></div>
+                <p class="notFoundText mT10">画像をまだアップロードしていません</p>
+              </section>
+            </div>
+          </div>
+        <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></div>
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+        </div>
+<!---->
+          <div id="ember1060" class="ember-view"><div class="dialogAddAttribute" id="add_attributes">
+  <div class="subSection">
+    <div class="row">
+      <div class="col-sm-4 text-right"><label class="preLabel">カーソルを合わせたときのテキスト</label></div>
+        <div class="col-sm-8">
+            <input name="image_title" id="ember1061" class="txtBox form-control ember-text-field ember-view" type="text">
+        </div>
+    </div>
+  </div>
+  <div class="subSection">
+    <div class="row">
+        <div class="col-sm-4 text-right"><label class="preLabel">クリックしたときの処理</label></div>
+        <div class="col-sm-8">
+            <div class="zsSelector dropdown imageAttrDD" name="imageAttribute">
+                <button class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="value" name="chosenSurveyValue">Missing translation: survey.popup.add_attribute.</span>
+                    <span class="linecaret pull-right"></span>
+                </button>
+                <ul role="menu" class="dropdown-menu droplist" name="dateList">
+<!---->                </ul>
+            </div>
+                <input name="image_link" id="ember1062" class="txtBox form-control urlInpTxt mT10 ember-text-field ember-view" type="text">
+        </div>
+    </div>
+  </div>
+</div></div>
+        
+      </section>
+
+      <footer class="modal-footer dialogAction">
+        <div class="btn-group col-sm-12">
+          <div class="row">
+          <button class="btn col-sm-6 btn-pop-close " data-dismiss="modal" id="dialogCloser" type="button" data-ember-action="" data-ember-action-1063="1063">
+            
+            キャンセルする
+          </button>
+           <button class="btn col-sm-6 btn-pop-ok " id="saveDialogButton" type="button" data-ember-action="" data-ember-action-1064="1064">
+            
+           </button>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+<!----></div>
+<!----></div>
+<!---->  <div id="ember1065" class="ember-view"><div class="qLogicWidget hide">
+  <div id="ember1066" class="ember-view"><!----></div>
+  <header class="widgetHeader text-center">
+<span id="ember1067" class="ember-view">      <button class="btnCloseWidget" data-toggle="tooltip" data-original-title="閉じる" data-placement="bottom" data-ember-action="" data-ember-action-1068="1068"><span class="iconCloseWidget"></span></button>
+
+</span>    <h4 class="widgetTitle text-center">条件処理</h4>
+    <div class="zsSelector dropdown pageSwitcher text-right">
+      <button class="btnPageSwitcher " id="logicPageChanger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="value">ページ </span>
+        <span class="caret "></span>
+      </button>
+<span id="ember1069" class="ember-view">        <ul class="dropdown-menu dropdown-menu-right super-scrollbar-box super-scrollbar ss-no-auto-hide" aria-labelledby="logicPageChanger" id="logicPageSwitcher" data-ss-id="5f6f44fc-414c-32bc-9f28-11a307d92b18">
+            <li class="dropItem "><a href="javascript:void(0);" class="itemLink hide" data-ember-action="" data-ember-action-1070="1070">ページ 1 :  満足度・期待度調査</a></li>
+            <li class="dropItem "><a href="javascript:void(0);" class="itemLink hide" data-ember-action="" data-ember-action-1071="1071">ページ 2 :  満足度・期待度調査</a></li>
+            <li class="dropItem "><a href="javascript:void(0);" class="itemLink hide" data-ember-action="" data-ember-action-1072="1072">ページ 3 :  総合評価</a></li>
+            <li class="dropItem "><a href="javascript:void(0);" class="itemLink hide" data-ember-action="" data-ember-action-1073="1073">ページ 4 :  期待項目の確認</a></li>
+            <li class="dropItem "><a href="javascript:void(0);" class="itemLink hide" data-ember-action="" data-ember-action-1074="1074">ページ 5 :  最も期待値が高い項目について</a></li>
+            <li class="dropItem "><a href="javascript:void(0);" class="itemLink hide" data-ember-action="" data-ember-action-1075="1075">ページ 6 :  満足項目の確認</a></li>
+            <li class="dropItem "><a href="javascript:void(0);" class="itemLink hide" data-ember-action="" data-ember-action-1076="1076">ページ 7 :  最も満足度が高い項目について</a></li>
+            <li class="dropItem "><a href="javascript:void(0);" class="itemLink hide" data-ember-action="" data-ember-action-1077="1077">ページ 8 :  満足度が低い項目について</a></li>
+            <li class="dropItem "><a href="javascript:void(0);" class="itemLink hide" data-ember-action="" data-ember-action-1078="1078">ページ 9 :  お礼</a></li>
+        <div class="ss-scrollbar-x-rail"><div class="ss-scrollbar-x"></div></div><div class="ss-scrollbar-y-rail"><div class="ss-scrollbar-y"></div></div></ul>
+
+</span>    </div>
+  </header>
+  <section class="qLogicContainer">
+<!---->
+    <section class="emptyContent text-center hide">
+      <div class="emptyEmoji"></div>
+      <p class="notFoundText mT10">このページについて保存された条件処理はありません</p>
+    </section>
+  </section>
+
+  <footer class="qFooter col-sm-12 ">
+    <div class="row">
+      <div class="btn-group col-sm-12">
+        <div class="row">
+          <button class="btn col-sm-6 btn-pop-close" type="button" data-ember-action="" data-ember-action-1079="1079">キャンセルする</button>
+          <button class="btn col-sm-6 btn-pop-ok zsDisabled" disabled="" type="button" data-ember-action="" data-ember-action-1080="1080">保存する</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+</div>
+</div>
+<!---->
+<!---->
+
+	  </section>
+	</div>
+<!---->
+
+
+  </div>
+</div>
+</div>
